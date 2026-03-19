@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Python para Distribuição de Energia Elétrica — Parte 1</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+  <style>
+    :root {
+      --energia-amarelo: #f5a623;
+      --energia-azul: #1a6fa8;
+      --energia-verde: #27ae60;
+      --energia-cinza: #2c3e50;
+      --energia-branco: #ecf0f1;
+    }
+
+    .reveal {
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      color: var(--energia-amarelo);
+      text-transform: none;
+      letter-spacing: -0.02em;
+    }
+
+    .reveal h1 { font-size: 2em; }
+    .reveal h2 { font-size: 1.5em; }
+    .reveal h3 { font-size: 1.15em; color: #a0cfee; }
+
+    .reveal p, .reveal li { color: var(--energia-branco); line-height: 1.6; }
+
+    .slide-abertura {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 50%, #0d1b2a 100%);
+    }
+
+    .tag-modulo {
+      display: inline-block;
+      background: var(--energia-amarelo);
+      color: #0d1b2a;
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.7em;
+      font-weight: bold;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .destaque {
+      color: var(--energia-amarelo);
+      font-weight: bold;
+    }
+
+    .destaque-verde {
+      color: var(--energia-verde);
+      font-weight: bold;
+    }
+
+    .caixa-info {
+      background: rgba(26, 111, 168, 0.25);
+      border-left: 4px solid var(--energia-azul);
+      padding: 12px 18px;
+      border-radius: 0 6px 6px 0;
+      margin: 10px 0;
+      font-size: 0.85em;
+    }
+
+    .caixa-aviso {
+      background: rgba(245, 166, 35, 0.15);
+      border-left: 4px solid var(--energia-amarelo);
+      padding: 12px 18px;
+      border-radius: 0 6px 6px 0;
+      margin: 10px 0;
+      font-size: 0.85em;
+    }
+
+    .caixa-codigo {
+      background: #1e1e2e;
+      border: 1px solid #444;
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78em;
+      text-align: left;
+      color: #cdd6f4;
+      margin: 8px 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .card h4 {
+      color: var(--energia-amarelo);
+      margin: 0 0 8px 0;
+      font-size: 0.95em;
+    }
+
+    .card p, .card li {
+      font-size: 0.78em;
+      margin: 4px 0;
+    }
+
+    .numero-grande {
+      font-size: 3em;
+      color: var(--energia-amarelo);
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    table.agenda {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8em;
+    }
+
+    table.agenda th {
+      background: var(--energia-azul);
+      color: white;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    table.agenda td {
+      padding: 7px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: var(--energia-branco);
+    }
+
+    table.agenda tr:nth-child(even) td {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 12px;
+      padding: 2px 10px;
+      font-size: 0.7em;
+      font-weight: bold;
+    }
+
+    .badge-parte1 { background: #1a6fa8; color: white; }
+    .badge-parte2 { background: #8e44ad; color: white; }
+
+    .icon-grande { font-size: 2.5em; }
+    .footer-slide {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6em;
+      color: rgba(255,255,255,0.35);
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ======================================================
+         SLIDE 1 — ABERTURA
+    ======================================================= -->
+    <section class="slide-abertura" data-background-gradient="linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 60%, #0d1b2a 100%)">
+      <div style="padding: 20px 0;">
+        <div style="font-size:3em; margin-bottom:10px;">⚡</div>
+        <h1 style="font-size:1.9em; margin-bottom:0.3em;">Python para Distribuição<br>de Energia Elétrica</h1>
+        <p style="color:#a0cfee; font-size:1em; margin-bottom:1.5em;">
+          Fundamentos · Análise de Dados · IA no Desenvolvimento
+        </p>
+        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:1.5em;">
+          <span class="badge badge-parte1">Parte 1 — Fundamentos &amp; Dados</span>
+          <span class="badge badge-parte2">Parte 2 — Claude Code &amp; Snowflake</span>
+        </div>
+        <p style="font-size:0.7em; color:rgba(255,255,255,0.4);">
+          Use as setas do teclado para navegar &nbsp;|&nbsp; Pressione <kbd style="background:#333;padding:1px 5px;border-radius:3px;">F</kbd> para tela cheia
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 2 — SOBRE O CURSO
+    ======================================================= -->
+    <section>
+      <h2>Sobre este curso</h2>
+      <div class="grid-2" style="margin-top:20px;">
+        <div>
+          <div class="caixa-info">
+            <strong>Para quem é?</strong><br>
+            Analistas e engenheiros do setor de distribuição de energia elétrica que desejam usar Python para automatizar análises e melhorar a qualidade de dados.
+          </div>
+          <div class="caixa-info" style="margin-top:12px;">
+            <strong>O que vamos construir?</strong><br>
+            Um pipeline de <span class="destaque">qualidade de cadastro de consumidores</span> integrado ao Snowflake, com relatórios automáticos e alertas.
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <h4>Pré-requisitos</h4>
+            <ul style="margin:0; padding-left:18px;">
+              <li>Conhecimento básico de Excel/SQL</li>
+              <li>Familiaridade com conceitos do setor elétrico</li>
+              <li>Curiosidade e disposição para praticar</li>
+            </ul>
+          </div>
+          <div class="card" style="margin-top:12px;">
+            <h4>Ferramentas</h4>
+            <ul style="margin:0; padding-left:18px;">
+              <li>Python 3.11 + <strong>uv</strong> (gerenciador de pacotes)</li>
+              <li>JupyterLab</li>
+              <li>Snowflake (Módulo 5)</li>
+              <li>Claude Code (Módulo 4)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 3 — AGENDA
+    ======================================================= -->
+    <section>
+      <h2>Agenda do Curso</h2>
+      <table class="agenda" style="margin-top:18px;">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Módulo</th>
+            <th>Conteúdo</th>
+            <th>Duração</th>
+            <th>Parte</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Fundamentos Python</td>
+            <td>Variáveis, tipos, estruturas de controle, funções</td>
+            <td>1h15</td>
+            <td><span class="badge badge-parte1">1</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Análise com Pandas</td>
+            <td>DataFrames, limpeza, agrupamentos, qualidade</td>
+            <td>1h30</td>
+            <td><span class="badge badge-parte1">1</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Visualização</td>
+            <td>matplotlib, seaborn, plotly — indicadores DEC/FEC</td>
+            <td>45min</td>
+            <td><span class="badge badge-parte1">1</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Claude Code &amp; IA</td>
+            <td>Desenvolvimento assistido por IA, prompts, CLAUDE.md</td>
+            <td>1h30</td>
+            <td><span class="badge badge-parte2">2</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Snowflake &amp; Qualidade</td>
+            <td>Conexão, queries avançadas, projeto de qualidade</td>
+            <td>2h</td>
+            <td><span class="badge badge-parte2">2</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.7em; color:rgba(255,255,255,0.4); margin-top:14px;">
+        Parte 1: 3h30 &nbsp;|&nbsp; Parte 2: 3h30 &nbsp;|&nbsp; Total: 7h
+      </p>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 4 — POR QUE PYTHON?
+    ======================================================= -->
+    <section>
+      <h2>Por que Python no setor elétrico?</h2>
+      <div class="grid-3" style="margin-top:20px;">
+        <div class="card">
+          <h4>📊 Análise de Dados</h4>
+          <p>Processe milhões de leituras de medidores, identifique anomalias e gere relatórios automáticos que levariam dias no Excel.</p>
+        </div>
+        <div class="card">
+          <h4>🔗 Integração</h4>
+          <p>Conecte-se ao Snowflake, SAP, sistemas de GIS, APIs regulatórias da ANEEL e fontes de dados externas com poucas linhas.</p>
+        </div>
+        <div class="card">
+          <h4>🤖 Automação</h4>
+          <p>Automatize validações de cadastro de UC, geração de relatórios DEC/FEC e envio de alertas por e-mail ou Teams.</p>
+        </div>
+        <div class="card">
+          <h4>📈 Visualização</h4>
+          <p>Dashboards interativos com Plotly para monitorar indicadores de qualidade de energia e desempenho regulatório.</p>
+        </div>
+        <div class="card">
+          <h4>🧠 IA &amp; ML</h4>
+          <p>Detecção de fraudes, previsão de demanda e classificação automática de ocorrências com scikit-learn e modelos de linguagem.</p>
+        </div>
+        <div class="card">
+          <h4>🆓 Gratuito e Open Source</h4>
+          <p>Sem licenças. Enorme comunidade. Bibliotecas para qualquer necessidade do setor. Roda em qualquer infraestrutura.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 5 — CONFIGURAÇÃO DO AMBIENTE
+    ======================================================= -->
+    <section>
+      <h2>Configuração do Ambiente com <span class="destaque">uv</span></h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Passo 1 — Instalar o uv</h3>
+          <div class="caixa-codigo">
+<span style="color:#7ec8e3;"># Linux / Mac</span><br>
+curl -LsSf https://astral.sh/uv/install.sh | sh<br><br>
+<span style="color:#7ec8e3;"># Windows (PowerShell)</span><br>
+powershell -ExecutionPolicy ByPass -c \<br>
+&nbsp;&nbsp;"irm https://astral.sh/uv/install.ps1 | iex"
+          </div>
+          <div class="caixa-info" style="margin-top:10px; font-size:0.82em;">
+            <strong>uv</strong> é o gerenciador moderno do ecossistema Python — <br>
+            10–100x mais rápido que pip, sem necessidade de instalar Python separadamente.
+          </div>
+        </div>
+        <div>
+          <h3>Passo 2 — Criar ambiente e rodar</h3>
+          <div class="caixa-codigo">
+<span style="color:#7ec8e3;"># Clonar/abrir o projeto e instalar tudo</span><br>
+uv sync<br><br>
+<span style="color:#7ec8e3;"># Ativar o ambiente virtual</span><br>
+source .venv/bin/activate &nbsp;&nbsp;<span style="color:#666;"># Linux/Mac</span><br>
+.venv\Scripts\activate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#666;"># Windows</span><br><br>
+<span style="color:#7ec8e3;"># Iniciar JupyterLab</span><br>
+jupyter lab
+          </div>
+          <div class="caixa-aviso" style="margin-top:10px; font-size:0.82em;">
+            O <code>uv sync</code> lê o <code>pyproject.toml</code> e instala Python + todas as dependências automaticamente.
+          </div>
+        </div>
+      </div>
+      <div class="caixa-info" style="margin-top:14px; font-size:0.8em;">
+        <strong>Verificação:</strong> <code>uv run python --version</code> — deve mostrar <code>Python 3.11.x</code>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 6 — MÓDULO 1: FUNDAMENTOS — ABERTURA
+    ======================================================= -->
+    <section data-background-gradient="linear-gradient(135deg, #1a3a5c 0%, #0d1b2a 100%)">
+      <div style="text-align:center; padding:30px 0;">
+        <div class="tag-modulo">MÓDULO 1</div>
+        <h2 style="margin-top:16px;">Fundamentos Python</h2>
+        <p style="color:#a0cfee;">Variáveis &amp; Tipos · Estruturas de Controle · Funções</p>
+        <div style="display:flex; justify-content:center; gap:40px; margin-top:30px;">
+          <div style="text-align:center;">
+            <div class="numero-grande">3</div>
+            <p style="font-size:0.75em; color:#a0cfee;">notebooks</p>
+          </div>
+          <div style="text-align:center;">
+            <div class="numero-grande">1h15</div>
+            <p style="font-size:0.75em; color:#a0cfee;">duração</p>
+          </div>
+          <div style="text-align:center;">
+            <div class="numero-grande">1</div>
+            <p style="font-size:0.75em; color:#a0cfee;">exercício</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 7 — VARIÁVEIS E TIPOS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M1</span> Variáveis e Tipos de Dados</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Tipos básicos no setor elétrico</h3>
+          <div class="caixa-codigo">
+<span style="color:#cba6f7;"># Inteiros — códigos e tensões</span><br>
+cod_consumidor = 100042<br>
+tensao_nominal = 220  <span style="color:#6c7086;"># Volts</span><br><br>
+<span style="color:#cba6f7;"># Float — medições</span><br>
+consumo_kwh = 342.7<br>
+fator_potencia = 0.92<br><br>
+<span style="color:#cba6f7;"># String — cadastro</span><br>
+nome = "Maria Silva Santos"<br>
+municipio = "São Paulo"<br><br>
+<span style="color:#cba6f7;"># Booleano — status</span><br>
+ativo = True<br>
+inadimplente = False
+          </div>
+        </div>
+        <div>
+          <h3>Estruturas de dados</h3>
+          <div class="caixa-codigo">
+<span style="color:#cba6f7;"># Lista — leituras mensais</span><br>
+leituras = [310, 325, 342, 298, 315]<br><br>
+<span style="color:#cba6f7;"># Dicionário — registro UC</span><br>
+consumidor = {<br>
+&nbsp;&nbsp;"cod": 100042,<br>
+&nbsp;&nbsp;"nome": "Maria Silva",<br>
+&nbsp;&nbsp;"classe": "B1",<br>
+&nbsp;&nbsp;"consumo_kwh": 342.7,<br>
+&nbsp;&nbsp;"ativo": True<br>
+}<br><br>
+<span style="color:#cba6f7;"># Acessando valores</span><br>
+print(consumidor["nome"])
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 8 — ESTRUTURAS DE CONTROLE
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M1</span> Estruturas de Controle</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Classificação tarifária (if/elif)</h3>
+          <div class="caixa-codigo">
+def classificar_tarifa(consumo_kwh):<br>
+&nbsp;&nbsp;if consumo_kwh &lt;= 30:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Baixa Renda"<br>
+&nbsp;&nbsp;elif consumo_kwh &lt;= 100:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 1"<br>
+&nbsp;&nbsp;elif consumo_kwh &lt;= 220:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 2"<br>
+&nbsp;&nbsp;else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 3"<br><br>
+print(classificar_tarifa(342))
+<span style="color:#a6e3a1;"># → "Faixa 3"</span>
+          </div>
+        </div>
+        <div>
+          <h3>Iteração sobre leituras (for)</h3>
+          <div class="caixa-codigo">
+leituras = [310, 325, 342, None, 315]<br><br>
+validas = []<br>
+for leitura in leituras:<br>
+&nbsp;&nbsp;if leitura is not None:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;validas.append(leitura)<br><br>
+<span style="color:#cba6f7;"># List comprehension — mais pythonico</span><br>
+validas = [x for x in leituras<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if x is not None]<br><br>
+media = sum(validas) / len(validas)<br>
+print(f"Média: {media:.1f} kWh")
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 9 — FUNÇÕES
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M1</span> Funções</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Cálculo do DEC</h3>
+          <div class="caixa-codigo">
+def calcular_dec(interrupcoes: list) -&gt; float:<br>
+&nbsp;&nbsp;"""<br>
+&nbsp;&nbsp;Calcula o DEC (Duração Equivalente de<br>
+&nbsp;&nbsp;Interrupção por Consumidor).<br><br>
+&nbsp;&nbsp;Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;interrupcoes: lista de dicts com<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'duracao_h' e 'consumidores'<br>
+&nbsp;&nbsp;Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEC em horas<br>
+&nbsp;&nbsp;"""<br>
+&nbsp;&nbsp;total_ucs = interrupcoes[0]['total_ucs']<br>
+&nbsp;&nbsp;soma = sum(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;i['duracao_h'] * i['consumidores']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for i in interrupcoes<br>
+&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;return round(soma / total_ucs, 4)
+          </div>
+        </div>
+        <div>
+          <h3>Validação de CPF</h3>
+          <div class="caixa-codigo">
+import re<br><br>
+def validar_cpf_formato(cpf: str) -&gt; bool:<br>
+&nbsp;&nbsp;"""Valida formato do CPF."""<br>
+&nbsp;&nbsp;cpf_limpo = re.sub(r'\D', '', cpf)<br>
+&nbsp;&nbsp;return len(cpf_limpo) == 11<br><br>
+def formatar_cpf(cpf: str) -&gt; str:<br>
+&nbsp;&nbsp;"""Formata CPF: 12345678900 →<br>
+&nbsp;&nbsp;123.456.789-00"""<br>
+&nbsp;&nbsp;c = re.sub(r'\D', '', cpf)<br>
+&nbsp;&nbsp;if len(c) != 11:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return cpf<br>
+&nbsp;&nbsp;return f"{c[:3]}.{c[3:6]}.{c[6:9]}-{c[9:]}"
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 10 — MÓDULO 2: PANDAS — ABERTURA
+    ======================================================= -->
+    <section data-background-gradient="linear-gradient(135deg, #1a3a5c 0%, #0d1b2a 100%)">
+      <div style="text-align:center; padding:30px 0;">
+        <div class="tag-modulo">MÓDULO 2</div>
+        <h2 style="margin-top:16px;">Análise de Dados com Pandas</h2>
+        <p style="color:#a0cfee;">Leitura · Limpeza · Agregações · Qualidade de Cadastro</p>
+        <div style="display:flex; justify-content:center; gap:40px; margin-top:30px;">
+          <div style="text-align:center;">
+            <div class="numero-grande">3</div>
+            <p style="font-size:0.75em; color:#a0cfee;">notebooks</p>
+          </div>
+          <div style="text-align:center;">
+            <div class="numero-grande">1h30</div>
+            <p style="font-size:0.75em; color:#a0cfee;">duração</p>
+          </div>
+          <div style="text-align:center;">
+            <div class="numero-grande">50</div>
+            <p style="font-size:0.75em; color:#a0cfee;">linhas no CSV simulado</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 11 — PANDAS INTRO
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M2</span> Pandas — Primeiros Passos</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Lendo o cadastro de consumidores</h3>
+          <div class="caixa-codigo">
+import pandas as pd<br><br>
+df = pd.read_csv("dados/consumidores_simulado.csv")<br><br>
+<span style="color:#cba6f7;"># Exploração básica</span><br>
+print(df.shape)        <span style="color:#6c7086;"># (50, 12)</span><br>
+df.head()              <span style="color:#6c7086;"># primeiras 5 linhas</span><br>
+df.info()              <span style="color:#6c7086;"># tipos e nulos</span><br>
+df.describe()          <span style="color:#6c7086;"># estatísticas</span><br><br>
+<span style="color:#cba6f7;"># Verificar nulos</span><br>
+df.isnull().sum()
+          </div>
+        </div>
+        <div>
+          <h3>Filtros e agrupamentos</h3>
+          <div class="caixa-codigo">
+<span style="color:#cba6f7;"># Filtrar ativos</span><br>
+ativos = df[df['flg_ativo'] == True]<br><br>
+<span style="color:#cba6f7;"># Consumidores B1 com consumo &gt; 300</span><br>
+altos = df[<br>
+&nbsp;&nbsp;(df['cod_modalidade_tarifaria'] == 'B1')<br>
+&nbsp;&nbsp;&amp; (df['vlr_consumo_medio_kwh'] &gt; 300)<br>
+]<br><br>
+<span style="color:#cba6f7;"># Agrupamento por classe</span><br>
+df.groupby('cod_classe_consumo')\<br>
+&nbsp;&nbsp;['vlr_consumo_medio_kwh']\<br>
+&nbsp;&nbsp;.agg(['mean', 'count', 'sum'])\<br>
+&nbsp;&nbsp;.round(2)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 12 — LIMPEZA DE DADOS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M2</span> Limpeza de Dados de Consumidores</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Problemas comuns no cadastro</h3>
+          <ul style="font-size:0.82em;">
+            <li>CPF/CNPJ com formatação inconsistente</li>
+            <li>Nomes em maiúsculas, minúsculas e misto</li>
+            <li>CEP sem zeros à esquerda</li>
+            <li>Duplicatas de UC por migração de sistema</li>
+            <li>Datas em formatos diferentes</li>
+            <li>Campos obrigatórios vazios</li>
+            <li>Coordenadas geográficas ausentes</li>
+          </ul>
+          <div class="caixa-aviso" style="margin-top:10px;">
+            Dados de baixa qualidade impactam diretamente o <strong>faturamento</strong> e os <strong>indicadores ANEEL</strong>.
+          </div>
+        </div>
+        <div>
+          <h3>Técnicas de limpeza</h3>
+          <div class="caixa-codigo">
+<span style="color:#cba6f7;"># Normalizar nomes</span><br>
+df['nom_consumidor'] = (<br>
+&nbsp;&nbsp;df['nom_consumidor']<br>
+&nbsp;&nbsp;.str.strip()<br>
+&nbsp;&nbsp;.str.title()<br>
+)<br><br>
+<span style="color:#cba6f7;"># Limpar CPF/CNPJ</span><br>
+df['cpf_cnpj'] = (<br>
+&nbsp;&nbsp;df['cpf_cnpj']<br>
+&nbsp;&nbsp;.str.replace(r'\D', '', regex=True)<br>
+)<br><br>
+<span style="color:#cba6f7;"># Remover duplicatas</span><br>
+df = df.drop_duplicates(<br>
+&nbsp;&nbsp;subset=['cod_consumidor']<br>
+)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 13 — QUALIDADE DE CADASTRO
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M2</span> Análise de Qualidade do Cadastro</h2>
+      <div class="grid-2" style="margin-top:14px;">
+        <div>
+          <h3>Score de qualidade por registro</h3>
+          <div class="caixa-codigo">
+def score_qualidade(row) -&gt; float:<br>
+&nbsp;&nbsp;campos = [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'nom_consumidor', 'cpf_cnpj',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'cod_modalidade_tarifaria',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'nom_municipio', 'num_cep',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'num_medidor', 'dat_ultima_leitura'<br>
+&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;preenchidos = sum(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1 for c in campos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if pd.notna(row[c]) and row[c] != ''<br>
+&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;return round(preenchidos / len(campos), 2)<br><br>
+df['score_qualidade'] = df.apply(<br>
+&nbsp;&nbsp;score_qualidade, axis=1<br>
+)
+          </div>
+        </div>
+        <div>
+          <h3>Dimensões de qualidade</h3>
+          <div style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
+            <div class="card" style="padding:10px;">
+              <h4 style="margin:0; font-size:0.85em;">Completude</h4>
+              <p style="margin:4px 0; font-size:0.75em;">% de campos preenchidos por UC</p>
+            </div>
+            <div class="card" style="padding:10px;">
+              <h4 style="margin:0; font-size:0.85em;">Consistência</h4>
+              <p style="margin:4px 0; font-size:0.75em;">Classe de consumo vs. modalidade tarifária</p>
+            </div>
+            <div class="card" style="padding:10px;">
+              <h4 style="margin:0; font-size:0.85em;">Unicidade</h4>
+              <p style="margin:4px 0; font-size:0.75em;">Duplicatas de COD_CONSUMIDOR e CPF</p>
+            </div>
+            <div class="card" style="padding:10px;">
+              <h4 style="margin:0; font-size:0.85em;">Validade</h4>
+              <p style="margin:4px 0; font-size:0.75em;">Formato CPF/CNPJ, CEP, coordenadas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 14 — MÓDULO 3: VISUALIZAÇÃO — ABERTURA
+    ======================================================= -->
+    <section data-background-gradient="linear-gradient(135deg, #1a3a5c 0%, #0d1b2a 100%)">
+      <div style="text-align:center; padding:30px 0;">
+        <div class="tag-modulo">MÓDULO 3</div>
+        <h2 style="margin-top:16px;">Visualização de Indicadores</h2>
+        <p style="color:#a0cfee;">matplotlib · seaborn · plotly · DEC/FEC</p>
+        <div style="display:flex; justify-content:center; gap:40px; margin-top:30px;">
+          <div>
+            <div class="numero-grande">3</div>
+            <p style="font-size:0.75em; color:#a0cfee;">bibliotecas</p>
+          </div>
+          <div>
+            <div class="numero-grande">45min</div>
+            <p style="font-size:0.75em; color:#a0cfee;">duração</p>
+          </div>
+          <div>
+            <div class="numero-grande">∞</div>
+            <p style="font-size:0.75em; color:#a0cfee;">gráficos possíveis</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 15 — VISUALIZAÇÕES
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M3</span> Visualização de Indicadores</h2>
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="card">
+          <h4>matplotlib — Barras</h4>
+          <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
+import matplotlib.pyplot as plt<br><br>
+classes = df.groupby(<br>
+&nbsp;&nbsp;'cod_classe_consumo'<br>
+)['cod_consumidor'].count()<br><br>
+classes.plot(kind='bar',<br>
+&nbsp;&nbsp;color='steelblue',<br>
+&nbsp;&nbsp;title='Consumidores<br>&nbsp;&nbsp;por Classe')<br>
+plt.tight_layout()<br>
+plt.show()
+          </div>
+        </div>
+        <div class="card">
+          <h4>seaborn — Heatmap</h4>
+          <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
+import seaborn as sns<br><br>
+nulos = df.isnull().groupby(<br>
+&nbsp;&nbsp;df['cod_uf']<br>
+).mean() * 100<br><br>
+sns.heatmap(<br>
+&nbsp;&nbsp;nulos,<br>
+&nbsp;&nbsp;annot=True,<br>
+&nbsp;&nbsp;fmt='.0f',<br>
+&nbsp;&nbsp;cmap='RdYlGn_r'<br>
+)<br>
+plt.title('% Nulos / UF')
+          </div>
+        </div>
+        <div class="card">
+          <h4>plotly — Interativo</h4>
+          <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
+import plotly.express as px<br><br>
+fig = px.line(<br>
+&nbsp;&nbsp;df_mensal,<br>
+&nbsp;&nbsp;x='mes',<br>
+&nbsp;&nbsp;y='consumo_kwh',<br>
+&nbsp;&nbsp;color='classe',<br>
+&nbsp;&nbsp;title='Consumo Mensal'<br>
+)<br>
+fig.update_layout(<br>
+&nbsp;&nbsp;template='plotly_dark'<br>
+)<br>
+fig.show()
+          </div>
+        </div>
+      </div>
+      <div class="caixa-info" style="margin-top:14px; font-size:0.78em;">
+        <strong>Dica:</strong> Use Plotly para dashboards interativos — os usuários podem dar zoom, filtrar e exportar os dados diretamente no gráfico.
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 16 — DEC / FEC
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M3</span> Indicadores DEC e FEC</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <div class="card">
+            <h4>DEC — Duração Equivalente de Interrupção</h4>
+            <p style="font-size:0.8em;">Soma das durações de interrupções ponderadas pelo número de UCs afetadas, dividida pelo total de UCs do conjunto.</p>
+            <div class="caixa-codigo" style="margin-top:8px;">
+<span style="color:#cba6f7;"># Fórmula</span><br>
+DEC = Σ(Duração_i × UCs_i) / UCs_total
+            </div>
+          </div>
+          <div class="card" style="margin-top:12px;">
+            <h4>FEC — Frequência Equivalente de Interrupção</h4>
+            <p style="font-size:0.8em;">Número de interrupções ponderadas pelo número de UCs afetadas, dividido pelo total de UCs.</p>
+            <div class="caixa-codigo" style="margin-top:8px;">
+FEC = Σ(UCs_i) / UCs_total
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="caixa-codigo">
+import plotly.graph_objects as go<br><br>
+fig = go.Figure()<br><br>
+fig.add_trace(go.Bar(<br>
+&nbsp;&nbsp;name='DEC Real',<br>
+&nbsp;&nbsp;x=meses, y=dec_real,<br>
+&nbsp;&nbsp;marker_color='#e74c3c'<br>
+))<br>
+fig.add_trace(go.Scatter(<br>
+&nbsp;&nbsp;name='Limite ANEEL',<br>
+&nbsp;&nbsp;x=meses, y=dec_limite,<br>
+&nbsp;&nbsp;line=dict(color='#f39c12',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dash='dash')<br>
+))<br>
+fig.update_layout(<br>
+&nbsp;&nbsp;title='DEC Mensal vs. Limite',<br>
+&nbsp;&nbsp;template='plotly_dark'<br>
+)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 17 — TRANSIÇÃO PARA PARTE 2
+    ======================================================= -->
+    <section data-background-gradient="linear-gradient(135deg, #2d1b69 0%, #1a3a5c 50%, #0d1b2a 100%)">
+      <div style="text-align:center; padding:20px 0;">
+        <div style="font-size:2.5em; margin-bottom:16px;">🚀</div>
+        <h2 style="font-size:1.6em;">Parabéns! Parte 1 concluída.</h2>
+        <p style="color:#a0cfee; font-size:0.9em; margin-bottom:24px;">
+          Você domina os fundamentos de Python e análise de dados com Pandas e Matplotlib.
+        </p>
+        <div class="caixa-info" style="text-align:left; max-width:560px; margin:0 auto 24px;">
+          <strong>Na Parte 2 você vai aprender:</strong>
+          <ul style="margin:8px 0 0 0; padding-left:20px;">
+            <li>Claude Code — desenvolvimento assistido por IA</li>
+            <li>CLAUDE.md e skills customizados</li>
+            <li>Conectar ao Snowflake a partir do Python</li>
+            <li>Construir um projeto de qualidade de dados de UC</li>
+          </ul>
+        </div>
+        <div style="margin-top:20px;">
+          <p style="font-size:0.8em; color:rgba(255,255,255,0.5);">
+            Inicie a Parte 2 com:
+          </p>
+          <div class="caixa-codigo" style="max-width:400px; margin:8px auto; text-align:center;">
+            python serve_apresentacao.py --parte 2
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    transitionSpeed: 'default',
+    backgroundTransition: 'fade',
+    controls: true,
+    progress: true,
+    center: false,
+    width: 1200,
+    height: 700,
+    margin: 0.04,
+    plugins: [ RevealNotes, RevealMarkdown, RevealHighlight ]
+  });
+</script>
+</body>
+</html>

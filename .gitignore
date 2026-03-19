@@ -1,0 +1,42 @@
+# Ambiente Python
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+pip-log.txt
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Chaves e credenciais — NUNCA commitar
+chaves/
+*.p8
+*.pem
+*.key
+*.env
+.env.*
+
+# uv / pip
+uv.lock
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Dados sensíveis (se houver)
+modulo2_dados_com_pandas/dados/*.xlsx
+modulo5_snowflake_qualidade/queries/
+
+# Logs
+*.log

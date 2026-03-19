@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Python para Distribuição de Energia — Parte 2: IA &amp; Snowflake</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+  <style>
+    :root {
+      --ia-roxo: #8e44ad;
+      --ia-ciano: #00bcd4;
+      --ia-verde: #27ae60;
+      --energia-amarelo: #f5a623;
+      --energia-branco: #ecf0f1;
+    }
+
+    .reveal { font-family: 'Segoe UI', Arial, sans-serif; }
+    .reveal h1, .reveal h2, .reveal h3 { text-transform: none; letter-spacing: -0.02em; }
+    .reveal h1 { font-size: 2em; color: var(--ia-ciano); }
+    .reveal h2 { font-size: 1.5em; color: var(--ia-ciano); }
+    .reveal h3 { font-size: 1.1em; color: #a0cfee; }
+    .reveal p, .reveal li { color: var(--energia-branco); line-height: 1.6; }
+
+    .tag-modulo {
+      display: inline-block;
+      background: var(--ia-roxo);
+      color: white;
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.7em;
+      font-weight: bold;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .tag-snow {
+      display: inline-block;
+      background: #29b5e8;
+      color: #0d1b2a;
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.7em;
+      font-weight: bold;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .destaque { color: var(--ia-ciano); font-weight: bold; }
+    .destaque-roxo { color: var(--ia-roxo); font-weight: bold; }
+    .destaque-amarelo { color: var(--energia-amarelo); font-weight: bold; }
+
+    .caixa-info {
+      background: rgba(0, 188, 212, 0.15);
+      border-left: 4px solid var(--ia-ciano);
+      padding: 12px 18px;
+      border-radius: 0 6px 6px 0;
+      margin: 10px 0;
+      font-size: 0.85em;
+    }
+
+    .caixa-aviso {
+      background: rgba(245, 166, 35, 0.15);
+      border-left: 4px solid var(--energia-amarelo);
+      padding: 12px 18px;
+      border-radius: 0 6px 6px 0;
+      margin: 10px 0;
+      font-size: 0.85em;
+    }
+
+    .caixa-codigo {
+      background: #1e1e2e;
+      border: 1px solid #444;
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78em;
+      text-align: left;
+      color: #cdd6f4;
+      margin: 8px 0;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: start; }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .card h4 { color: var(--ia-ciano); margin: 0 0 8px 0; font-size: 0.95em; }
+    .card p, .card li { font-size: 0.78em; margin: 4px 0; }
+
+    .numero-grande {
+      font-size: 3em;
+      color: var(--ia-ciano);
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    table.tabela {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8em;
+    }
+
+    table.tabela th {
+      background: #8e44ad;
+      color: white;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    table.tabela td {
+      padding: 7px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: var(--energia-branco);
+    }
+
+    table.tabela tr:nth-child(even) td {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .badge-ia { display:inline-block; background:#8e44ad; color:white; border-radius:12px; padding:2px 10px; font-size:0.7em; font-weight:bold; }
+    .badge-snow { display:inline-block; background:#29b5e8; color:#0d1b2a; border-radius:12px; padding:2px 10px; font-size:0.7em; font-weight:bold; }
+    .badge-parte1 { display:inline-block; background: #1a6fa8; color: white; border-radius:12px; padding:2px 10px; font-size:0.7em; font-weight:bold; }
+
+    .prompt-box {
+      background: #1a1a2e;
+      border: 2px solid #8e44ad;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78em;
+      color: #e2b0ff;
+      margin: 8px 0;
+      text-align: left;
+    }
+
+    .arrow { color: var(--ia-ciano); font-size: 1.5em; text-align:center; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ======================================================
+         SLIDE 1 — ABERTURA PARTE 2
+    ======================================================= -->
+    <section data-background-gradient="linear-gradient(135deg, #1a0a2e 0%, #2d1b69 40%, #0d1b2a 100%)">
+      <div style="padding: 20px 0; text-align:center;">
+        <div style="font-size:2.8em; margin-bottom:12px;">🤖 ⚡</div>
+        <h1 style="font-size:1.8em; margin-bottom:0.3em;">Desenvolvimento Moderno com IA</h1>
+        <p style="color:#c0a0ee; font-size:0.95em; margin-bottom:1.5em;">
+          Claude Code · CLAUDE.md · Snowflake · Qualidade de Dados
+        </p>
+        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:1.5em;">
+          <span class="badge-ia">Módulo 4 — Claude Code &amp; IA</span>
+          <span class="badge-snow">Módulo 5 — Snowflake &amp; Qualidade</span>
+        </div>
+        <p style="font-size:0.7em; color:rgba(255,255,255,0.4);">
+          Parte 2 do curso Python para Distribuição de Energia Elétrica
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 2 — O QUE É CLAUDE CODE?
+    ======================================================= -->
+    <section>
+      <h2>O que é Claude Code?</h2>
+      <div class="grid-2" style="margin-top:18px;">
+        <div>
+          <div class="caixa-info">
+            <strong>Claude Code</strong> é uma ferramenta de linha de comando da Anthropic que integra o modelo Claude diretamente ao terminal e ao seu editor de código.
+          </div>
+          <div class="caixa-info" style="margin-top:12px;">
+            Ele lê e escreve arquivos, executa comandos, entende o contexto do seu projeto e <span class="destaque">colabora como um desenvolvedor experiente</span> — mas você mantém o controle total.
+          </div>
+          <div class="caixa-aviso" style="margin-top:12px;">
+            Diferente de autocompletar de IDE: Claude Code <strong>entende o projeto inteiro</strong> e pode refatorar, documentar e gerar testes de forma contextual.
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <h4>Casos de uso para analistas de energia</h4>
+            <ul style="margin:0; padding-left:18px;">
+              <li>Gerar queries SQL para Snowflake a partir de descrições em português</li>
+              <li>Criar funções de validação de dados de UC</li>
+              <li>Documentar pipelines de qualidade automaticamente</li>
+              <li>Explicar erros e sugerir correções</li>
+              <li>Refatorar notebooks em scripts produtivos</li>
+              <li>Gerar relatórios de qualidade em Excel/PDF</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 3 — INSTALAÇÃO CLAUDE CODE
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M4</span> Instalação e Configuração</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Pré-requisitos</h3>
+          <ul style="font-size:0.85em;">
+            <li>Node.js 18+ instalado</li>
+            <li>Conta na Anthropic (anthropic.com)</li>
+            <li>Chave de API (API Key)</li>
+          </ul>
+          <h3 style="margin-top:18px;">Instalação</h3>
+          <div class="caixa-codigo">
+<span style="color:#cba6f7;"># Instalar globalmente via npm</span><br>
+npm install -g @anthropic-ai/claude-code<br><br>
+<span style="color:#cba6f7;"># Configurar a API Key</span><br>
+export ANTHROPIC_API_KEY="sk-ant-..."<br><br>
+<span style="color:#cba6f7;"># Ou adicionar ao ~/.bashrc / ~/.zshrc</span><br>
+echo 'export ANTHROPIC_API_KEY="sk-ant-..."' \<br>
+&nbsp;&nbsp;&gt;&gt; ~/.bashrc
+          </div>
+        </div>
+        <div>
+          <h3>Primeiros comandos</h3>
+          <div class="caixa-codigo">
+<span style="color:#cba6f7;"># Iniciar Claude Code no projeto</span><br>
+cd /meu/projeto<br>
+claude<br><br>
+<span style="color:#cba6f7;"># Modo não-interativo (comando único)</span><br>
+claude -p "Explique este arquivo"<br><br>
+<span style="color:#cba6f7;"># Verificar versão</span><br>
+claude --version
+          </div>
+          <div class="caixa-info" style="margin-top:12px;">
+            Ao iniciar o Claude Code em um projeto com <code>CLAUDE.md</code>, ele carrega automaticamente o contexto do projeto.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 4 — CLAUDE.MD
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M4</span> Estrutura de Projetos com CLAUDE.md</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>O que é o CLAUDE.md?</h3>
+          <p style="font-size:0.85em;">É um arquivo Markdown na raiz do projeto que fornece contexto persistente ao Claude Code: quem você é, o que o projeto faz, quais padrões seguir e o que <strong>não</strong> fazer.</p>
+          <div class="caixa-aviso">
+            O CLAUDE.md é lido a <strong>cada sessão</strong>. Mantenha-o atualizado — é a memória do seu projeto.
+          </div>
+          <h3 style="margin-top:16px;">Seções recomendadas</h3>
+          <ul style="font-size:0.82em;">
+            <li>Contexto do negócio e domínio</li>
+            <li>Stack tecnológica e versões</li>
+            <li>Convenções de nomenclatura</li>
+            <li>Padrões de código e estilo</li>
+            <li>O que Claude NUNCA deve fazer</li>
+            <li>Comandos úteis do projeto</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Exemplo — qualidade de dados</h3>
+          <div class="caixa-codigo" style="font-size:0.72em;">
+# Projeto: Qualidade Cadastro UC<br><br>
+## Contexto<br>
+Pipeline de qualidade do cadastro de<br>
+consumidores de uma distribuidora de<br>
+energia. Dados no Snowflake.<br><br>
+## Stack<br>
+- Python 3.11, pandas, great-expectations<br>
+- Snowflake (schema: CADASTRO)<br>
+- Tabela principal: CONSUMIDORES_UC<br><br>
+## Convenções<br>
+- Nomes em snake_case<br>
+- Prefixo vw_ para views<br>
+- Queries parametrizadas (sem f-strings<br>
+&nbsp;&nbsp;em SQL para evitar SQL injection)<br><br>
+## Nunca<br>
+- Fazer DELETE/UPDATE sem WHERE<br>
+- Commitar credenciais no .env
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 5 — SKILLS E PROMPTS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M4</span> Skills e Prompts Customizados</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>O que são Skills?</h3>
+          <p style="font-size:0.85em;">Skills são arquivos Markdown que definem tarefas reutilizáveis para o Claude Code. Você invoca com <code>/nomeskill</code> e ele executa a tarefa descrita.</p>
+          <div class="caixa-codigo" style="font-size:0.72em;">
+<span style="color:#cba6f7;"># .claude/commands/data-quality.md</span><br>
+---<br>
+description: Executa análise de qualidade<br>
+&nbsp;&nbsp;no DataFrame `df`<br>
+---<br><br>
+Analise a qualidade dos dados no<br>
+DataFrame `df`:<br>
+1. % nulos por coluna<br>
+2. Duplicatas na chave primária<br>
+3. Outliers em colunas numéricas<br>
+4. Gere um relatório em Markdown<br>
+          </div>
+          <div class="caixa-info" style="margin-top:10px; font-size:0.8em;">
+            Salve skills em <code>.claude/commands/</code> no projeto.
+          </div>
+        </div>
+        <div>
+          <h3>Prompt engineering para dados</h3>
+          <div class="prompt-box" style="font-size:0.73em;">
+<span style="color:#a6e3a1;">✅ Prompt eficaz:</span><br><br>
+"Crie uma função Python que recebe um<br>
+DataFrame pandas com a tabela CONSUMIDORES_UC<br>
+(colunas: cod_consumidor, cpf_cnpj,<br>
+cod_modalidade_tarifaria, vlr_consumo_medio_kwh)<br>
+e retorna um dict com:<br>
+- pct_nulos: % nulos por coluna<br>
+- duplicatas: contagem de cod_consumidor<br>
+&nbsp;&nbsp;duplicados<br>
+- outliers_consumo: registros com consumo<br>
+&nbsp;&nbsp;acima de 3 desvios padrão<br>
+Use type hints e docstring em português."
+          </div>
+          <div class="prompt-box" style="font-size:0.73em; border-color: #e74c3c; color: #f38ba8; margin-top:8px;">
+<span style="color:#e74c3c;">❌ Prompt ineficaz:</span><br>
+"faça uma função de qualidade de dados"
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 6 — MARKDOWN
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M4</span> Markdown para Documentação Técnica</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Por que Markdown?</h3>
+          <ul style="font-size:0.85em;">
+            <li>Legível como texto puro</li>
+            <li>Renderizado em GitHub, Jupyter, VS Code</li>
+            <li>Base para dicionários de dados</li>
+            <li>Gerado automaticamente pelo Claude Code</li>
+            <li>Versiona junto com o código (git)</li>
+          </ul>
+          <div class="caixa-info" style="margin-top:12px;">
+            O Claude Code lê e <strong>gera</strong> Markdown. Use-o para criar e manter documentação técnica automaticamente.
+          </div>
+        </div>
+        <div>
+          <h3>Elementos essenciais</h3>
+          <div class="caixa-codigo" style="font-size:0.72em;">
+# Título Principal<br>
+## Seção<br>
+### Subseção<br><br>
+**negrito**, *itálico*, `código inline`<br><br>
+- Item de lista<br>
+- Outro item<br><br>
+| Coluna A | Coluna B |<br>
+|----------|----------|<br>
+| Valor 1  | Valor 2  |<br><br>
+```python<br>
+# bloco de código com sintaxe<br>
+def funcao():<br>
+&nbsp;&nbsp;pass<br>
+```<br><br>
+&gt; Citação ou nota importante
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 7 — SNOWFLAKE ARQUITETURA
+    ======================================================= -->
+    <section data-background-gradient="linear-gradient(135deg, #0d2a3a 0%, #1a3a5c 100%)">
+      <h2><span class="tag-snow">M5</span> Snowflake + Python: Arquitetura</h2>
+      <div class="grid-2" style="margin-top:18px;">
+        <div>
+          <h3>Componentes Snowflake</h3>
+          <div class="card">
+            <table style="font-size:0.78em; width:100%; border-collapse:collapse;">
+              <tr><td style="padding:5px; color:#29b5e8;">Account</td><td style="padding:5px;">Instância da sua empresa</td></tr>
+              <tr><td style="padding:5px; color:#29b5e8;">Warehouse</td><td style="padding:5px;">Cluster de computação (VXS a 6XL)</td></tr>
+              <tr><td style="padding:5px; color:#29b5e8;">Database</td><td style="padding:5px;">Banco de dados lógico</td></tr>
+              <tr><td style="padding:5px; color:#29b5e8;">Schema</td><td style="padding:5px;">Agrupamento de tabelas/views</td></tr>
+              <tr><td style="padding:5px; color:#29b5e8;">Stage</td><td style="padding:5px;">Área de carga de arquivos</td></tr>
+            </table>
+          </div>
+          <div class="caixa-aviso" style="margin-top:10px; font-size:0.8em;">
+            Snowflake cobra por <strong>tempo de execução do warehouse</strong>. Sempre suspenda ao terminar análises longas.
+          </div>
+        </div>
+        <div>
+          <h3>Conexão Python</h3>
+          <div class="caixa-codigo" style="font-size:0.73em;">
+import snowflake.connector<br>
+from dotenv import load_dotenv<br>
+import os<br><br>
+load_dotenv()<br><br>
+conn = snowflake.connector.connect(<br>
+&nbsp;&nbsp;account=os.getenv("SF_ACCOUNT"),<br>
+&nbsp;&nbsp;user=os.getenv("SF_USER"),<br>
+&nbsp;&nbsp;password=os.getenv("SF_PASSWORD"),<br>
+&nbsp;&nbsp;warehouse=os.getenv("SF_WAREHOUSE"),<br>
+&nbsp;&nbsp;database=os.getenv("SF_DATABASE"),<br>
+&nbsp;&nbsp;schema=os.getenv("SF_SCHEMA"),<br>
+)<br><br>
+cursor = conn.cursor()<br>
+cursor.execute("SELECT CURRENT_VERSION()")<br>
+print(cursor.fetchone()[0])
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 8 — PROJETO QUALIDADE DE DADOS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-snow">M5</span> Projeto: Qualidade de Dados de Consumidores</h2>
+      <div style="margin-top:16px;">
+        <div class="caixa-info">
+          <strong>Objetivo:</strong> Construir um pipeline Python que conecta ao Snowflake, analisa a qualidade do cadastro de UCs (Unidades Consumidoras), gera um relatório com score por registro e identifica os principais problemas para correção.
+        </div>
+      </div>
+      <div class="grid-3" style="margin-top:16px;">
+        <div class="card">
+          <h4>1. Extração</h4>
+          <ul style="margin:0; padding-left:16px;">
+            <li>Conectar ao Snowflake</li>
+            <li>Carregar tabela CONSUMIDORES_UC</li>
+            <li>Filtros por data de competência</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>2. Análise de Qualidade</h4>
+          <ul style="margin:0; padding-left:16px;">
+            <li>Completude por campo</li>
+            <li>Validação CPF/CNPJ</li>
+            <li>Consistência tarifária</li>
+            <li>Outliers de consumo</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>3. Relatório</h4>
+          <ul style="margin:0; padding-left:16px;">
+            <li>Score por UC (0 a 1)</li>
+            <li>Dashboard Plotly</li>
+            <li>Exportar Excel com issues</li>
+            <li>Envio de alertas</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 9 — QUERIES AVANÇADAS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-snow">M5</span> Queries Avançadas no Snowflake</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>CTEs — organização de queries</h3>
+          <div class="caixa-codigo" style="font-size:0.73em;">
+query = """<br>
+WITH nulos_por_campo AS (<br>
+&nbsp;&nbsp;SELECT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;COUNT(*) AS total,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;COUNT(cpf_cnpj) AS com_cpf,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;COUNT(num_medidor) AS com_medidor,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;COUNT(num_cep) AS com_cep<br>
+&nbsp;&nbsp;FROM CONSUMIDORES_UC<br>
+&nbsp;&nbsp;WHERE flg_ativo = TRUE<br>
+),<br>
+pct_preenchimento AS (<br>
+&nbsp;&nbsp;SELECT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ROUND(com_cpf / total * 100, 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AS pct_cpf,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ROUND(com_medidor / total * 100, 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AS pct_medidor<br>
+&nbsp;&nbsp;FROM nulos_por_campo<br>
+)<br>
+SELECT * FROM pct_preenchimento;<br>
+"""<br>
+df = pd.read_sql(query, conn)
+          </div>
+        </div>
+        <div>
+          <h3>Window Functions — ranking de issues</h3>
+          <div class="caixa-codigo" style="font-size:0.73em;">
+query_rank = """<br>
+SELECT<br>
+&nbsp;&nbsp;nom_municipio,<br>
+&nbsp;&nbsp;COUNT(*) AS total_ucs,<br>
+&nbsp;&nbsp;SUM(CASE WHEN cpf_cnpj IS NULL<br>
+&nbsp;&nbsp;&nbsp;&nbsp;THEN 1 ELSE 0 END) AS sem_cpf,<br>
+&nbsp;&nbsp;ROUND(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SUM(CASE WHEN cpf_cnpj IS NULL<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;THEN 1 ELSE 0 END)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/ COUNT(*) * 100, 1<br>
+&nbsp;&nbsp;) AS pct_sem_cpf,<br>
+&nbsp;&nbsp;RANK() OVER (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ORDER BY pct_sem_cpf DESC<br>
+&nbsp;&nbsp;) AS ranking<br>
+FROM CONSUMIDORES_UC<br>
+GROUP BY nom_municipio<br>
+ORDER BY ranking<br>
+LIMIT 20;<br>
+"""
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 10 — BOAS PRÁTICAS
+    ======================================================= -->
+    <section>
+      <h2>Boas Práticas — Desenvolvimento com IA</h2>
+      <div class="grid-2" style="margin-top:18px;">
+        <div>
+          <h3>Com Claude Code</h3>
+          <ul style="font-size:0.83em;">
+            <li>Mantenha o <code>CLAUDE.md</code> atualizado com o contexto do projeto</li>
+            <li>Revise <strong>todo</strong> código gerado antes de executar</li>
+            <li>Use o Claude para explicar, não apenas para gerar</li>
+            <li>Versione os prompts e skills junto com o código</li>
+            <li>Documente o que o Claude gerou nos commits</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Com Snowflake + Python</h3>
+          <ul style="font-size:0.83em;">
+            <li>Nunca armazene credenciais no código — use <code>.env</code></li>
+            <li>Adicione <code>.env</code> ao <code>.gitignore</code></li>
+            <li>Use queries parametrizadas (evite SQL injection)</li>
+            <li>Feche conexões com <code>conn.close()</code> ou <code>with</code></li>
+            <li>Suspenda o warehouse após análises longas</li>
+            <li>Prefira <code>pd.read_sql()</code> para resultados em DataFrame</li>
+          </ul>
+        </div>
+      </div>
+      <div class="caixa-info" style="margin-top:16px;">
+        <strong>Fluxo recomendado:</strong> Prototipar no Jupyter → Revisar com Claude Code → Refatorar em script → Agendar no pipeline de dados da empresa.
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 11 — PRÓXIMOS PASSOS
+    ======================================================= -->
+    <section data-background-gradient="linear-gradient(135deg, #1a0a2e 0%, #0d2a3a 60%, #0d1b2a 100%)">
+      <div style="text-align:center; padding:20px 0;">
+        <div style="font-size:2.5em; margin-bottom:16px;">🎯</div>
+        <h2 style="font-size:1.6em;">Próximos Passos</h2>
+        <div class="grid-2" style="margin-top:20px; text-align:left;">
+          <div>
+            <div class="card">
+              <h4>Curto prazo</h4>
+              <ul style="margin:0; padding-left:16px;">
+                <li>Completar todos os notebooks do curso</li>
+                <li>Configurar Claude Code no seu PC</li>
+                <li>Criar um CLAUDE.md para o seu projeto atual</li>
+                <li>Executar a análise de qualidade no seu ambiente Snowflake</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="card">
+              <h4>Médio prazo</h4>
+              <ul style="margin:0; padding-left:16px;">
+                <li>Automatizar o pipeline de qualidade (agendamento)</li>
+                <li>Integrar com dashboards Power BI ou Streamlit</li>
+                <li>Expandir para validações com great-expectations</li>
+                <li>Criar alertas automáticos via e-mail/Teams</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="caixa-info" style="margin-top:18px; font-size:0.82em; text-align:left; max-width:700px; margin-left:auto; margin-right:auto;">
+          <strong>Recursos adicionais:</strong> docs.anthropic.com · snowflake.com/developers · pandas.pydata.org · plotly.com/python
+        </div>
+        <p style="font-size:0.75em; color:rgba(255,255,255,0.4); margin-top:20px;">
+          Obrigado! Dúvidas? Use o Claude Code para perguntar. 😄
+        </p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    transitionSpeed: 'default',
+    backgroundTransition: 'fade',
+    controls: true,
+    progress: true,
+    center: false,
+    width: 1200,
+    height: 700,
+    margin: 0.04,
+    plugins: [ RevealNotes, RevealMarkdown, RevealHighlight ]
+  });
+</script>
+</body>
+</html>
