@@ -1,0 +1,54 @@
+<!-- ======================================================
+         SLIDE 10 — ESTRUTURAS DE CONTROLE
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M1</span> Estruturas de Controle</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Classificação tarifária (if/elif)</h3>
+          <div class="caixa-codigo">
+def classificar_tarifa(consumo_kwh):<br>
+&nbsp;&nbsp;if consumo_kwh &lt;= 30:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Baixa Renda"<br>
+&nbsp;&nbsp;elif consumo_kwh &lt;= 100:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 1"<br>
+&nbsp;&nbsp;elif consumo_kwh &lt;= 220:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 2"<br>
+&nbsp;&nbsp;else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 3"<br><br>
+print(classificar_tarifa(342))
+<span style="color:#16a34a;"># → "Faixa 3"</span>
+          </div>
+        </div>
+        <div>
+          <h3>Iteração sobre leituras (for)</h3>
+          <div class="caixa-codigo">
+leituras = [310, 325, 342, None, 315]<br><br>
+validas = []<br>
+for leitura in leituras:<br>
+&nbsp;&nbsp;if leitura is not None:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;validas.append(leitura)<br><br>
+<span style="color:#7c3aed;"># List comprehension — mais pythonico</span><br>
+validas = [x for x in leituras<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if x is not None]<br><br>
+media = sum(validas) / len(validas)<br>
+print(f"Média: {media:.1f} kWh")
+          </div>
+        </div>
+      </div>
+
+      <!-- Notas sobre estruturas de controle -->
+      <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+        <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
+          <ul style="margin: 0; padding-left: 18px;">
+            <li><strong>Indentação é lei:</strong> Em Python, os blocos de código são definidos pelos espaços no início da linha (use 4 espaços).</li>
+            <li><strong>Não esqueça:</strong> É obrigatório usar dois-pontos (<code>:</code>) no final das linhas de <code>if</code>, <code>elif</code>, <code>else</code> e <code>for</code>.</li>
+          </ul>
+          <ul style="margin: 0; padding-left: 18px;">
+            <li><strong>if/elif/else:</strong> Em uma cadeia de condições, apenas o bloco da <em>primeira</em> condição verdadeira será executado.</li>
+            <li><strong>for loop:</strong> É a forma mais direta e pythônica de percorrer itens de uma lista um por um.</li>
+          </ul>
+        </div>
+      </div>
+    </section>

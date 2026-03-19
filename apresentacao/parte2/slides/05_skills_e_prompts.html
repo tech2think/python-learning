@@ -1,0 +1,49 @@
+<!-- ======================================================
+         SLIDE 5 — SKILLS E PROMPTS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M4</span> Skills e Prompts Customizados</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>O que são Skills?</h3>
+          <p style="font-size:0.85em;">Skills são arquivos Markdown que definem tarefas reutilizáveis para o Claude Code. Você invoca com <code>/nomeskill</code> e ele executa a tarefa descrita.</p>
+          <div class="caixa-codigo" style="font-size:0.72em;">
+<span style="color:#7c3aed;"># .claude/commands/data-quality.md</span><br>
+---<br>
+description: Executa análise de qualidade<br>
+&nbsp;&nbsp;no DataFrame `df`<br>
+---<br><br>
+Analise a qualidade dos dados no<br>
+DataFrame `df`:<br>
+1. % nulos por coluna<br>
+2. Duplicatas na chave primária<br>
+3. Outliers em colunas numéricas<br>
+4. Gere um relatório em Markdown<br>
+          </div>
+          <div class="caixa-info" style="margin-top:10px; font-size:0.8em;">
+            Salve skills em <code>.claude/commands/</code> no projeto.
+          </div>
+        </div>
+        <div>
+          <h3>Prompt engineering para dados</h3>
+          <div class="prompt-box" style="font-size:0.73em;">
+<span style="color:#16a34a;">✅ Prompt eficaz:</span><br><br>
+"Crie uma função Python que recebe um<br>
+DataFrame pandas com a tabela CONSUMIDORES_UC<br>
+(colunas: cod_consumidor, cpf_cnpj,<br>
+cod_modalidade_tarifaria, vlr_consumo_medio_kwh)<br>
+e retorna um dict com:<br>
+- pct_nulos: % nulos por coluna<br>
+- duplicatas: contagem de cod_consumidor<br>
+&nbsp;&nbsp;duplicados<br>
+- outliers_consumo: registros com consumo<br>
+&nbsp;&nbsp;acima de 3 desvios padrão<br>
+Use type hints e docstring em português."
+          </div>
+          <div class="prompt-box" style="font-size:0.73em; border-color: #dc2626; margin-top:8px;">
+<span style="color:#dc2626;">❌ Prompt ineficaz:</span><br>
+"faça uma função de qualidade de dados"
+          </div>
+        </div>
+      </div>
+    </section>

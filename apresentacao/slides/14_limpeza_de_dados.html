@@ -1,0 +1,43 @@
+<!-- ======================================================
+         SLIDE 14 — LIMPEZA DE DADOS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M2</span> Limpeza de Dados de Consumidores</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Problemas comuns no cadastro</h3>
+          <ul style="font-size:0.82em;">
+            <li>CPF/CNPJ com formatação inconsistente</li>
+            <li>Nomes em maiúsculas, minúsculas e misto</li>
+            <li>CEP sem zeros à esquerda</li>
+            <li>Duplicatas de UC por migração de sistema</li>
+            <li>Datas em formatos diferentes</li>
+            <li>Campos obrigatórios vazios</li>
+            <li>Coordenadas geográficas ausentes</li>
+          </ul>
+          <div class="caixa-aviso" style="margin-top:10px;">
+            Dados de baixa qualidade impactam diretamente o <strong>faturamento</strong> e os <strong>indicadores ANEEL</strong>.
+          </div>
+        </div>
+        <div>
+          <h3>Técnicas de limpeza</h3>
+          <div class="caixa-codigo">
+<span style="color:#7c3aed;"># Normalizar nomes</span><br>
+df['nom_consumidor'] = (<br>
+&nbsp;&nbsp;df['nom_consumidor']<br>
+&nbsp;&nbsp;.str.strip()<br>
+&nbsp;&nbsp;.str.title()<br>
+)<br><br>
+<span style="color:#7c3aed;"># Limpar CPF/CNPJ</span><br>
+df['cpf_cnpj'] = (<br>
+&nbsp;&nbsp;df['cpf_cnpj']<br>
+&nbsp;&nbsp;.str.replace(r'\D', '', regex=True)<br>
+)<br><br>
+<span style="color:#7c3aed;"># Remover duplicatas</span><br>
+df = df.drop_duplicates(<br>
+&nbsp;&nbsp;subset=['cod_consumidor']<br>
+)
+          </div>
+        </div>
+      </div>
+    </section>

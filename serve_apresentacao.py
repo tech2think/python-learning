@@ -19,6 +19,14 @@ url_map = {
     "2": "/apresentacao/parte2/index.html",
 }
 
+try:
+    import build_apresentacao
+    print("Construindo slides a partir dos arquivos individuais...")
+    build_apresentacao.build_presentation('apresentacao')
+    build_apresentacao.build_presentation('apresentacao/parte2')
+except ImportError:
+    pass
+
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
@@ -30,6 +38,7 @@ print(f"Iniciando apresentação Parte {args.parte}...")
 print(f"Acesse: {url}")
 print("Pressione Ctrl+C para encerrar.")
 
+socketserver.TCPServer.allow_reuse_address = True
 with socketserver.TCPServer(("", args.port), Handler) as httpd:
     webbrowser.open(url)
     try:

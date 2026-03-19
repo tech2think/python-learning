@@ -1,0 +1,58 @@
+<!-- ======================================================
+         SLIDE 17 — VISUALIZAÇÕES
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M3</span> Visualização de Indicadores</h2>
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="card">
+          <h4>matplotlib — Barras</h4>
+          <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
+import matplotlib.pyplot as plt<br><br>
+classes = df.groupby(<br>
+&nbsp;&nbsp;'cod_classe_consumo'<br>
+)['cod_consumidor'].count()<br><br>
+classes.plot(kind='bar',<br>
+&nbsp;&nbsp;color='steelblue',<br>
+&nbsp;&nbsp;title='Consumidores<br>&nbsp;&nbsp;por Classe')<br>
+plt.tight_layout()<br>
+plt.show()
+          </div>
+        </div>
+        <div class="card">
+          <h4>seaborn — Heatmap</h4>
+          <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
+import seaborn as sns<br><br>
+nulos = df.isnull().groupby(<br>
+&nbsp;&nbsp;df['cod_uf']<br>
+).mean() * 100<br><br>
+sns.heatmap(<br>
+&nbsp;&nbsp;nulos,<br>
+&nbsp;&nbsp;annot=True,<br>
+&nbsp;&nbsp;fmt='.0f',<br>
+&nbsp;&nbsp;cmap='RdYlGn_r'<br>
+)<br>
+plt.title('% Nulos / UF')
+          </div>
+        </div>
+        <div class="card">
+          <h4>plotly — Interativo</h4>
+          <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
+import plotly.express as px<br><br>
+fig = px.line(<br>
+&nbsp;&nbsp;df_mensal,<br>
+&nbsp;&nbsp;x='mes',<br>
+&nbsp;&nbsp;y='consumo_kwh',<br>
+&nbsp;&nbsp;color='classe',<br>
+&nbsp;&nbsp;title='Consumo Mensal'<br>
+)<br>
+fig.update_layout(<br>
+&nbsp;&nbsp;template='plotly_white'<br>
+)<br>
+fig.show()
+          </div>
+        </div>
+      </div>
+      <div class="caixa-info" style="margin-top:14px; font-size:0.78em;">
+        <strong>Dica:</strong> Use Plotly para dashboards interativos — os usuários podem dar zoom, filtrar e exportar os dados diretamente no gráfico.
+      </div>
+    </section>

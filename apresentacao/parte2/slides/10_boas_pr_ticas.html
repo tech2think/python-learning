@@ -1,0 +1,32 @@
+<!-- ======================================================
+         SLIDE 10 — BOAS PRÁTICAS
+    ======================================================= -->
+    <section>
+      <h2>Boas Práticas — Desenvolvimento com IA</h2>
+      <div class="grid-2" style="margin-top:18px;">
+        <div>
+          <h3>Com Claude Code</h3>
+          <ul style="font-size:0.83em;">
+            <li>Mantenha o <code>CLAUDE.md</code> atualizado com o contexto do projeto</li>
+            <li>Revise <strong>todo</strong> código gerado antes de executar</li>
+            <li>Use o Claude para explicar, não apenas para gerar</li>
+            <li>Versione os prompts e skills junto com o código</li>
+            <li>Documente o que o Claude gerou nos commits</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Com Snowflake + Python</h3>
+          <ul style="font-size:0.83em;">
+            <li>Nunca armazene credenciais no código — use <code>.env</code></li>
+            <li>Adicione <code>.env</code> ao <code>.gitignore</code></li>
+            <li>Use queries parametrizadas (evite SQL injection)</li>
+            <li>Feche conexões com <code>conn.close()</code> ou <code>with</code></li>
+            <li>Suspenda o warehouse após análises longas</li>
+            <li>Prefira <code>pd.read_sql()</code> para resultados em DataFrame</li>
+          </ul>
+        </div>
+      </div>
+      <div class="caixa-info" style="margin-top:16px;">
+        <strong>Fluxo recomendado:</strong> Prototipar no Jupyter → Revisar com Claude Code → Refatorar em script → Agendar no pipeline de dados da empresa.
+      </div>
+    </section>

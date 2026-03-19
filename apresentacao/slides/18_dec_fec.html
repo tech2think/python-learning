@@ -1,0 +1,46 @@
+<!-- ======================================================
+         SLIDE 18 — DEC / FEC
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M3</span> Indicadores DEC e FEC</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <div class="card">
+            <h4>DEC — Duração Equivalente de Interrupção</h4>
+            <p style="font-size:0.8em;">Soma das durações de interrupções ponderadas pelo número de UCs afetadas, dividida pelo total de UCs do conjunto.</p>
+            <div class="caixa-codigo" style="margin-top:8px;">
+<span style="color:#7c3aed;"># Fórmula</span><br>
+DEC = Σ(Duração_i × UCs_i) / UCs_total
+            </div>
+          </div>
+          <div class="card" style="margin-top:12px;">
+            <h4>FEC — Frequência Equivalente de Interrupção</h4>
+            <p style="font-size:0.8em;">Número de interrupções ponderadas pelo número de UCs afetadas, dividido pelo total de UCs.</p>
+            <div class="caixa-codigo" style="margin-top:8px;">
+FEC = Σ(UCs_i) / UCs_total
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="caixa-codigo">
+import plotly.graph_objects as go<br><br>
+fig = go.Figure()<br><br>
+fig.add_trace(go.Bar(<br>
+&nbsp;&nbsp;name='DEC Real',<br>
+&nbsp;&nbsp;x=meses, y=dec_real,<br>
+&nbsp;&nbsp;marker_color='#dc2626'<br>
+))<br>
+fig.add_trace(go.Scatter(<br>
+&nbsp;&nbsp;name='Limite ANEEL',<br>
+&nbsp;&nbsp;x=meses, y=dec_limite,<br>
+&nbsp;&nbsp;line=dict(color='#d97706',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dash='dash')<br>
+))<br>
+fig.update_layout(<br>
+&nbsp;&nbsp;title='DEC Mensal vs. Limite',<br>
+&nbsp;&nbsp;template='plotly_white'<br>
+)
+          </div>
+        </div>
+      </div>
+    </section>

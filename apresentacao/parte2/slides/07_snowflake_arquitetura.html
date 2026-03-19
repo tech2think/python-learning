@@ -1,0 +1,43 @@
+<!-- ======================================================
+         SLIDE 7 — SNOWFLAKE ARQUITETURA
+    ======================================================= -->
+    <section>
+      <h2 style="border-top: 4px solid #0ea5e9; padding-top: 8px;"><span class="tag-snow">M5</span> Snowflake + Python: Arquitetura</h2>
+      <div class="grid-2" style="margin-top:18px;">
+        <div>
+          <h3>Componentes Snowflake</h3>
+          <div class="card">
+            <table style="font-size:0.78em; width:100%; border-collapse:collapse;">
+              <tr><td style="padding:5px; color:#0ea5e9;">Account</td><td style="padding:5px; color:#1e2a3a;">Instância da sua empresa</td></tr>
+              <tr><td style="padding:5px; color:#0ea5e9;">Warehouse</td><td style="padding:5px; color:#1e2a3a;">Cluster de computação (VXS a 6XL)</td></tr>
+              <tr><td style="padding:5px; color:#0ea5e9;">Database</td><td style="padding:5px; color:#1e2a3a;">Banco de dados lógico</td></tr>
+              <tr><td style="padding:5px; color:#0ea5e9;">Schema</td><td style="padding:5px; color:#1e2a3a;">Agrupamento de tabelas/views</td></tr>
+              <tr><td style="padding:5px; color:#0ea5e9;">Stage</td><td style="padding:5px; color:#1e2a3a;">Área de carga de arquivos</td></tr>
+            </table>
+          </div>
+          <div class="caixa-aviso" style="margin-top:10px; font-size:0.8em;">
+            Snowflake cobra por <strong>tempo de execução do warehouse</strong>. Sempre suspenda ao terminar análises longas.
+          </div>
+        </div>
+        <div>
+          <h3>Conexão Python</h3>
+          <div class="caixa-codigo" style="font-size:0.73em;">
+import snowflake.connector<br>
+from dotenv import load_dotenv<br>
+import os<br><br>
+load_dotenv()<br><br>
+conn = snowflake.connector.connect(<br>
+&nbsp;&nbsp;account=os.getenv("SF_ACCOUNT"),<br>
+&nbsp;&nbsp;user=os.getenv("SF_USER"),<br>
+&nbsp;&nbsp;password=os.getenv("SF_PASSWORD"),<br>
+&nbsp;&nbsp;warehouse=os.getenv("SF_WAREHOUSE"),<br>
+&nbsp;&nbsp;database=os.getenv("SF_DATABASE"),<br>
+&nbsp;&nbsp;schema=os.getenv("SF_SCHEMA"),<br>
+)<br><br>
+cursor = conn.cursor()<br>
+cursor.execute("SELECT CURRENT_VERSION()")<br>
+print(cursor.fetchone()[0])
+          </div>
+        </div>
+      </div>
+    </section>

@@ -1,0 +1,39 @@
+<!-- ======================================================
+         SLIDE 8 — PROJETO QUALIDADE DE DADOS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-snow">M5</span> Projeto: Qualidade de Dados de Consumidores</h2>
+      <div style="margin-top:16px;">
+        <div class="caixa-info">
+          <strong>Objetivo:</strong> Construir um pipeline Python que conecta ao Snowflake, analisa a qualidade do cadastro de UCs (Unidades Consumidoras), gera um relatório com score por registro e identifica os principais problemas para correção.
+        </div>
+      </div>
+      <div class="grid-3" style="margin-top:16px;">
+        <div class="card">
+          <h4>1. Extração</h4>
+          <ul style="margin:0; padding-left:16px;">
+            <li>Conectar ao Snowflake</li>
+            <li>Carregar tabela CONSUMIDORES_UC</li>
+            <li>Filtros por data de competência</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>2. Análise de Qualidade</h4>
+          <ul style="margin:0; padding-left:16px;">
+            <li>Completude por campo</li>
+            <li>Validação CPF/CNPJ</li>
+            <li>Consistência tarifária</li>
+            <li>Outliers de consumo</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>3. Relatório</h4>
+          <ul style="margin:0; padding-left:16px;">
+            <li>Score por UC (0 a 1)</li>
+            <li>Dashboard Plotly</li>
+            <li>Exportar Excel com issues</li>
+            <li>Envio de alertas</li>
+          </ul>
+        </div>
+      </div>
+    </section>

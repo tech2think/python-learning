@@ -1,0 +1,60 @@
+<!-- ======================================================
+         SLIDE 15 — QUALIDADE DE CADASTRO
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M2</span> Análise de Qualidade do Cadastro</h2>
+      <div class="grid-2" style="margin-top:14px;">
+        <div>
+          <h3>Score de qualidade por registro</h3>
+          <div class="caixa-codigo">
+def score_qualidade(row) -&gt; float:<br>
+&nbsp;&nbsp;campos = [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'nom_consumidor', 'cpf_cnpj',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'cod_modalidade_tarifaria',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'nom_municipio', 'num_cep',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'num_medidor', 'dat_ultima_leitura'<br>
+&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;preenchidos = sum(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1 for c in campos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if pd.notna(row[c]) and row[c] != ''<br>
+&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;return round(preenchidos / len(campos), 2)<br><br>
+df['score_qualidade'] = df.apply(<br>
+&nbsp;&nbsp;score_qualidade, axis=1<br>
+)
+          </div>
+        </div>
+        <div>
+          <h3>Dimensões de qualidade</h3>
+          <div class="caixa-codigo">
+<span style="color:#7c3aed;"># Completude (%)</span><br>
+completude = (<br>
+&nbsp;&nbsp;df['nom_consumidor'].notna().mean() * 100<br>
+)<br><br>
+<span style="color:#7c3aed;"># Unicidade (Duplicatas)</span><br>
+duplicados = (<br>
+&nbsp;&nbsp;df.duplicated(subset=['cod_consumidor']).sum()<br>
+)<br><br>
+<span style="color:#7c3aed;"># Consistência</span><br>
+consistente = (<br>
+&nbsp;&nbsp;df['cod_classe_consumo'].isin(['RES', 'IND', 'COM'])<br>
+)
+          </div>
+        </div>
+      </div>
+
+      <!-- Notas sobre qualidade de dados -->
+      <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+        <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
+          <ul style="margin: 0; padding-left: 18px;">
+            <li><strong>Completude:</strong> Verifique se campos críticos (CPF, Medidor) estão preenchidos para evitar erros de faturamento.</li>
+            <li><strong>Unicidade:</strong> O <code>cod_consumidor</code> deve ser único para garantir a integridade da base.</li>
+          </ul>
+          <ul style="margin: 0; padding-left: 18px;">
+            <li><strong>Consistência:</strong> Cruze dados (ex: Classe vs. Tarifa) para validar se as regras de negócio foram aplicadas.</li>
+            <li><strong>Score:</strong> Use o <code>.apply(axis=1)</code> para calcular indicadores linha a linha de forma simples.</li>
+          </ul>
+        </div>
+      </div>
+    </section>

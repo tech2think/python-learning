@@ -1,0 +1,46 @@
+<!-- ======================================================
+         SLIDE 4 — CLAUDE.MD
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M4</span> Estrutura de Projetos com CLAUDE.md</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>O que é o CLAUDE.md?</h3>
+          <p style="font-size:0.85em;">É um arquivo Markdown na raiz do projeto que fornece contexto persistente ao Claude Code: quem você é, o que o projeto faz, quais padrões seguir e o que <strong>não</strong> fazer.</p>
+          <div class="caixa-aviso">
+            O CLAUDE.md é lido a <strong>cada sessão</strong>. Mantenha-o atualizado — é a memória do seu projeto.
+          </div>
+          <h3 style="margin-top:16px;">Seções recomendadas</h3>
+          <ul style="font-size:0.82em;">
+            <li>Contexto do negócio e domínio</li>
+            <li>Stack tecnológica e versões</li>
+            <li>Convenções de nomenclatura</li>
+            <li>Padrões de código e estilo</li>
+            <li>O que Claude NUNCA deve fazer</li>
+            <li>Comandos úteis do projeto</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Exemplo — qualidade de dados</h3>
+          <div class="caixa-codigo" style="font-size:0.72em;">
+# Projeto: Qualidade Cadastro UC<br><br>
+## Contexto<br>
+Pipeline de qualidade do cadastro de<br>
+consumidores de uma distribuidora de<br>
+energia. Dados no Snowflake.<br><br>
+## Stack<br>
+- Python 3.11, pandas, great-expectations<br>
+- Snowflake (schema: CADASTRO)<br>
+- Tabela principal: CONSUMIDORES_UC<br><br>
+## Convenções<br>
+- Nomes em snake_case<br>
+- Prefixo vw_ para views<br>
+- Queries parametrizadas (sem f-strings<br>
+&nbsp;&nbsp;em SQL para evitar SQL injection)<br><br>
+## Nunca<br>
+- Fazer DELETE/UPDATE sem WHERE<br>
+- Commitar credenciais no .env
+          </div>
+        </div>
+      </div>
+    </section>

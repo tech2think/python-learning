@@ -1,0 +1,53 @@
+<!-- ======================================================
+         SLIDE 9 — ESTRUTURAS DE DADOS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M1</span> Estruturas de Dados</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Listas (Sequências)</h3>
+          <p style="font-size: 0.8em; color: #475569; margin-bottom: 10px;">Coleções ordenadas e mutáveis de itens.</p>
+          <div class="caixa-codigo">
+<span style="color:#7c3aed;"># Criando uma lista de leituras</span><br>
+leituras = [310, 325, 342, 298, 315]<br><br>
+<span style="color:#7c3aed;"># Acessando o primeiro elemento (índice 0)</span><br>
+primeira_leitura = leituras[0]<br><br>
+<span style="color:#7c3aed;"># Adicionando um novo elemento</span><br>
+leituras.append(330)
+          </div>
+        </div>
+        <div>
+          <h3>Dicionários (Chave-Valor)</h3>
+          <p style="font-size: 0.8em; color: #475569; margin-bottom: 10px;">Coleções de pares com chaves únicas.</p>
+          <div class="caixa-codigo">
+<span style="color:#7c3aed;"># Criando um registro de UC</span><br>
+consumidor = {<br>
+&nbsp;&nbsp;"cod": 100042,<br>
+&nbsp;&nbsp;"nome": "Maria Silva",<br>
+&nbsp;&nbsp;"classe": "B1",<br>
+&nbsp;&nbsp;"consumo_kwh": 342.7,<br>
+&nbsp;&nbsp;"ativo": True<br>
+}<br><br>
+<span style="color:#7c3aed;"># Acessando valores</span><br>
+nome_cliente = consumidor["nome"]
+          </div>
+        </div>
+      </div>
+
+      <!-- Notas sobre estruturas -->
+      <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+        <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
+          <ul style="margin: 0; padding-left: 18px;">
+            <li><strong>Listas:</strong> o primeiro item está sempre no índice <code>0</code>.</li>
+            <li>Use <code>len(lista)</code> para saber o número de itens.</li>
+            <li>Listas preservam a ordem em que os itens foram inseridos.</li>
+          </ul>
+          <ul style="margin: 0; padding-left: 18px;">
+            <li><strong>Dicionários:</strong> as chaves (ex: "nome") devem ser únicas.</li>
+            <li>Acesso rápido: encontrar um valor pela chave é instantâneo.</li>
+            <li>Ideal para representar objetos complexos (clientes, medidores).</li>
+          </ul>
+        </div>
+      </div>
+    </section>

@@ -1,0 +1,58 @@
+    <!-- ======================================================
+         SLIDE 8 — VARIÁVEIS E TIPOS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M1</span> Variáveis e Tipos de Dados</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Tipos básicos no setor elétrico</h3>
+          <div class="caixa-codigo">
+<span style="color:#7c3aed;"># Inteiros — códigos e tensões</span><br>
+cod_consumidor = 100042<br>
+tensao_nominal = 220  <span style="color:#94a3b8;"># Volts</span><br><br>
+<span style="color:#7c3aed;"># Float — medições</span><br>
+consumo_kwh = 342.7<br>
+fator_potencia = 0.92<br><br>
+<span style="color:#7c3aed;"># String — cadastro</span><br>
+nome = "Maria Silva Santos"<br>
+municipio = "São Paulo"<br><br>
+<span style="color:#7c3aed;"># Booleano — status</span><br>
+ativo = True<br>
+inadimplente = False
+          </div>
+        </div>
+        <div>
+          <h3>Estruturas de dados</h3>
+          <div class="caixa-codigo">
+<span style="color:#7c3aed;"># Lista — leituras mensais</span><br>
+leituras = [310, 325, 342, 298, 315]<br><br>
+<span style="color:#7c3aed;"># Dicionário — registro UC</span><br>
+consumidor = {<br>
+&nbsp;&nbsp;"cod": 100042,<br>
+&nbsp;&nbsp;"nome": "Maria Silva",<br>
+&nbsp;&nbsp;"classe": "B1",<br>
+&nbsp;&nbsp;"consumo_kwh": 342.7,<br>
+&nbsp;&nbsp;"ativo": True<br>
+}<br><br>
+<span style="color:#7c3aed;"># Acessando valores</span><br>
+print(consumidor["nome"])
+          </div>
+        </div>
+      </div>
+
+      <!-- Notas importantes -->
+      <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+        <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras Importantes</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
+          <ul style="margin: 0; padding-left: 18px;">
+            <li>Tipagem dinâmica: não precisa especificar o tipo (int, str, etc.) na criação.</li>
+            <li>Nomes não podem ter espaços ou caracteres especiais (exceto _).</li>
+            <li><strong>Case Sensitive:</strong> a variável <code>X</code> é diferente da variável <code>x</code>.</li>
+          </ul>
+          <ul style="margin: 0; padding-left: 18px;">
+            <li>Proibido usar palavras reservadas (<code>if</code>, <code>def</code>, <code>True</code>, etc.) como nomes.</li>
+            <li>Use <code>#</code> para inserir comentários no seu código.</li>
+          </ul>
+        </div>
+      </div>
+    </section>

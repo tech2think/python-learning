@@ -1,0 +1,43 @@
+<!-- ======================================================
+         SLIDE 6 — CONFIGURAÇÃO DO AMBIENTE
+    ======================================================= -->
+    <section>
+      <h2>Configuração do Ambiente com <span class="destaque">uv</span></h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Passo 1 — Instalar o uv</h3>
+          <div class="caixa-codigo">
+<span style="color:#0ea5e9;"># Linux / Mac</span><br>
+curl -LsSf https://astral.sh/uv/install.sh | sh<br><br>
+<span style="color:#0ea5e9;"># Windows (PowerShell)</span><br>
+powershell -ExecutionPolicy ByPass -c \<br>
+&nbsp;&nbsp;"irm https://astral.sh/uv/install.ps1 | iex"
+          </div>
+          <div class="caixa-info" style="margin-top:10px; font-size:0.82em;">
+            <strong>uv</strong> é o gerenciador moderno do ecossistema Python — <br>
+            10–100x mais rápido que pip, sem necessidade de instalar Python separadamente.
+          </div>
+        </div>
+        <div>
+          <h3>Opção B — Google Colab (Nuvem)</h3>
+          <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 20px; text-align: center;">
+            <p style="font-size: 0.85em; color: #92400e; margin-bottom: 15px;">
+              Caso tenha problemas com a instalação local ou restrições de TI:
+            </p>
+            <a href="https://colab.research.google.com/" target="_blank" style="display: inline-block; background: #f59e0b; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9em; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+              Abrir Google Colab
+            </a>
+            <p style="font-size: 0.7em; color: #b45309; margin-top: 15px; line-height: 1.4;">
+              Ambiente pronto para uso no navegador.<br>
+              Requer apenas uma conta Google.
+            </p>
+          </div>
+          <div class="caixa-info" style="margin-top:10px; font-size:0.82em;">
+            Basta fazer o upload dos notebooks do curso para o seu Drive.
+          </div>
+        </div>
+      </div>
+      <div class="caixa-info" style="margin-top:14px; font-size:0.8em;">
+        <strong>Verificação:</strong> <code>uv run python --version</code> — deve mostrar <code>Python 3.11.x</code>
+      </div>
+    </section>

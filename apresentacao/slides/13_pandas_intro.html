@@ -1,0 +1,39 @@
+<!-- ======================================================
+         SLIDE 13 — PANDAS INTRO
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M2</span> Pandas — Primeiros Passos</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Lendo o cadastro de consumidores</h3>
+          <div class="caixa-codigo">
+import pandas as pd<br><br>
+df = pd.read_csv("dados/consumidores_simulado.csv")<br><br>
+<span style="color:#7c3aed;"># Exploração básica</span><br>
+print(df.shape)        <span style="color:#94a3b8;"># (50, 12)</span><br>
+df.head()              <span style="color:#94a3b8;"># primeiras 5 linhas</span><br>
+df.info()              <span style="color:#94a3b8;"># tipos e nulos</span><br>
+df.describe()          <span style="color:#94a3b8;"># estatísticas</span><br><br>
+<span style="color:#7c3aed;"># Verificar nulos</span><br>
+df.isnull().sum()
+          </div>
+        </div>
+        <div>
+          <h3>Filtros e agrupamentos</h3>
+          <div class="caixa-codigo">
+<span style="color:#7c3aed;"># Filtrar ativos</span><br>
+ativos = df[df['flg_ativo'] == True]<br><br>
+<span style="color:#7c3aed;"># Consumidores B1 com consumo &gt; 300</span><br>
+altos = df[<br>
+&nbsp;&nbsp;(df['cod_modalidade_tarifaria'] == 'B1')<br>
+&nbsp;&nbsp;&amp; (df['vlr_consumo_medio_kwh'] &gt; 300)<br>
+]<br><br>
+<span style="color:#7c3aed;"># Agrupamento por classe</span><br>
+df.groupby('cod_classe_consumo')\<br>
+&nbsp;&nbsp;['vlr_consumo_medio_kwh']\<br>
+&nbsp;&nbsp;.agg(['mean', 'count', 'sum'])\<br>
+&nbsp;&nbsp;.round(2)
+          </div>
+        </div>
+      </div>
+    </section>

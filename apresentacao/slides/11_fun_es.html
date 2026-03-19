@@ -1,0 +1,61 @@
+<!-- ======================================================
+         SLIDE 11 — FUNÇÕES
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M1</span> Funções</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Cálculo do DEC</h3>
+          <div class="caixa-codigo">
+def calcular_dec(interrupcoes: list) -&gt; float:<br>
+&nbsp;&nbsp;"""<br>
+&nbsp;&nbsp;Calcula o DEC (Duração Equivalente de<br>
+&nbsp;&nbsp;Interrupção por Consumidor).<br><br>
+&nbsp;&nbsp;Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;interrupcoes: lista de dicts com<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'duracao_h' e 'consumidores'<br>
+&nbsp;&nbsp;Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEC em horas<br>
+&nbsp;&nbsp;"""<br>
+&nbsp;&nbsp;total_ucs = interrupcoes[0]['total_ucs']<br>
+&nbsp;&nbsp;soma = sum(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;i['duracao_h'] * i['consumidores']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for i in interrupcoes<br>
+&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;return round(soma / total_ucs, 4)
+          </div>
+        </div>
+        <div>
+          <h3>Validação de CPF</h3>
+          <div class="caixa-codigo">
+import re<br><br>
+def validar_cpf_formato(cpf: str) -&gt; bool:<br>
+&nbsp;&nbsp;"""Valida formato do CPF."""<br>
+&nbsp;&nbsp;cpf_limpo = re.sub(r'\D', '', cpf)<br>
+&nbsp;&nbsp;return len(cpf_limpo) == 11<br><br>
+def formatar_cpf(cpf: str) -&gt; str:<br>
+&nbsp;&nbsp;"""Formata CPF: 12345678900 →<br>
+&nbsp;&nbsp;123.456.789-00"""<br>
+&nbsp;&nbsp;c = re.sub(r'\D', '', cpf)<br>
+&nbsp;&nbsp;if len(c) != 11:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return cpf<br>
+&nbsp;&nbsp;return f"{c[:3]}.{c[3:6]}.{c[6:9]}-{c[9:]}"
+          </div>
+        </div>
+      </div>
+
+      <!-- Notas sobre funções -->
+      <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+        <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
+          <ul style="margin: 0; padding-left: 18px;">
+            <li><strong>Reutilização:</strong> Use funções para evitar repetir lógica de cálculo (como DEC/FEC) em vários lugares.</li>
+            <li><strong>Docstrings:</strong> Sempre documente o que a função faz, seus parâmetros e o que ela retorna entre <code>"""triple quotes"""</code>.</li>
+          </ul>
+          <ul style="margin: 0; padding-left: 18px;">
+            <li><strong>Type Hints:</strong> Indicar tipos (ex: <code>cpf: str</code>) ajuda na leitura do código e evita bugs.</li>
+            <li><strong>Modularidade:</strong> Mantenha funções focadas em uma única tarefa para facilitar testes e manutenção.</li>
+          </ul>
+        </div>
+      </div>
+    </section>

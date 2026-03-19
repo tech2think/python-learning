@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Python para Distribuição de Energia Elétrica — Parte 1</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+  <style>
+    :root {
+      --bg: #fafafa;
+      --bg-soft: #f1f5f9;
+      --text-primary: #1e2a3a;
+      --text-secondary: #5a6a7a;
+      --azul: #1a6fa8;
+      --roxo: #7c3aed;
+      --amarelo: #d97706;
+      --verde: #16a34a;
+      --borda: #e2e8f0;
+      --r-main-font-size: 26px;
+      --r-heading-color: #1e2a3a;
+      --r-main-color: #1e2a3a;
+      --r-link-color: #1a6fa8;
+      --r-background-color: #fafafa;
+    }
+
+    .reveal .slides section {
+      padding: 12px 30px;
+      box-sizing: border-box;
+    }
+
+    .reveal {
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      text-transform: none;
+      letter-spacing: -0.02em;
+    }
+
+    .reveal h1 { font-size: 1.8em; color: #1e2a3a; }
+    .reveal h2 { font-size: 1.3em; color: #1e2a3a; }
+    .reveal h3 { font-size: 1em; color: #1a6fa8; }
+
+    .reveal p, .reveal li { color: #1e2a3a; line-height: 1.5; }
+
+    .tag-modulo {
+      display: inline-block;
+      background: #1a6fa8;
+      color: white;
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.7em;
+      font-weight: bold;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .destaque {
+      color: #1a6fa8;
+      font-weight: bold;
+    }
+
+    .destaque-verde {
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    .destaque-roxo {
+      color: #7c3aed;
+      font-weight: bold;
+    }
+
+    .destaque-amarelo {
+      color: #d97706;
+      font-weight: bold;
+    }
+
+    .caixa-info {
+      background: #eff6ff;
+      border-left: 4px solid #1a6fa8;
+      padding: 10px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 8px 0;
+      font-size: 0.82em;
+      color: #1e2a3a;
+    }
+
+    .caixa-aviso {
+      background: #fffbeb;
+      border-left: 4px solid #d97706;
+      padding: 10px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 8px 0;
+      font-size: 0.82em;
+      color: #1e2a3a;
+    }
+
+    .caixa-codigo {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 0.76em;
+      text-align: left;
+      color: #1e2a3a;
+      margin: 6px 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .card h4 {
+      color: #1a6fa8;
+      margin: 0 0 8px 0;
+      font-size: 0.9em;
+    }
+
+    .card p, .card li {
+      font-size: 0.78em;
+      margin: 4px 0;
+      color: #1e2a3a;
+    }
+
+    .numero-grande {
+      font-size: 3em;
+      color: #1a6fa8;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    table.agenda {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8em;
+    }
+
+    table.agenda th {
+      background: #1a6fa8;
+      color: white;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    table.agenda td {
+      padding: 7px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #1e2a3a;
+    }
+
+    table.agenda tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 12px;
+      padding: 2px 10px;
+      font-size: 0.7em;
+      font-weight: bold;
+    }
+
+    .badge-parte1 { background: #1a6fa8; color: white; }
+    .badge-parte2 { background: #7c3aed; color: white; }
+
+    .icon-grande { font-size: 2.5em; }
+
+    .footer-slide {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6em;
+      color: #94a3b8;
+    }
+
+    .arrow { color: #1a6fa8; font-size: 1.5em; text-align: center; }
+
+    kbd {
+      background: #e2e8f0;
+      color: #1e2a3a;
+      padding: 1px 6px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    

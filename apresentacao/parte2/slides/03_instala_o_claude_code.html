@@ -1,0 +1,41 @@
+<!-- ======================================================
+         SLIDE 3 — INSTALAÇÃO CLAUDE CODE
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M4</span> Instalação e Configuração</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>Pré-requisitos</h3>
+          <ul style="font-size:0.85em;">
+            <li>Node.js 18+ instalado</li>
+            <li>Conta na Anthropic (anthropic.com)</li>
+            <li>Chave de API (API Key)</li>
+          </ul>
+          <h3 style="margin-top:18px;">Instalação</h3>
+          <div class="caixa-codigo">
+<span style="color:#7c3aed;"># Instalar globalmente via npm</span><br>
+npm install -g @anthropic-ai/claude-code<br><br>
+<span style="color:#7c3aed;"># Configurar a API Key</span><br>
+export ANTHROPIC_API_KEY="sk-ant-..."<br><br>
+<span style="color:#7c3aed;"># Ou adicionar ao ~/.bashrc / ~/.zshrc</span><br>
+echo 'export ANTHROPIC_API_KEY="sk-ant-..."' \<br>
+&nbsp;&nbsp;&gt;&gt; ~/.bashrc
+          </div>
+        </div>
+        <div>
+          <h3>Primeiros comandos</h3>
+          <div class="caixa-codigo">
+<span style="color:#7c3aed;"># Iniciar Claude Code no projeto</span><br>
+cd /meu/projeto<br>
+claude<br><br>
+<span style="color:#7c3aed;"># Modo não-interativo (comando único)</span><br>
+claude -p "Explique este arquivo"<br><br>
+<span style="color:#7c3aed;"># Verificar versão</span><br>
+claude --version
+          </div>
+          <div class="caixa-info" style="margin-top:12px;">
+            Ao iniciar o Claude Code em um projeto com <code>CLAUDE.md</code>, ele carrega automaticamente o contexto do projeto.
+          </div>
+        </div>
+      </div>
+    </section>

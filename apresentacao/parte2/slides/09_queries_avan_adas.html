@@ -1,0 +1,58 @@
+<!-- ======================================================
+         SLIDE 9 — QUERIES AVANÇADAS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-snow">M5</span> Queries Avançadas no Snowflake</h2>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <h3>CTEs — organização de queries</h3>
+          <div class="caixa-codigo" style="font-size:0.73em;">
+query = """<br>
+WITH nulos_por_campo AS (<br>
+&nbsp;&nbsp;SELECT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;COUNT(*) AS total,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;COUNT(cpf_cnpj) AS com_cpf,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;COUNT(num_medidor) AS com_medidor,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;COUNT(num_cep) AS com_cep<br>
+&nbsp;&nbsp;FROM CONSUMIDORES_UC<br>
+&nbsp;&nbsp;WHERE flg_ativo = TRUE<br>
+),<br>
+pct_preenchimento AS (<br>
+&nbsp;&nbsp;SELECT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ROUND(com_cpf / total * 100, 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AS pct_cpf,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ROUND(com_medidor / total * 100, 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AS pct_medidor<br>
+&nbsp;&nbsp;FROM nulos_por_campo<br>
+)<br>
+SELECT * FROM pct_preenchimento;<br>
+"""<br>
+df = pd.read_sql(query, conn)
+          </div>
+        </div>
+        <div>
+          <h3>Window Functions — ranking de issues</h3>
+          <div class="caixa-codigo" style="font-size:0.73em;">
+query_rank = """<br>
+SELECT<br>
+&nbsp;&nbsp;nom_municipio,<br>
+&nbsp;&nbsp;COUNT(*) AS total_ucs,<br>
+&nbsp;&nbsp;SUM(CASE WHEN cpf_cnpj IS NULL<br>
+&nbsp;&nbsp;&nbsp;&nbsp;THEN 1 ELSE 0 END) AS sem_cpf,<br>
+&nbsp;&nbsp;ROUND(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SUM(CASE WHEN cpf_cnpj IS NULL<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;THEN 1 ELSE 0 END)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/ COUNT(*) * 100, 1<br>
+&nbsp;&nbsp;) AS pct_sem_cpf,<br>
+&nbsp;&nbsp;RANK() OVER (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ORDER BY pct_sem_cpf DESC<br>
+&nbsp;&nbsp;) AS ranking<br>
+FROM CONSUMIDORES_UC<br>
+GROUP BY nom_municipio<br>
+ORDER BY ranking<br>
+LIMIT 20;<br>
+"""
+          </div>
+        </div>
+      </div>
+    </section>
