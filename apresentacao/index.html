@@ -6,15 +6,28 @@
   <title>Python para Distribuição de Energia Elétrica — Parte 1</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
   <style>
     :root {
-      --energia-amarelo: #f5a623;
-      --energia-azul: #1a6fa8;
-      --energia-verde: #27ae60;
-      --energia-cinza: #2c3e50;
-      --energia-branco: #ecf0f1;
+      --bg: #ffffff;
+      --bg-soft: #f5f7fa;
+      --text-primary: #1e2a3a;
+      --text-secondary: #5a6a7a;
+      --azul: #1a6fa8;
+      --roxo: #7c3aed;
+      --amarelo: #d97706;
+      --verde: #16a34a;
+      --borda: #e2e8f0;
+      --r-main-font-size: 26px;
+      --r-heading-color: #1e2a3a;
+      --r-main-color: #1e2a3a;
+      --r-link-color: #1a6fa8;
+    }
+
+    .reveal .slides section {
+      padding: 12px 30px;
+      box-sizing: border-box;
     }
 
     .reveal {
@@ -22,25 +35,20 @@
     }
 
     .reveal h1, .reveal h2, .reveal h3 {
-      color: var(--energia-amarelo);
       text-transform: none;
       letter-spacing: -0.02em;
     }
 
-    .reveal h1 { font-size: 2em; }
-    .reveal h2 { font-size: 1.5em; }
-    .reveal h3 { font-size: 1.15em; color: #a0cfee; }
+    .reveal h1 { font-size: 1.8em; color: #1e2a3a; }
+    .reveal h2 { font-size: 1.3em; color: #1e2a3a; }
+    .reveal h3 { font-size: 1em; color: #1a6fa8; }
 
-    .reveal p, .reveal li { color: var(--energia-branco); line-height: 1.6; }
-
-    .slide-abertura {
-      background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 50%, #0d1b2a 100%);
-    }
+    .reveal p, .reveal li { color: #1e2a3a; line-height: 1.5; }
 
     .tag-modulo {
       display: inline-block;
-      background: var(--energia-amarelo);
-      color: #0d1b2a;
+      background: #1a6fa8;
+      color: white;
       border-radius: 4px;
       padding: 2px 10px;
       font-size: 0.7em;
@@ -50,43 +58,55 @@
     }
 
     .destaque {
-      color: var(--energia-amarelo);
+      color: #1a6fa8;
       font-weight: bold;
     }
 
     .destaque-verde {
-      color: var(--energia-verde);
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    .destaque-roxo {
+      color: #7c3aed;
+      font-weight: bold;
+    }
+
+    .destaque-amarelo {
+      color: #d97706;
       font-weight: bold;
     }
 
     .caixa-info {
-      background: rgba(26, 111, 168, 0.25);
-      border-left: 4px solid var(--energia-azul);
-      padding: 12px 18px;
+      background: #eff6ff;
+      border-left: 4px solid #1a6fa8;
+      padding: 10px 16px;
       border-radius: 0 6px 6px 0;
-      margin: 10px 0;
-      font-size: 0.85em;
+      margin: 8px 0;
+      font-size: 0.82em;
+      color: #1e2a3a;
     }
 
     .caixa-aviso {
-      background: rgba(245, 166, 35, 0.15);
-      border-left: 4px solid var(--energia-amarelo);
-      padding: 12px 18px;
+      background: #fffbeb;
+      border-left: 4px solid #d97706;
+      padding: 10px 16px;
       border-radius: 0 6px 6px 0;
-      margin: 10px 0;
-      font-size: 0.85em;
+      margin: 8px 0;
+      font-size: 0.82em;
+      color: #1e2a3a;
     }
 
     .caixa-codigo {
-      background: #1e1e2e;
-      border: 1px solid #444;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
       border-radius: 6px;
-      padding: 14px 18px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.78em;
+      padding: 12px 16px;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 0.76em;
       text-align: left;
-      color: #cdd6f4;
-      margin: 8px 0;
+      color: #1e2a3a;
+      margin: 6px 0;
     }
 
     .grid-2 {
@@ -104,26 +124,27 @@
     }
 
     .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
       padding: 14px;
     }
 
     .card h4 {
-      color: var(--energia-amarelo);
+      color: #1a6fa8;
       margin: 0 0 8px 0;
-      font-size: 0.95em;
+      font-size: 0.9em;
     }
 
     .card p, .card li {
       font-size: 0.78em;
       margin: 4px 0;
+      color: #1e2a3a;
     }
 
     .numero-grande {
       font-size: 3em;
-      color: var(--energia-amarelo);
+      color: #1a6fa8;
       font-weight: bold;
       line-height: 1;
     }
@@ -135,7 +156,7 @@
     }
 
     table.agenda th {
-      background: var(--energia-azul);
+      background: #1a6fa8;
       color: white;
       padding: 8px 12px;
       text-align: left;
@@ -143,12 +164,12 @@
 
     table.agenda td {
       padding: 7px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      color: var(--energia-branco);
+      border-bottom: 1px solid #e2e8f0;
+      color: #1e2a3a;
     }
 
     table.agenda tr:nth-child(even) td {
-      background: rgba(255,255,255,0.04);
+      background: #f8fafc;
     }
 
     .badge {
@@ -160,16 +181,26 @@
     }
 
     .badge-parte1 { background: #1a6fa8; color: white; }
-    .badge-parte2 { background: #8e44ad; color: white; }
+    .badge-parte2 { background: #7c3aed; color: white; }
 
     .icon-grande { font-size: 2.5em; }
+
     .footer-slide {
       position: absolute;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       font-size: 0.6em;
-      color: rgba(255,255,255,0.35);
+      color: #94a3b8;
+    }
+
+    .arrow { color: #1a6fa8; font-size: 1.5em; text-align: center; }
+
+    kbd {
+      background: #e2e8f0;
+      color: #1e2a3a;
+      padding: 1px 6px;
+      border-radius: 3px;
     }
   </style>
 </head>
@@ -178,27 +209,98 @@
   <div class="slides">
 
     <!-- ======================================================
-         SLIDE 1 — ABERTURA
+         SLIDE 1 — ABERTURA / INTRODUÇÃO
     ======================================================= -->
-    <section class="slide-abertura" data-background-gradient="linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 60%, #0d1b2a 100%)">
-      <div style="padding: 20px 0;">
-        <div style="font-size:3em; margin-bottom:10px;">⚡</div>
-        <h1 style="font-size:1.9em; margin-bottom:0.3em;">Python para Distribuição<br>de Energia Elétrica</h1>
-        <p style="color:#a0cfee; font-size:1em; margin-bottom:1.5em;">
-          Fundamentos · Análise de Dados · IA no Desenvolvimento
-        </p>
-        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:1.5em;">
-          <span class="badge badge-parte1">Parte 1 — Fundamentos &amp; Dados</span>
-          <span class="badge badge-parte2">Parte 2 — Claude Code &amp; Snowflake</span>
+    <section>
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding: 30px 0; gap: 28px;">
+
+        <!-- Espaço reservado para logo da empresa -->
+        <div style="
+          width: 220px;
+          height: 80px;
+          border: 2px dashed #e2e8f0;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #aab;
+          background: #f8fafc;
+          font-size: 0.65em;
+          letter-spacing: 0.05em;
+        ">
+          <!-- substitua esta div por: <img src="logo.png" style="max-height:80px;"> -->
+          LOGO DA EMPRESA
         </div>
-        <p style="font-size:0.7em; color:rgba(255,255,255,0.4);">
-          Use as setas do teclado para navegar &nbsp;|&nbsp; Pressione <kbd style="background:#333;padding:1px 5px;border-radius:3px;">F</kbd> para tela cheia
-        </p>
+
+        <div style="text-align:center;">
+          <h1 style="font-size:2.2em; margin: 0 0 0.2em 0; line-height:1.2; color: #1e2a3a;">Introdução a Python</h1>
+          <p style="color: #94a3b8; font-size:0.9em; margin:0;">
+            Use as setas do teclado para navegar &nbsp;|&nbsp;
+            <kbd>F</kbd> para tela cheia
+          </p>
+        </div>
+
       </div>
     </section>
 
     <!-- ======================================================
-         SLIDE 2 — SOBRE O CURSO
+         SLIDE 2 — APRESENTAÇÃO DO INSTRUTOR
+    ======================================================= -->
+    <section>
+      <div class="grid-2" style="margin-top: 10px; gap: 36px; align-items: center;">
+
+        <!-- Avatar / inicial -->
+        <div style="text-align:center;">
+          <div style="
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a6fa8, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2em;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 18px;
+          ">VT</div>
+          <p style="font-size:0.75em; color: #94a3b8; margin:0;">
+            Instrutor
+          </p>
+        </div>
+
+        <!-- Informações -->
+        <div>
+          <h2 style="font-size:1.25em; margin-bottom:4px;">Vinicius Tertulino Parede</h2>
+
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
+            <div class="caixa-info" style="padding:10px 14px;">
+              <span style="font-size:0.75em; color:#1a6fa8; display:block; margin-bottom:2px;">Formação</span>
+              <span style="font-size:0.82em;">Engenheiro Eletricista — Ênfase em Sistemas Eletrônicos Embarcados · UFPR</span>
+            </div>
+            <div class="caixa-info" style="padding:10px 14px;">
+              <span style="font-size:0.75em; color:#1a6fa8; display:block; margin-bottom:2px;">Pós-graduação</span>
+              <span style="font-size:0.82em;">Mestrando em Engenharia Elétrica · UFPR</span>
+            </div>
+            <div class="caixa-info" style="padding:10px 14px;">
+              <span style="font-size:0.75em; color:#1a6fa8; display:block; margin-bottom:2px;">Especialização</span>
+              <span style="font-size:0.82em;">Cientista de Dados · T2T</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;">
+              <span class="badge badge-parte1">Python</span>
+              <span class="badge badge-parte1">IA Generativa</span>
+              <span class="badge badge-parte1">Agents</span>
+              <span class="badge badge-parte1">Machine Learning</span>
+              <span class="badge badge-parte2">Claude Code</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SLIDE 3 — SOBRE O CURSO
     ======================================================= -->
     <section>
       <h2>Sobre este curso</h2>
@@ -236,65 +338,144 @@
     </section>
 
     <!-- ======================================================
-         SLIDE 3 — AGENDA
+         SLIDE 4 — AGENDA GERAL
     ======================================================= -->
     <section>
-      <h2>Agenda do Curso</h2>
-      <table class="agenda" style="margin-top:18px;">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Módulo</th>
-            <th>Conteúdo</th>
-            <th>Duração</th>
-            <th>Parte</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Fundamentos Python</td>
-            <td>Variáveis, tipos, estruturas de controle, funções</td>
-            <td>1h15</td>
-            <td><span class="badge badge-parte1">1</span></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Análise com Pandas</td>
-            <td>DataFrames, limpeza, agrupamentos, qualidade</td>
-            <td>1h30</td>
-            <td><span class="badge badge-parte1">1</span></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Visualização</td>
-            <td>matplotlib, seaborn, plotly — indicadores DEC/FEC</td>
-            <td>45min</td>
-            <td><span class="badge badge-parte1">1</span></td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Claude Code &amp; IA</td>
-            <td>Desenvolvimento assistido por IA, prompts, CLAUDE.md</td>
-            <td>1h30</td>
-            <td><span class="badge badge-parte2">2</span></td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Snowflake &amp; Qualidade</td>
-            <td>Conexão, queries avançadas, projeto de qualidade</td>
-            <td>2h</td>
-            <td><span class="badge badge-parte2">2</span></td>
-          </tr>
-        </tbody>
-      </table>
-      <p style="font-size:0.7em; color:rgba(255,255,255,0.4); margin-top:14px;">
-        Parte 1: 3h30 &nbsp;|&nbsp; Parte 2: 3h30 &nbsp;|&nbsp; Total: 7h
-      </p>
+      <h2 style="text-align:center; margin-bottom:20px;">Agenda do Curso</h2>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+
+        <!-- PARTE 1 -->
+        <div style="
+          border: 2px solid #1a6fa8;
+          border-radius: 12px;
+          overflow: hidden;
+        ">
+          <div style="
+            background: #1a6fa8;
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          ">
+            <span style="font-weight:bold; font-size:0.95em; color:#fff;">Parte 1 — Python &amp; Dados</span>
+            <span style="font-size:0.78em; color:rgba(255,255,255,0.8);">3h30</span>
+          </div>
+          <div style="padding: 14px 18px; background: #f0f7ff; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; align-items:flex-start; gap:12px;">
+              <span style="
+                min-width: 28px; height: 28px;
+                border-radius: 50%;
+                background: #dbeafe;
+                border: 1px solid #1a6fa8;
+                display:flex; align-items:center; justify-content:center;
+                font-size:0.75em; font-weight:bold; color:#1a6fa8;
+              ">1</span>
+              <div>
+                <div style="font-size:0.85em; font-weight:bold; color:#1e2a3a;">Fundamentos Python</div>
+                <div style="font-size:0.72em; color:#5a6a7a;">Variáveis · Tipos · Estruturas de controle · Funções</div>
+                <div style="font-size:0.68em; color:#d97706; margin-top:2px;">1h15</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:12px;">
+              <span style="
+                min-width: 28px; height: 28px;
+                border-radius: 50%;
+                background: #dbeafe;
+                border: 1px solid #1a6fa8;
+                display:flex; align-items:center; justify-content:center;
+                font-size:0.75em; font-weight:bold; color:#1a6fa8;
+              ">2</span>
+              <div>
+                <div style="font-size:0.85em; font-weight:bold; color:#1e2a3a;">Análise de Dados com Pandas</div>
+                <div style="font-size:0.72em; color:#5a6a7a;">DataFrames · Limpeza · Agrupamentos · Qualidade de dados</div>
+                <div style="font-size:0.68em; color:#d97706; margin-top:2px;">1h30</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:12px;">
+              <span style="
+                min-width: 28px; height: 28px;
+                border-radius: 50%;
+                background: #dbeafe;
+                border: 1px solid #1a6fa8;
+                display:flex; align-items:center; justify-content:center;
+                font-size:0.75em; font-weight:bold; color:#1a6fa8;
+              ">3</span>
+              <div>
+                <div style="font-size:0.85em; font-weight:bold; color:#1e2a3a;">Visualização de Indicadores</div>
+                <div style="font-size:0.72em; color:#5a6a7a;">matplotlib · seaborn · plotly · DEC / FEC</div>
+                <div style="font-size:0.68em; color:#d97706; margin-top:2px;">45min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PARTE 2 -->
+        <div style="
+          border: 2px solid #7c3aed;
+          border-radius: 12px;
+          overflow: hidden;
+        ">
+          <div style="
+            background: #7c3aed;
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          ">
+            <span style="font-weight:bold; font-size:0.95em; color:#fff;">Parte 2 — IA &amp; Snowflake</span>
+            <span style="font-size:0.78em; color:rgba(255,255,255,0.8);">3h30</span>
+          </div>
+          <div style="padding: 14px 18px; background: #faf5ff; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; align-items:flex-start; gap:12px;">
+              <span style="
+                min-width: 28px; height: 28px;
+                border-radius: 50%;
+                background: #ede9fe;
+                border: 1px solid #7c3aed;
+                display:flex; align-items:center; justify-content:center;
+                font-size:0.75em; font-weight:bold; color:#7c3aed;
+              ">4</span>
+              <div>
+                <div style="font-size:0.85em; font-weight:bold; color:#1e2a3a;">Claude Code &amp; IA Generativa</div>
+                <div style="font-size:0.72em; color:#5a6a7a;">Instalação · CLAUDE.md · Skills · Prompt engineering</div>
+                <div style="font-size:0.68em; color:#d97706; margin-top:2px;">1h30</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:12px;">
+              <span style="
+                min-width: 28px; height: 28px;
+                border-radius: 50%;
+                background: #ede9fe;
+                border: 1px solid #7c3aed;
+                display:flex; align-items:center; justify-content:center;
+                font-size:0.75em; font-weight:bold; color:#7c3aed;
+              ">5</span>
+              <div>
+                <div style="font-size:0.85em; font-weight:bold; color:#1e2a3a;">Snowflake &amp; Qualidade de Dados</div>
+                <div style="font-size:0.72em; color:#5a6a7a;">Conexão PKI · Queries · Pipeline de qualidade de cadastro</div>
+                <div style="font-size:0.68em; color:#d97706; margin-top:2px;">2h</div>
+              </div>
+            </div>
+            <div style="margin-top:4px; padding:8px 12px; background:#f3f0ff; border-radius:6px; font-size:0.72em; color:#5a6a7a;">
+              Projeto prático: pipeline de qualidade do cadastro de consumidores integrado ao Snowflake da Equatorial
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:32px; margin-top:16px;">
+        <span style="font-size:0.68em; color:#94a3b8;">Total: 7 horas</span>
+        <span style="font-size:0.68em; color:#94a3b8;">·</span>
+        <span style="font-size:0.68em; color:#94a3b8;">5 módulos práticos</span>
+        <span style="font-size:0.68em; color:#94a3b8;">·</span>
+        <span style="font-size:0.68em; color:#94a3b8;">Jupyter Notebooks + Apresentações</span>
+      </div>
     </section>
 
     <!-- ======================================================
-         SLIDE 4 — POR QUE PYTHON?
+         SLIDE 5 — POR QUE PYTHON?
     ======================================================= -->
     <section>
       <h2>Por que Python no setor elétrico?</h2>
@@ -327,7 +508,7 @@
     </section>
 
     <!-- ======================================================
-         SLIDE 5 — CONFIGURAÇÃO DO AMBIENTE
+         SLIDE 6 — CONFIGURAÇÃO DO AMBIENTE
     ======================================================= -->
     <section>
       <h2>Configuração do Ambiente com <span class="destaque">uv</span></h2>
@@ -335,9 +516,9 @@
         <div>
           <h3>Passo 1 — Instalar o uv</h3>
           <div class="caixa-codigo">
-<span style="color:#7ec8e3;"># Linux / Mac</span><br>
+<span style="color:#0ea5e9;"># Linux / Mac</span><br>
 curl -LsSf https://astral.sh/uv/install.sh | sh<br><br>
-<span style="color:#7ec8e3;"># Windows (PowerShell)</span><br>
+<span style="color:#0ea5e9;"># Windows (PowerShell)</span><br>
 powershell -ExecutionPolicy ByPass -c \<br>
 &nbsp;&nbsp;"irm https://astral.sh/uv/install.ps1 | iex"
           </div>
@@ -349,12 +530,12 @@ powershell -ExecutionPolicy ByPass -c \<br>
         <div>
           <h3>Passo 2 — Criar ambiente e rodar</h3>
           <div class="caixa-codigo">
-<span style="color:#7ec8e3;"># Clonar/abrir o projeto e instalar tudo</span><br>
+<span style="color:#0ea5e9;"># Clonar/abrir o projeto e instalar tudo</span><br>
 uv sync<br><br>
-<span style="color:#7ec8e3;"># Ativar o ambiente virtual</span><br>
-source .venv/bin/activate &nbsp;&nbsp;<span style="color:#666;"># Linux/Mac</span><br>
-.venv\Scripts\activate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#666;"># Windows</span><br><br>
-<span style="color:#7ec8e3;"># Iniciar JupyterLab</span><br>
+<span style="color:#0ea5e9;"># Ativar o ambiente virtual</span><br>
+source .venv/bin/activate &nbsp;&nbsp;<span style="color:#94a3b8;"># Linux/Mac</span><br>
+.venv\Scripts\activate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#94a3b8;"># Windows</span><br><br>
+<span style="color:#0ea5e9;"># Iniciar JupyterLab</span><br>
 jupyter lab
           </div>
           <div class="caixa-aviso" style="margin-top:10px; font-size:0.82em;">
@@ -368,32 +549,32 @@ jupyter lab
     </section>
 
     <!-- ======================================================
-         SLIDE 6 — MÓDULO 1: FUNDAMENTOS — ABERTURA
+         SLIDE 7 — MÓDULO 1: FUNDAMENTOS — ABERTURA
     ======================================================= -->
-    <section data-background-gradient="linear-gradient(135deg, #1a3a5c 0%, #0d1b2a 100%)">
+    <section style="background:#f5f7fa;">
       <div style="text-align:center; padding:30px 0;">
         <div class="tag-modulo">MÓDULO 1</div>
         <h2 style="margin-top:16px;">Fundamentos Python</h2>
-        <p style="color:#a0cfee;">Variáveis &amp; Tipos · Estruturas de Controle · Funções</p>
+        <p style="color:#5a6a7a;">Variáveis &amp; Tipos · Estruturas de Controle · Funções</p>
         <div style="display:flex; justify-content:center; gap:40px; margin-top:30px;">
           <div style="text-align:center;">
             <div class="numero-grande">3</div>
-            <p style="font-size:0.75em; color:#a0cfee;">notebooks</p>
+            <p style="font-size:0.75em; color:#5a6a7a;">notebooks</p>
           </div>
           <div style="text-align:center;">
             <div class="numero-grande">1h15</div>
-            <p style="font-size:0.75em; color:#a0cfee;">duração</p>
+            <p style="font-size:0.75em; color:#5a6a7a;">duração</p>
           </div>
           <div style="text-align:center;">
             <div class="numero-grande">1</div>
-            <p style="font-size:0.75em; color:#a0cfee;">exercício</p>
+            <p style="font-size:0.75em; color:#5a6a7a;">exercício</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ======================================================
-         SLIDE 7 — VARIÁVEIS E TIPOS
+         SLIDE 8 — VARIÁVEIS E TIPOS
     ======================================================= -->
     <section>
       <h2><span class="tag-modulo">M1</span> Variáveis e Tipos de Dados</h2>
@@ -401,16 +582,16 @@ jupyter lab
         <div>
           <h3>Tipos básicos no setor elétrico</h3>
           <div class="caixa-codigo">
-<span style="color:#cba6f7;"># Inteiros — códigos e tensões</span><br>
+<span style="color:#7c3aed;"># Inteiros — códigos e tensões</span><br>
 cod_consumidor = 100042<br>
-tensao_nominal = 220  <span style="color:#6c7086;"># Volts</span><br><br>
-<span style="color:#cba6f7;"># Float — medições</span><br>
+tensao_nominal = 220  <span style="color:#94a3b8;"># Volts</span><br><br>
+<span style="color:#7c3aed;"># Float — medições</span><br>
 consumo_kwh = 342.7<br>
 fator_potencia = 0.92<br><br>
-<span style="color:#cba6f7;"># String — cadastro</span><br>
+<span style="color:#7c3aed;"># String — cadastro</span><br>
 nome = "Maria Silva Santos"<br>
 municipio = "São Paulo"<br><br>
-<span style="color:#cba6f7;"># Booleano — status</span><br>
+<span style="color:#7c3aed;"># Booleano — status</span><br>
 ativo = True<br>
 inadimplente = False
           </div>
@@ -418,9 +599,9 @@ inadimplente = False
         <div>
           <h3>Estruturas de dados</h3>
           <div class="caixa-codigo">
-<span style="color:#cba6f7;"># Lista — leituras mensais</span><br>
+<span style="color:#7c3aed;"># Lista — leituras mensais</span><br>
 leituras = [310, 325, 342, 298, 315]<br><br>
-<span style="color:#cba6f7;"># Dicionário — registro UC</span><br>
+<span style="color:#7c3aed;"># Dicionário — registro UC</span><br>
 consumidor = {<br>
 &nbsp;&nbsp;"cod": 100042,<br>
 &nbsp;&nbsp;"nome": "Maria Silva",<br>
@@ -428,7 +609,7 @@ consumidor = {<br>
 &nbsp;&nbsp;"consumo_kwh": 342.7,<br>
 &nbsp;&nbsp;"ativo": True<br>
 }<br><br>
-<span style="color:#cba6f7;"># Acessando valores</span><br>
+<span style="color:#7c3aed;"># Acessando valores</span><br>
 print(consumidor["nome"])
           </div>
         </div>
@@ -436,7 +617,7 @@ print(consumidor["nome"])
     </section>
 
     <!-- ======================================================
-         SLIDE 8 — ESTRUTURAS DE CONTROLE
+         SLIDE 9 — ESTRUTURAS DE CONTROLE
     ======================================================= -->
     <section>
       <h2><span class="tag-modulo">M1</span> Estruturas de Controle</h2>
@@ -454,7 +635,7 @@ def classificar_tarifa(consumo_kwh):<br>
 &nbsp;&nbsp;else:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 3"<br><br>
 print(classificar_tarifa(342))
-<span style="color:#a6e3a1;"># → "Faixa 3"</span>
+<span style="color:#16a34a;"># → "Faixa 3"</span>
           </div>
         </div>
         <div>
@@ -465,7 +646,7 @@ validas = []<br>
 for leitura in leituras:<br>
 &nbsp;&nbsp;if leitura is not None:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;validas.append(leitura)<br><br>
-<span style="color:#cba6f7;"># List comprehension — mais pythonico</span><br>
+<span style="color:#7c3aed;"># List comprehension — mais pythonico</span><br>
 validas = [x for x in leituras<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if x is not None]<br><br>
 media = sum(validas) / len(validas)<br>
@@ -476,7 +657,7 @@ print(f"Média: {media:.1f} kWh")
     </section>
 
     <!-- ======================================================
-         SLIDE 9 — FUNÇÕES
+         SLIDE 10 — FUNÇÕES
     ======================================================= -->
     <section>
       <h2><span class="tag-modulo">M1</span> Funções</h2>
@@ -523,32 +704,32 @@ def formatar_cpf(cpf: str) -&gt; str:<br>
     </section>
 
     <!-- ======================================================
-         SLIDE 10 — MÓDULO 2: PANDAS — ABERTURA
+         SLIDE 11 — MÓDULO 2: PANDAS — ABERTURA
     ======================================================= -->
-    <section data-background-gradient="linear-gradient(135deg, #1a3a5c 0%, #0d1b2a 100%)">
+    <section style="background:#f5f7fa;">
       <div style="text-align:center; padding:30px 0;">
         <div class="tag-modulo">MÓDULO 2</div>
         <h2 style="margin-top:16px;">Análise de Dados com Pandas</h2>
-        <p style="color:#a0cfee;">Leitura · Limpeza · Agregações · Qualidade de Cadastro</p>
+        <p style="color:#5a6a7a;">Leitura · Limpeza · Agregações · Qualidade de Cadastro</p>
         <div style="display:flex; justify-content:center; gap:40px; margin-top:30px;">
           <div style="text-align:center;">
             <div class="numero-grande">3</div>
-            <p style="font-size:0.75em; color:#a0cfee;">notebooks</p>
+            <p style="font-size:0.75em; color:#5a6a7a;">notebooks</p>
           </div>
           <div style="text-align:center;">
             <div class="numero-grande">1h30</div>
-            <p style="font-size:0.75em; color:#a0cfee;">duração</p>
+            <p style="font-size:0.75em; color:#5a6a7a;">duração</p>
           </div>
           <div style="text-align:center;">
             <div class="numero-grande">50</div>
-            <p style="font-size:0.75em; color:#a0cfee;">linhas no CSV simulado</p>
+            <p style="font-size:0.75em; color:#5a6a7a;">linhas no CSV simulado</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ======================================================
-         SLIDE 11 — PANDAS INTRO
+         SLIDE 12 — PANDAS INTRO
     ======================================================= -->
     <section>
       <h2><span class="tag-modulo">M2</span> Pandas — Primeiros Passos</h2>
@@ -558,26 +739,26 @@ def formatar_cpf(cpf: str) -&gt; str:<br>
           <div class="caixa-codigo">
 import pandas as pd<br><br>
 df = pd.read_csv("dados/consumidores_simulado.csv")<br><br>
-<span style="color:#cba6f7;"># Exploração básica</span><br>
-print(df.shape)        <span style="color:#6c7086;"># (50, 12)</span><br>
-df.head()              <span style="color:#6c7086;"># primeiras 5 linhas</span><br>
-df.info()              <span style="color:#6c7086;"># tipos e nulos</span><br>
-df.describe()          <span style="color:#6c7086;"># estatísticas</span><br><br>
-<span style="color:#cba6f7;"># Verificar nulos</span><br>
+<span style="color:#7c3aed;"># Exploração básica</span><br>
+print(df.shape)        <span style="color:#94a3b8;"># (50, 12)</span><br>
+df.head()              <span style="color:#94a3b8;"># primeiras 5 linhas</span><br>
+df.info()              <span style="color:#94a3b8;"># tipos e nulos</span><br>
+df.describe()          <span style="color:#94a3b8;"># estatísticas</span><br><br>
+<span style="color:#7c3aed;"># Verificar nulos</span><br>
 df.isnull().sum()
           </div>
         </div>
         <div>
           <h3>Filtros e agrupamentos</h3>
           <div class="caixa-codigo">
-<span style="color:#cba6f7;"># Filtrar ativos</span><br>
+<span style="color:#7c3aed;"># Filtrar ativos</span><br>
 ativos = df[df['flg_ativo'] == True]<br><br>
-<span style="color:#cba6f7;"># Consumidores B1 com consumo &gt; 300</span><br>
+<span style="color:#7c3aed;"># Consumidores B1 com consumo &gt; 300</span><br>
 altos = df[<br>
 &nbsp;&nbsp;(df['cod_modalidade_tarifaria'] == 'B1')<br>
 &nbsp;&nbsp;&amp; (df['vlr_consumo_medio_kwh'] &gt; 300)<br>
 ]<br><br>
-<span style="color:#cba6f7;"># Agrupamento por classe</span><br>
+<span style="color:#7c3aed;"># Agrupamento por classe</span><br>
 df.groupby('cod_classe_consumo')\<br>
 &nbsp;&nbsp;['vlr_consumo_medio_kwh']\<br>
 &nbsp;&nbsp;.agg(['mean', 'count', 'sum'])\<br>
@@ -588,7 +769,7 @@ df.groupby('cod_classe_consumo')\<br>
     </section>
 
     <!-- ======================================================
-         SLIDE 12 — LIMPEZA DE DADOS
+         SLIDE 13 — LIMPEZA DE DADOS
     ======================================================= -->
     <section>
       <h2><span class="tag-modulo">M2</span> Limpeza de Dados de Consumidores</h2>
@@ -611,18 +792,18 @@ df.groupby('cod_classe_consumo')\<br>
         <div>
           <h3>Técnicas de limpeza</h3>
           <div class="caixa-codigo">
-<span style="color:#cba6f7;"># Normalizar nomes</span><br>
+<span style="color:#7c3aed;"># Normalizar nomes</span><br>
 df['nom_consumidor'] = (<br>
 &nbsp;&nbsp;df['nom_consumidor']<br>
 &nbsp;&nbsp;.str.strip()<br>
 &nbsp;&nbsp;.str.title()<br>
 )<br><br>
-<span style="color:#cba6f7;"># Limpar CPF/CNPJ</span><br>
+<span style="color:#7c3aed;"># Limpar CPF/CNPJ</span><br>
 df['cpf_cnpj'] = (<br>
 &nbsp;&nbsp;df['cpf_cnpj']<br>
 &nbsp;&nbsp;.str.replace(r'\D', '', regex=True)<br>
 )<br><br>
-<span style="color:#cba6f7;"># Remover duplicatas</span><br>
+<span style="color:#7c3aed;"># Remover duplicatas</span><br>
 df = df.drop_duplicates(<br>
 &nbsp;&nbsp;subset=['cod_consumidor']<br>
 )
@@ -632,7 +813,7 @@ df = df.drop_duplicates(<br>
     </section>
 
     <!-- ======================================================
-         SLIDE 13 — QUALIDADE DE CADASTRO
+         SLIDE 14 — QUALIDADE DE CADASTRO
     ======================================================= -->
     <section>
       <h2><span class="tag-modulo">M2</span> Análise de Qualidade do Cadastro</h2>
@@ -682,32 +863,32 @@ df['score_qualidade'] = df.apply(<br>
     </section>
 
     <!-- ======================================================
-         SLIDE 14 — MÓDULO 3: VISUALIZAÇÃO — ABERTURA
+         SLIDE 15 — MÓDULO 3: VISUALIZAÇÃO — ABERTURA
     ======================================================= -->
-    <section data-background-gradient="linear-gradient(135deg, #1a3a5c 0%, #0d1b2a 100%)">
+    <section style="background:#f5f7fa;">
       <div style="text-align:center; padding:30px 0;">
         <div class="tag-modulo">MÓDULO 3</div>
         <h2 style="margin-top:16px;">Visualização de Indicadores</h2>
-        <p style="color:#a0cfee;">matplotlib · seaborn · plotly · DEC/FEC</p>
+        <p style="color:#5a6a7a;">matplotlib · seaborn · plotly · DEC/FEC</p>
         <div style="display:flex; justify-content:center; gap:40px; margin-top:30px;">
           <div>
             <div class="numero-grande">3</div>
-            <p style="font-size:0.75em; color:#a0cfee;">bibliotecas</p>
+            <p style="font-size:0.75em; color:#5a6a7a;">bibliotecas</p>
           </div>
           <div>
             <div class="numero-grande">45min</div>
-            <p style="font-size:0.75em; color:#a0cfee;">duração</p>
+            <p style="font-size:0.75em; color:#5a6a7a;">duração</p>
           </div>
           <div>
             <div class="numero-grande">∞</div>
-            <p style="font-size:0.75em; color:#a0cfee;">gráficos possíveis</p>
+            <p style="font-size:0.75em; color:#5a6a7a;">gráficos possíveis</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ======================================================
-         SLIDE 15 — VISUALIZAÇÕES
+         SLIDE 16 — VISUALIZAÇÕES
     ======================================================= -->
     <section>
       <h2><span class="tag-modulo">M3</span> Visualização de Indicadores</h2>
@@ -754,7 +935,7 @@ fig = px.line(<br>
 &nbsp;&nbsp;title='Consumo Mensal'<br>
 )<br>
 fig.update_layout(<br>
-&nbsp;&nbsp;template='plotly_dark'<br>
+&nbsp;&nbsp;template='plotly_white'<br>
 )<br>
 fig.show()
           </div>
@@ -766,7 +947,7 @@ fig.show()
     </section>
 
     <!-- ======================================================
-         SLIDE 16 — DEC / FEC
+         SLIDE 17 — DEC / FEC
     ======================================================= -->
     <section>
       <h2><span class="tag-modulo">M3</span> Indicadores DEC e FEC</h2>
@@ -776,7 +957,7 @@ fig.show()
             <h4>DEC — Duração Equivalente de Interrupção</h4>
             <p style="font-size:0.8em;">Soma das durações de interrupções ponderadas pelo número de UCs afetadas, dividida pelo total de UCs do conjunto.</p>
             <div class="caixa-codigo" style="margin-top:8px;">
-<span style="color:#cba6f7;"># Fórmula</span><br>
+<span style="color:#7c3aed;"># Fórmula</span><br>
 DEC = Σ(Duração_i × UCs_i) / UCs_total
             </div>
           </div>
@@ -795,17 +976,17 @@ fig = go.Figure()<br><br>
 fig.add_trace(go.Bar(<br>
 &nbsp;&nbsp;name='DEC Real',<br>
 &nbsp;&nbsp;x=meses, y=dec_real,<br>
-&nbsp;&nbsp;marker_color='#e74c3c'<br>
+&nbsp;&nbsp;marker_color='#dc2626'<br>
 ))<br>
 fig.add_trace(go.Scatter(<br>
 &nbsp;&nbsp;name='Limite ANEEL',<br>
 &nbsp;&nbsp;x=meses, y=dec_limite,<br>
-&nbsp;&nbsp;line=dict(color='#f39c12',<br>
+&nbsp;&nbsp;line=dict(color='#d97706',<br>
 &nbsp;&nbsp;&nbsp;&nbsp;dash='dash')<br>
 ))<br>
 fig.update_layout(<br>
 &nbsp;&nbsp;title='DEC Mensal vs. Limite',<br>
-&nbsp;&nbsp;template='plotly_dark'<br>
+&nbsp;&nbsp;template='plotly_white'<br>
 )
           </div>
         </div>
@@ -813,13 +994,13 @@ fig.update_layout(<br>
     </section>
 
     <!-- ======================================================
-         SLIDE 17 — TRANSIÇÃO PARA PARTE 2
+         SLIDE 18 — TRANSIÇÃO PARA PARTE 2
     ======================================================= -->
-    <section data-background-gradient="linear-gradient(135deg, #2d1b69 0%, #1a3a5c 50%, #0d1b2a 100%)">
+    <section style="background:#f5f7fa;">
       <div style="text-align:center; padding:20px 0;">
         <div style="font-size:2.5em; margin-bottom:16px;">🚀</div>
         <h2 style="font-size:1.6em;">Parabéns! Parte 1 concluída.</h2>
-        <p style="color:#a0cfee; font-size:0.9em; margin-bottom:24px;">
+        <p style="color:#5a6a7a; font-size:0.9em; margin-bottom:24px;">
           Você domina os fundamentos de Python e análise de dados com Pandas e Matplotlib.
         </p>
         <div class="caixa-info" style="text-align:left; max-width:560px; margin:0 auto 24px;">
@@ -832,7 +1013,7 @@ fig.update_layout(<br>
           </ul>
         </div>
         <div style="margin-top:20px;">
-          <p style="font-size:0.8em; color:rgba(255,255,255,0.5);">
+          <p style="font-size:0.8em; color:#5a6a7a;">
             Inicie a Parte 2 com:
           </p>
           <div class="caixa-codigo" style="max-width:400px; margin:8px auto; text-align:center;">
@@ -859,9 +1040,11 @@ fig.update_layout(<br>
     controls: true,
     progress: true,
     center: false,
-    width: 1200,
-    height: 700,
+    width: 1280,
+    height: 720,
     margin: 0.04,
+    minScale: 0.1,
+    maxScale: 1.5,
     plugins: [ RevealNotes, RevealMarkdown, RevealHighlight ]
   });
 </script>

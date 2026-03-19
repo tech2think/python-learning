@@ -6,27 +6,36 @@
   <title>Python para Distribuição de Energia — Parte 2: IA &amp; Snowflake</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
   <style>
     :root {
-      --ia-roxo: #8e44ad;
-      --ia-ciano: #00bcd4;
-      --ia-verde: #27ae60;
-      --energia-amarelo: #f5a623;
-      --energia-branco: #ecf0f1;
+      --bg: #ffffff;
+      --bg-soft: #f5f7fa;
+      --text-primary: #1e2a3a;
+      --text-secondary: #5a6a7a;
+      --azul: #1a6fa8;
+      --roxo: #7c3aed;
+      --amarelo: #d97706;
+      --verde: #16a34a;
+      --borda: #e2e8f0;
+      --r-main-font-size: 26px;
+      --r-heading-color: #1e2a3a;
+      --r-main-color: #1e2a3a;
+      --r-link-color: #1a6fa8;
     }
 
+    .reveal .slides section { padding: 12px 30px; box-sizing: border-box; }
     .reveal { font-family: 'Segoe UI', Arial, sans-serif; }
     .reveal h1, .reveal h2, .reveal h3 { text-transform: none; letter-spacing: -0.02em; }
-    .reveal h1 { font-size: 2em; color: var(--ia-ciano); }
-    .reveal h2 { font-size: 1.5em; color: var(--ia-ciano); }
-    .reveal h3 { font-size: 1.1em; color: #a0cfee; }
-    .reveal p, .reveal li { color: var(--energia-branco); line-height: 1.6; }
+    .reveal h1 { font-size: 1.8em; color: #1e2a3a; }
+    .reveal h2 { font-size: 1.3em; color: #1e2a3a; }
+    .reveal h3 { font-size: 1em; color: #7c3aed; }
+    .reveal p, .reveal li { color: #1e2a3a; line-height: 1.5; }
 
     .tag-modulo {
       display: inline-block;
-      background: var(--ia-roxo);
+      background: #7c3aed;
       color: white;
       border-radius: 4px;
       padding: 2px 10px;
@@ -38,8 +47,8 @@
 
     .tag-snow {
       display: inline-block;
-      background: #29b5e8;
-      color: #0d1b2a;
+      background: #0ea5e9;
+      color: white;
       border-radius: 4px;
       padding: 2px 10px;
       font-size: 0.7em;
@@ -48,56 +57,59 @@
       vertical-align: middle;
     }
 
-    .destaque { color: var(--ia-ciano); font-weight: bold; }
-    .destaque-roxo { color: var(--ia-roxo); font-weight: bold; }
-    .destaque-amarelo { color: var(--energia-amarelo); font-weight: bold; }
+    .destaque { color: #1a6fa8; font-weight: bold; }
+    .destaque-roxo { color: #7c3aed; font-weight: bold; }
+    .destaque-amarelo { color: #d97706; font-weight: bold; }
+    .destaque-verde { color: #16a34a; font-weight: bold; }
 
     .caixa-info {
-      background: rgba(0, 188, 212, 0.15);
-      border-left: 4px solid var(--ia-ciano);
-      padding: 12px 18px;
+      background: #eff6ff;
+      border-left: 4px solid #1a6fa8;
+      padding: 10px 16px;
       border-radius: 0 6px 6px 0;
-      margin: 10px 0;
-      font-size: 0.85em;
+      margin: 8px 0;
+      font-size: 0.82em;
+      color: #1e2a3a;
     }
 
     .caixa-aviso {
-      background: rgba(245, 166, 35, 0.15);
-      border-left: 4px solid var(--energia-amarelo);
-      padding: 12px 18px;
+      background: #fffbeb;
+      border-left: 4px solid #d97706;
+      padding: 10px 16px;
       border-radius: 0 6px 6px 0;
-      margin: 10px 0;
-      font-size: 0.85em;
+      margin: 8px 0;
+      font-size: 0.82em;
+      color: #1e2a3a;
     }
 
     .caixa-codigo {
-      background: #1e1e2e;
-      border: 1px solid #444;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
       border-radius: 6px;
-      padding: 14px 18px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.78em;
+      padding: 12px 16px;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 0.76em;
       text-align: left;
-      color: #cdd6f4;
-      margin: 8px 0;
+      color: #1e2a3a;
+      margin: 6px 0;
     }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
     .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: start; }
 
     .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
       padding: 14px;
     }
 
-    .card h4 { color: var(--ia-ciano); margin: 0 0 8px 0; font-size: 0.95em; }
-    .card p, .card li { font-size: 0.78em; margin: 4px 0; }
+    .card h4 { color: #1a6fa8; margin: 0 0 8px 0; font-size: 0.9em; }
+    .card p, .card li { font-size: 0.78em; margin: 4px 0; color: #1e2a3a; }
 
     .numero-grande {
       font-size: 3em;
-      color: var(--ia-ciano);
+      color: #7c3aed;
       font-weight: bold;
       line-height: 1;
     }
@@ -109,7 +121,7 @@
     }
 
     table.tabela th {
-      background: #8e44ad;
+      background: #1a6fa8;
       color: white;
       padding: 8px 12px;
       text-align: left;
@@ -117,31 +129,38 @@
 
     table.tabela td {
       padding: 7px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      color: var(--energia-branco);
+      border-bottom: 1px solid #e2e8f0;
+      color: #1e2a3a;
     }
 
     table.tabela tr:nth-child(even) td {
-      background: rgba(255,255,255,0.04);
+      background: #f8fafc;
     }
 
-    .badge-ia { display:inline-block; background:#8e44ad; color:white; border-radius:12px; padding:2px 10px; font-size:0.7em; font-weight:bold; }
-    .badge-snow { display:inline-block; background:#29b5e8; color:#0d1b2a; border-radius:12px; padding:2px 10px; font-size:0.7em; font-weight:bold; }
+    .badge-ia { display:inline-block; background:#7c3aed; color:white; border-radius:12px; padding:2px 10px; font-size:0.7em; font-weight:bold; }
+    .badge-snow { display:inline-block; background:#0ea5e9; color:white; border-radius:12px; padding:2px 10px; font-size:0.7em; font-weight:bold; }
     .badge-parte1 { display:inline-block; background: #1a6fa8; color: white; border-radius:12px; padding:2px 10px; font-size:0.7em; font-weight:bold; }
 
     .prompt-box {
-      background: #1a1a2e;
-      border: 2px solid #8e44ad;
+      background: #faf5ff;
+      border: 2px solid #7c3aed;
       border-radius: 8px;
-      padding: 14px 18px;
+      padding: 12px 16px;
       font-family: 'Courier New', monospace;
-      font-size: 0.78em;
-      color: #e2b0ff;
+      font-size: 0.76em;
+      color: #1e2a3a;
       margin: 8px 0;
       text-align: left;
     }
 
-    .arrow { color: var(--ia-ciano); font-size: 1.5em; text-align:center; }
+    .arrow { color: #1a6fa8; font-size: 1.5em; text-align:center; }
+
+    kbd {
+      background: #e2e8f0;
+      color: #1e2a3a;
+      padding: 1px 6px;
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
@@ -151,18 +170,18 @@
     <!-- ======================================================
          SLIDE 1 — ABERTURA PARTE 2
     ======================================================= -->
-    <section data-background-gradient="linear-gradient(135deg, #1a0a2e 0%, #2d1b69 40%, #0d1b2a 100%)">
+    <section>
       <div style="padding: 20px 0; text-align:center;">
         <div style="font-size:2.8em; margin-bottom:12px;">🤖 ⚡</div>
-        <h1 style="font-size:1.8em; margin-bottom:0.3em;">Desenvolvimento Moderno com IA</h1>
-        <p style="color:#c0a0ee; font-size:0.95em; margin-bottom:1.5em;">
+        <h1 style="font-size:1.8em; margin-bottom:0.3em; color:#1e2a3a;">Desenvolvimento Moderno com IA</h1>
+        <p style="color:#5a6a7a; font-size:0.95em; margin-bottom:1.5em;">
           Claude Code · CLAUDE.md · Snowflake · Qualidade de Dados
         </p>
         <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:1.5em;">
           <span class="badge-ia">Módulo 4 — Claude Code &amp; IA</span>
           <span class="badge-snow">Módulo 5 — Snowflake &amp; Qualidade</span>
         </div>
-        <p style="font-size:0.7em; color:rgba(255,255,255,0.4);">
+        <p style="font-size:0.7em; color:#94a3b8;">
           Parte 2 do curso Python para Distribuição de Energia Elétrica
         </p>
       </div>
@@ -179,7 +198,7 @@
             <strong>Claude Code</strong> é uma ferramenta de linha de comando da Anthropic que integra o modelo Claude diretamente ao terminal e ao seu editor de código.
           </div>
           <div class="caixa-info" style="margin-top:12px;">
-            Ele lê e escreve arquivos, executa comandos, entende o contexto do seu projeto e <span class="destaque">colabora como um desenvolvedor experiente</span> — mas você mantém o controle total.
+            Ele lê e escreve arquivos, executa comandos, entende o contexto do seu projeto e <span class="destaque-roxo">colabora como um desenvolvedor experiente</span> — mas você mantém o controle total.
           </div>
           <div class="caixa-aviso" style="margin-top:12px;">
             Diferente de autocompletar de IDE: Claude Code <strong>entende o projeto inteiro</strong> e pode refatorar, documentar e gerar testes de forma contextual.
@@ -216,11 +235,11 @@
           </ul>
           <h3 style="margin-top:18px;">Instalação</h3>
           <div class="caixa-codigo">
-<span style="color:#cba6f7;"># Instalar globalmente via npm</span><br>
+<span style="color:#7c3aed;"># Instalar globalmente via npm</span><br>
 npm install -g @anthropic-ai/claude-code<br><br>
-<span style="color:#cba6f7;"># Configurar a API Key</span><br>
+<span style="color:#7c3aed;"># Configurar a API Key</span><br>
 export ANTHROPIC_API_KEY="sk-ant-..."<br><br>
-<span style="color:#cba6f7;"># Ou adicionar ao ~/.bashrc / ~/.zshrc</span><br>
+<span style="color:#7c3aed;"># Ou adicionar ao ~/.bashrc / ~/.zshrc</span><br>
 echo 'export ANTHROPIC_API_KEY="sk-ant-..."' \<br>
 &nbsp;&nbsp;&gt;&gt; ~/.bashrc
           </div>
@@ -228,12 +247,12 @@ echo 'export ANTHROPIC_API_KEY="sk-ant-..."' \<br>
         <div>
           <h3>Primeiros comandos</h3>
           <div class="caixa-codigo">
-<span style="color:#cba6f7;"># Iniciar Claude Code no projeto</span><br>
+<span style="color:#7c3aed;"># Iniciar Claude Code no projeto</span><br>
 cd /meu/projeto<br>
 claude<br><br>
-<span style="color:#cba6f7;"># Modo não-interativo (comando único)</span><br>
+<span style="color:#7c3aed;"># Modo não-interativo (comando único)</span><br>
 claude -p "Explique este arquivo"<br><br>
-<span style="color:#cba6f7;"># Verificar versão</span><br>
+<span style="color:#7c3aed;"># Verificar versão</span><br>
 claude --version
           </div>
           <div class="caixa-info" style="margin-top:12px;">
@@ -300,7 +319,7 @@ energia. Dados no Snowflake.<br><br>
           <h3>O que são Skills?</h3>
           <p style="font-size:0.85em;">Skills são arquivos Markdown que definem tarefas reutilizáveis para o Claude Code. Você invoca com <code>/nomeskill</code> e ele executa a tarefa descrita.</p>
           <div class="caixa-codigo" style="font-size:0.72em;">
-<span style="color:#cba6f7;"># .claude/commands/data-quality.md</span><br>
+<span style="color:#7c3aed;"># .claude/commands/data-quality.md</span><br>
 ---<br>
 description: Executa análise de qualidade<br>
 &nbsp;&nbsp;no DataFrame `df`<br>
@@ -319,7 +338,7 @@ DataFrame `df`:<br>
         <div>
           <h3>Prompt engineering para dados</h3>
           <div class="prompt-box" style="font-size:0.73em;">
-<span style="color:#a6e3a1;">✅ Prompt eficaz:</span><br><br>
+<span style="color:#16a34a;">✅ Prompt eficaz:</span><br><br>
 "Crie uma função Python que recebe um<br>
 DataFrame pandas com a tabela CONSUMIDORES_UC<br>
 (colunas: cod_consumidor, cpf_cnpj,<br>
@@ -332,8 +351,8 @@ e retorna um dict com:<br>
 &nbsp;&nbsp;acima de 3 desvios padrão<br>
 Use type hints e docstring em português."
           </div>
-          <div class="prompt-box" style="font-size:0.73em; border-color: #e74c3c; color: #f38ba8; margin-top:8px;">
-<span style="color:#e74c3c;">❌ Prompt ineficaz:</span><br>
+          <div class="prompt-box" style="font-size:0.73em; border-color: #dc2626; margin-top:8px;">
+<span style="color:#dc2626;">❌ Prompt ineficaz:</span><br>
 "faça uma função de qualidade de dados"
           </div>
         </div>
@@ -385,18 +404,18 @@ def funcao():<br>
     <!-- ======================================================
          SLIDE 7 — SNOWFLAKE ARQUITETURA
     ======================================================= -->
-    <section data-background-gradient="linear-gradient(135deg, #0d2a3a 0%, #1a3a5c 100%)">
-      <h2><span class="tag-snow">M5</span> Snowflake + Python: Arquitetura</h2>
+    <section>
+      <h2 style="border-top: 4px solid #0ea5e9; padding-top: 8px;"><span class="tag-snow">M5</span> Snowflake + Python: Arquitetura</h2>
       <div class="grid-2" style="margin-top:18px;">
         <div>
           <h3>Componentes Snowflake</h3>
           <div class="card">
             <table style="font-size:0.78em; width:100%; border-collapse:collapse;">
-              <tr><td style="padding:5px; color:#29b5e8;">Account</td><td style="padding:5px;">Instância da sua empresa</td></tr>
-              <tr><td style="padding:5px; color:#29b5e8;">Warehouse</td><td style="padding:5px;">Cluster de computação (VXS a 6XL)</td></tr>
-              <tr><td style="padding:5px; color:#29b5e8;">Database</td><td style="padding:5px;">Banco de dados lógico</td></tr>
-              <tr><td style="padding:5px; color:#29b5e8;">Schema</td><td style="padding:5px;">Agrupamento de tabelas/views</td></tr>
-              <tr><td style="padding:5px; color:#29b5e8;">Stage</td><td style="padding:5px;">Área de carga de arquivos</td></tr>
+              <tr><td style="padding:5px; color:#0ea5e9;">Account</td><td style="padding:5px; color:#1e2a3a;">Instância da sua empresa</td></tr>
+              <tr><td style="padding:5px; color:#0ea5e9;">Warehouse</td><td style="padding:5px; color:#1e2a3a;">Cluster de computação (VXS a 6XL)</td></tr>
+              <tr><td style="padding:5px; color:#0ea5e9;">Database</td><td style="padding:5px; color:#1e2a3a;">Banco de dados lógico</td></tr>
+              <tr><td style="padding:5px; color:#0ea5e9;">Schema</td><td style="padding:5px; color:#1e2a3a;">Agrupamento de tabelas/views</td></tr>
+              <tr><td style="padding:5px; color:#0ea5e9;">Stage</td><td style="padding:5px; color:#1e2a3a;">Área de carga de arquivos</td></tr>
             </table>
           </div>
           <div class="caixa-aviso" style="margin-top:10px; font-size:0.8em;">
@@ -561,7 +580,7 @@ LIMIT 20;<br>
     <!-- ======================================================
          SLIDE 11 — PRÓXIMOS PASSOS
     ======================================================= -->
-    <section data-background-gradient="linear-gradient(135deg, #1a0a2e 0%, #0d2a3a 60%, #0d1b2a 100%)">
+    <section style="background:#f5f7fa;">
       <div style="text-align:center; padding:20px 0;">
         <div style="font-size:2.5em; margin-bottom:16px;">🎯</div>
         <h2 style="font-size:1.6em;">Próximos Passos</h2>
@@ -592,7 +611,7 @@ LIMIT 20;<br>
         <div class="caixa-info" style="margin-top:18px; font-size:0.82em; text-align:left; max-width:700px; margin-left:auto; margin-right:auto;">
           <strong>Recursos adicionais:</strong> docs.anthropic.com · snowflake.com/developers · pandas.pydata.org · plotly.com/python
         </div>
-        <p style="font-size:0.75em; color:rgba(255,255,255,0.4); margin-top:20px;">
+        <p style="font-size:0.75em; color:#94a3b8; margin-top:20px;">
           Obrigado! Dúvidas? Use o Claude Code para perguntar. 😄
         </p>
       </div>
@@ -615,9 +634,11 @@ LIMIT 20;<br>
     controls: true,
     progress: true,
     center: false,
-    width: 1200,
-    height: 700,
+    width: 1280,
+    height: 720,
     margin: 0.04,
+    minScale: 0.1,
+    maxScale: 1.5,
     plugins: [ RevealNotes, RevealMarkdown, RevealHighlight ]
   });
 </script>
