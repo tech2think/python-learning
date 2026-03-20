@@ -254,7 +254,7 @@
               ">VP</div>
               <h2 style="font-size:1.4em; margin: 0; color: #1e2a3a;">Vinicius Parede</h2>
               <p style="font-size:0.85em; color: #1a6fa8; font-weight: bold; margin-top: 5px; letter-spacing: 0.05em; text-transform: uppercase;">
-                Cientista de Dados & Engenheiro
+                Cientista de Dados
               </p>
             </div>
     
@@ -506,31 +506,31 @@
              SLIDE 5 — POR QUE PYTHON?
         ======================================================= -->
         <section>
-          <h2>Por que Python no setor elétrico?</h2>
+          <h2>Por que Python?</h2>
           <div class="grid-3" style="margin-top:20px;">
             <div class="card">
-              <h4>📊 Análise de Dados</h4>
-              <p>Processe milhões de leituras de medidores, identifique anomalias e gere relatórios automáticos que levariam dias no Excel.</p>
+              <h4>Análise de Dados</h4>
+              <p>Processe milhões de registros de forma eficiente, identifique padrões e gere relatórios automáticos que levariam dias em planilhas convencionais.</p>
             </div>
             <div class="card">
-              <h4>🔗 Integração</h4>
-              <p>Conecte-se ao Snowflake, SAP, sistemas de GIS, APIs regulatórias da ANEEL e fontes de dados externas com poucas linhas.</p>
+              <h4>Integração</h4>
+              <p>Conecte-se facilmente a bancos de dados, sistemas ERP, APIs externas e diversas outras fontes de dados com poucas linhas de código.</p>
             </div>
             <div class="card">
-              <h4>🤖 Automação</h4>
-              <p>Automatize validações de cadastro de UC, geração de relatórios DEC/FEC e envio de alertas por e-mail ou Teams.</p>
+              <h4>Automação</h4>
+              <p>Automatize validações de regras de negócio, rotinas de processamento diárias e o envio de alertas corporativos.</p>
             </div>
             <div class="card">
-              <h4>📈 Visualização</h4>
-              <p>Dashboards interativos com Plotly para monitorar indicadores de qualidade de energia e desempenho regulatório.</p>
+              <h4>Visualização</h4>
+              <p>Crie dashboards e gráficos interativos para monitorar indicadores de desempenho, facilitando a tomada de decisão gerencial.</p>
             </div>
             <div class="card">
-              <h4>🧠 IA &amp; ML</h4>
-              <p>Detecção de fraudes, previsão de demanda e classificação automática de ocorrências com scikit-learn e modelos de linguagem.</p>
+              <h4>Inteligência Artificial</h4>
+              <p>Implemente modelos preditivos, detecção de anomalias e integre suas aplicações facilmente com os modelos de linguagem mais modernos.</p>
             </div>
             <div class="card">
-              <h4>🆓 Gratuito e Open Source</h4>
-              <p>Sem licenças. Enorme comunidade. Bibliotecas para qualquer necessidade do setor. Roda em qualquer infraestrutura.</p>
+              <h4>Ecossistema Aberto</h4>
+              <p>Linguagem gratuita, open source, suportada por uma comunidade global gigantesca e com bibliotecas prontas para quase qualquer necessidade.</p>
             </div>
           </div>
         </section>
@@ -863,6 +863,21 @@
               </div>
             </div>
           </div>
+    
+          <!-- Notas sobre Pandas -->
+          <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+            <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
+              <ul style="margin: 0; padding-left: 18px;">
+                <li><strong>DataFrame (df):</strong> É a estrutura principal do Pandas, funcionando como uma tabela onde cada coluna possui um tipo de dado definido.</li>
+                <li><strong>Exploração:</strong> Sempre comece com <code>df.info()</code> para identificar colunas com valores nulos e tipos de dados errados.</li>
+              </ul>
+              <ul style="margin: 0; padding-left: 18px;">
+                <li><strong>Filtros:</strong> Use parênteses <code>()</code> para separar condições múltiplas e o símbolo <code>&amp;</code> para o "E" lógico.</li>
+                <li><strong>Agrupamentos:</strong> O <code>groupby</code> é o equivalente à Tabela Dinâmica, essencial para gerar indicadores por Classe ou UF.</li>
+              </ul>
+            </div>
+          </div>
         </section>
 
     <!-- ======================================================
@@ -882,8 +897,8 @@
                 <li>Campos obrigatórios vazios</li>
                 <li>Coordenadas geográficas ausentes</li>
               </ul>
-              <div class="caixa-aviso" style="margin-top:10px;">
-                Dados de baixa qualidade impactam diretamente o <strong>faturamento</strong> e os <strong>indicadores ANEEL</strong>.
+              <div class="caixa-info" style="margin-top:10px; font-size: 0.75em;">
+                <strong>Exemplos de Limpeza:</strong> Padronização de nomes de consumidores, saneamento de documentos (CPF/CNPJ) e remoção de registros duplicados em grandes bases cadastrais.
               </div>
             </div>
             <div>
@@ -905,6 +920,21 @@
     &nbsp;&nbsp;subset=['cod_consumidor']<br>
     )
               </div>
+            </div>
+          </div>
+    
+          <!-- Notas sobre limpeza -->
+          <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+            <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
+              <ul style="margin: 0; padding-left: 18px;">
+                <li><strong>Padronização:</strong> O uso de <code>.str.title()</code> garante que "MARIA", "maria" e "Maria" sejam tratadas como a mesma pessoa ("Maria").</li>
+                <li><strong>Regex:</strong> Expressões regulares (<code>r'\D'</code>) são poderosas para extrair apenas os números de CPFs mal formatados.</li>
+              </ul>
+              <ul style="margin: 0; padding-left: 18px;">
+                <li><strong>Duplicatas:</strong> Ao remover duplicatas (<code>drop_duplicates</code>), defina qual coluna deve ser única com o parâmetro <code>subset</code>.</li>
+                <li><strong>Impacto:</strong> Lembre que dados de clientes limpos são cruciais para cobrança correta e relatórios regulatórios.</li>
+              </ul>
             </div>
           </div>
         </section>
@@ -973,25 +1003,14 @@
     <!-- ======================================================
              SLIDE 16 — MÓDULO 3: VISUALIZAÇÃO — ABERTURA
         ======================================================= -->
-        <section style="background:#f5f7fa;">
-          <div style="text-align:center; padding:30px 0;">
-            <div class="tag-modulo">MÓDULO 3</div>
-            <h2 style="margin-top:16px;">Visualização de Indicadores</h2>
-            <p style="color:#5a6a7a;">matplotlib · seaborn · plotly · DEC/FEC</p>
-            <div style="display:flex; justify-content:center; gap:40px; margin-top:30px;">
-              <div>
-                <div class="numero-grande">3</div>
-                <p style="font-size:0.75em; color:#5a6a7a;">bibliotecas</p>
-              </div>
-              <div>
-                <div class="numero-grande">45min</div>
-                <p style="font-size:0.75em; color:#5a6a7a;">duração</p>
-              </div>
-              <div>
-                <div class="numero-grande">∞</div>
-                <p style="font-size:0.75em; color:#5a6a7a;">gráficos possíveis</p>
-              </div>
-            </div>
+        <section style="background: linear-gradient(135deg, #fafafa 0%, #f1f5f9 100%);">
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
+            <div class="tag-modulo" style="padding: 6px 16px; font-size: 0.75em; border-radius: 4px; background: #1a6fa8; color: white; margin-bottom: 25px;">MÓDULO 3</div>
+            <h2 style="font-size: 2.8em; color: #1e2a3a; margin: 0 0 20px 0; font-weight: 800;">Visualização de Indicadores</h2>
+            <div style="width: 80px; height: 4px; background: #1a6fa8; border-radius: 2px; margin-bottom: 25px;"></div>
+            <p style="color:#5a6a7a; font-size: 1.15em; max-width: 700px; line-height: 1.6; margin: 0;">
+              Criação de gráficos estáticos, mapas de calor e dashboards interativos com Matplotlib, Seaborn e Plotly.
+            </p>
           </div>
         </section>
 
@@ -1049,8 +1068,20 @@
               </div>
             </div>
           </div>
-          <div class="caixa-info" style="margin-top:14px; font-size:0.78em;">
-            <strong>Dica:</strong> Use Plotly para dashboards interativos — os usuários podem dar zoom, filtrar e exportar os dados diretamente no gráfico.
+    
+          <!-- Notas sobre visualização -->
+          <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+            <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
+              <ul style="margin: 0; padding-left: 18px;">
+                <li><strong>Matplotlib:</strong> Ideal para gráficos estáticos rápidos e customizações minuciosas (ex: relatórios em PDF).</li>
+                <li><strong>Seaborn:</strong> Excelente para gráficos estatísticos complexos (como heatmaps de correlação) com poucas linhas de código.</li>
+              </ul>
+              <ul style="margin: 0; padding-left: 18px;">
+                <li><strong>Plotly:</strong> A melhor escolha para dashboards interativos. Permite aos usuários dar zoom, filtrar e exportar dados.</li>
+                <li><strong>Foco:</strong> Escolha a ferramenta baseada no público. Relatórios impressos (matplotlib), exploração (seaborn), web (plotly).</li>
+              </ul>
+            </div>
           </div>
         </section>
 
@@ -1099,89 +1130,54 @@
               </div>
             </div>
           </div>
-        </section>
-
-    <!-- ======================================================
-             SLIDE 19 — TRANSIÇÃO PARA PARTE 2
-        ======================================================= -->
-        <section style="background:#f5f7fa;">
-          <div style="text-align:center; padding:20px 0;">
-            <div style="font-size:2.5em; margin-bottom:16px;">🚀</div>
-            <h2 style="font-size:1.6em;">Parabéns! Parte 1 concluída.</h2>
-            <p style="color:#5a6a7a; font-size:0.9em; margin-bottom:24px;">
-              Você domina os fundamentos de Python e análise de dados com Pandas e Matplotlib.
-            </p>
-            <div class="caixa-info" style="text-align:left; max-width:560px; margin:0 auto 24px;">
-              <strong>Na Parte 2 você vai aprender:</strong>
-              <ul style="margin:8px 0 0 0; padding-left:20px;">
-                <li>Claude Code — desenvolvimento assistido por IA</li>
-                <li>CLAUDE.md e skills customizados</li>
-                <li>Conectar ao Snowflake a partir do Python</li>
-                <li>Construir um projeto de qualidade de dados de UC</li>
+    
+          <!-- Notas sobre indicadores -->
+          <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+            <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
+              <ul style="margin: 0; padding-left: 18px;">
+                <li><strong>Cálculo Crítico:</strong> DEC e FEC são os indicadores de qualidade de fornecimento mais observados pela ANEEL e pela diretoria.</li>
+                <li><strong>Ponderação:</strong> Lembre que uma interrupção de 1h para 1000 clientes é mais grave no DEC do que 2h para 10 clientes.</li>
+              </ul>
+              <ul style="margin: 0; padding-left: 18px;">
+                <li><strong>Visualização:</strong> Sobrepor o realizado (barra) com a meta regulatória (linha tracejada) é a forma padrão do setor de apresentar o DEC.</li>
+                <li><strong>Qualidade:</strong> Erros no cadastro de UCs (tema da aula anterior) afetam diretamente o denominador do cálculo!</li>
               </ul>
             </div>
-            <div style="margin-top:20px;">
-              <p style="font-size:0.8em; color:#5a6a7a;">
-                Inicie a Parte 2 com:
-              </p>
-              <div class="caixa-codigo" style="max-width:400px; margin:8px auto; text-align:center;">
-                python serve_apresentacao.py --parte 2
-              </div>
-            </div>
           </div>
         </section>
 
     <!-- ======================================================
-             SLIDE 4.5 — EMENTA PARTE 1
+             SLIDE 19 — FINAL DA PARTE 1
         ======================================================= -->
-        <section>
-          <h2 style="text-align:center; margin-bottom:20px; font-size: 1.65em;">Ementa — Parte 1</h2>
-          
-          <div style="display:flex; flex-direction:column; gap:12px; max-width: 880px; margin: 0 auto;">
+        <section style="background: linear-gradient(135deg, #fafafa 0%, #f1f5f9 100%);">
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
             
-            <!-- Módulo 0 -->
-            <div style="background: white; border: 1px solid #e2e8f0; border-left: 6px solid #475569; border-radius: 8px; padding: 14px 22px; text-align: left; box-shadow: 0 3px 12px rgba(0,0,0,0.03);">
-              <h3 style="margin: 0 0 6px 0; color: #1e2a3a; font-size: 1.05em; display:flex; align-items:center; gap:10px;">
-                <span class="badge badge-parte1" style="font-size: 0.6em; padding: 4px 10px; background: #475569;">MÓDULO 0</span> Preparação do Ambiente
-              </h3>
-              <p style="margin: 0; font-size: 0.8em; color: #475569; padding-left: 8px; line-height: 1.5;">
-                • Por que Python no setor elétrico? / Instalação e configuração do <strong>uv</strong><br>
-                • <span style="color: #d97706; font-weight: bold;">Plano B:</span> Uso do <strong>Google Colab</strong> para execução em nuvem
-              </p>
-            </div>
+            <div style="font-size: 3em; margin-bottom: 10px;">🏆</div>
+            <h2 style="font-size: 2.4em; color: #1e2a3a; margin: 0 0 10px 0; font-weight: 800;">Parte 1 Concluída!</h2>
+            <p style="color:#5a6a7a; font-size: 1.1em; max-width: 700px; line-height: 1.4; margin: 0 0 30px 0;">
+              Você concluiu com sucesso os fundamentos de Python, manipulação de dados com Pandas e visualização de indicadores.
+            </p>
     
-            <!-- Módulo 1 -->
-            <div style="background: white; border: 1px solid #e2e8f0; border-left: 6px solid #1a6fa8; border-radius: 8px; padding: 14px 22px; text-align: left; box-shadow: 0 3px 12px rgba(0,0,0,0.03);">
-              <h3 style="margin: 0 0 6px 0; color: #1e2a3a; font-size: 1.05em; display:flex; align-items:center; gap:10px;">
-                <span class="badge badge-parte1" style="font-size: 0.6em; padding: 4px 10px;">MÓDULO 1</span> Fundamentos Python
-              </h3>
-              <p style="margin: 0; font-size: 0.8em; color: #475569; padding-left: 8px; line-height: 1.5;">
-                • Variáveis e Tipos / Estruturas de Controle / Funções e Reusabilidade
-              </p>
-            </div>
-    
-            <!-- Módulo 2 -->
-            <div style="background: white; border: 1px solid #e2e8f0; border-left: 6px solid #1a6fa8; border-radius: 8px; padding: 14px 22px; text-align: left; box-shadow: 0 3px 12px rgba(0,0,0,0.03);">
-              <h3 style="margin: 0 0 6px 0; color: #1e2a3a; font-size: 1.05em; display:flex; align-items:center; gap:10px;">
-                <span class="badge badge-parte1" style="font-size: 0.6em; padding: 4px 10px;">MÓDULO 2</span> Análise de Dados com Pandas
-              </h3>
-              <p style="margin: 0; font-size: 0.8em; color: #475569; padding-left: 8px; line-height: 1.5;">
-                • DataFrames e Series / Limpeza e Normalização / Qualidade de Cadastro
-              </p>
-            </div>
-    
-            <!-- Módulo 3 -->
-            <div style="background: white; border: 1px solid #e2e8f0; border-left: 6px solid #1a6fa8; border-radius: 8px; padding: 14px 22px; text-align: left; box-shadow: 0 3px 12px rgba(0,0,0,0.03);">
-              <h3 style="margin: 0 0 6px 0; color: #1e2a3a; font-size: 1.05em; display:flex; align-items:center; gap:10px;">
-                <span class="badge badge-parte1" style="font-size: 0.6em; padding: 4px 10px;">MÓDULO 3</span> Visualização de Indicadores
-              </h3>
-              <p style="margin: 0; font-size: 0.8em; color: #475569; padding-left: 8px; line-height: 1.5;">
-                • Matplotlib e Seaborn / Dashboards Plotly / Indicadores Regulatórios (DEC / FEC)
-              </p>
+            <div class="grid-2" style="gap: 40px; align-items: center; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+              <div style="text-align: left;">
+                <h3 style="color: #1a6fa8; margin-top: 0;">Sua avaliação</h3>
+                <p style="font-size: 0.9em; color: #334155; line-height: 1.5;">
+                  Sua opinião é fundamental para melhorarmos o curso. <br><br>
+                  Acesse o formulário e responda:<br>
+                  <strong>"Qual seu grau de satisfação com a Parte 1 do curso?"</strong>
+                </p>
+                <p style="font-size: 0.8em; color: #64748b; margin-top: 15px;">
+                  Escala de 1 (Muito Insatisfeito) a 5 (Muito Satisfeito).
+                </p>
+              </div>
+              <div style="text-align: center;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://forms.office.com/Pages/ResponsePage.aspx?id=gEwy3kxO-UOpE0xYE5qWjwMlOFGs6tFPhRjPn70do9ZUNzUzNzdVVjNEMkZXNUFTUFlQMlg0UU83Vi4u" alt="QR Code Feedback" style="border: 4px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 180px; height: 180px;">
+                <p style="font-size: 0.5em; color: #94a3b8; margin-top: 10px; font-family: monospace; word-break: break-all; max-width: 200px;">forms.office.com/r/feedback</p>
+              </div>
             </div>
     
           </div>
-        </section>
         </section>
 
   </div>
@@ -1208,6 +1204,20 @@
     maxScale: 1.5,
     plugins: [ RevealNotes, RevealMarkdown, RevealHighlight ]
   });
+</script>
+<script>
+  // Simple Live Reload
+  (function() {
+    setInterval(async () => {
+      try {
+        const res = await fetch('/check-update');
+        const data = await res.json();
+        if (data.reload) {
+          window.location.reload();
+        }
+      } catch (e) {}
+    }, 1000);
+  })();
 </script>
 </body>
 </html>

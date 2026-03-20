@@ -644,5 +644,19 @@
     plugins: [ RevealNotes, RevealMarkdown, RevealHighlight ]
   });
 </script>
+<script>
+  // Simple Live Reload
+  (function() {
+    setInterval(async () => {
+      try {
+        const res = await fetch('/check-update');
+        const data = await res.json();
+        if (data.reload) {
+          window.location.reload();
+        }
+      } catch (e) {}
+    }, 1000);
+  })();
+</script>
 </body>
 </html>
