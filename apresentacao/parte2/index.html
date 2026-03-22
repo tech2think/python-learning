@@ -170,22 +170,73 @@
 
     
     <!-- ======================================================
-             SLIDE 1 — ABERTURA PARTE 2
+             SLIDE 1 — ABERTURA PARTE 2 (mesmo layout da Parte 1)
         ======================================================= -->
         <section>
-          <div style="padding: 20px 0; text-align:center;">
-            <div style="font-size:2.8em; margin-bottom:12px;">🤖 ⚡</div>
-            <h1 style="font-size:1.8em; margin-bottom:0.3em; color:#1e2a3a;">Desenvolvimento Moderno com IA</h1>
-            <p style="color:#5a6a7a; font-size:0.95em; margin-bottom:1.5em;">
-              Claude Code · CLAUDE.md · Snowflake · Qualidade de Dados
-            </p>
-            <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:1.5em;">
-              <span class="badge-ia">Módulo 4 — Claude Code &amp; IA</span>
-              <span class="badge-snow">Módulo 5 — Snowflake &amp; Qualidade</span>
+          <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding: 30px 0; gap: 28px;">
+
+            <!-- Logo T2T -->
+            <img src="../../images/t2t_logo.webp" alt="Logo T2T" style="max-height: 450px; width: auto; object-fit: contain;">
+
+            <div style="text-align:center;">
+              <h1 style="font-size:2.2em; margin: 0 0 0.2em 0; line-height:1.2; color: #1e2a3a;">Introdução a Python</h1>
+              <a href="https://github.com/tech2think/python-learning" style="font-size: 0.55em; color: #94a3b8; text-decoration: none; font-family: 'JetBrains Mono', monospace; opacity: 0.8;">
+                github.com/tech2think/python-learning
+              </a>
             </div>
-            <p style="font-size:0.7em; color:#94a3b8;">
-              Parte 2 do curso Python para Distribuição de Energia Elétrica
-            </p>
+
+          </div>
+        </section>
+
+    <!-- ======================================================
+             SLIDE 2 — EVOLUÇÃO DA IA GERATIVA
+        ======================================================= -->
+        <section>
+          <h2><span class="tag-modulo">M4</span> A Evolução da IA no Desenvolvimento</h2>
+          <div style="margin-top: 30px;">
+            
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              
+              <!-- 2022 -->
+              <div style="display: flex; align-items: stretch; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                <div style="background: #94a3b8; color: white; padding: 20px; font-weight: bold; font-size: 1.5em; border-radius: 8px 0 0 8px; display: flex; align-items: center; justify-content: center; min-width: 120px;">
+                  2022
+                </div>
+                <div style="padding: 15px 25px; text-align: left; flex-grow: 1;">
+                  <h4 style="color: #1e2a3a; margin: 0 0 8px 0; font-size: 1.1em;">A Era do Chat Web (ChatGPT)</h4>
+                  <p style="color: #5a6a7a; font-size: 0.85em; margin: 0; line-height: 1.4;">
+                    Interação isolada no navegador. O desenvolvedor precisava explicar todo o contexto, copiar o código gerado, colar na IDE, testar e voltar ao navegador se houvesse erro.
+                  </p>
+                </div>
+              </div>
+    
+              <!-- 2023 -->
+              <div style="display: flex; align-items: stretch; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                <div style="background: #1a6fa8; color: white; padding: 20px; font-weight: bold; font-size: 1.5em; border-radius: 8px 0 0 8px; display: flex; align-items: center; justify-content: center; min-width: 120px;">
+                  2023
+                </div>
+                <div style="padding: 15px 25px; text-align: left; flex-grow: 1;">
+                  <h4 style="color: #1e2a3a; margin: 0 0 8px 0; font-size: 1.1em;">A Era dos Copilots (Extensões)</h4>
+                  <p style="color: #5a6a7a; font-size: 0.85em; margin: 0; line-height: 1.4;">
+                    A IA entra na IDE. O foco muda para o <strong>autocompletar inteligente</strong> e chats embutidos que já leem o arquivo aberto. Menos "copiar/colar", mas ainda muito reativo.
+                  </p>
+                </div>
+              </div>
+    
+              <!-- Hoje -->
+              <div style="display: flex; align-items: stretch; background: white; border: 1px solid #7c3aed; border-radius: 8px; box-shadow: 0 4px 12px rgba(124,58,237,0.15);">
+                <div style="background: linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%); color: white; padding: 20px; font-weight: bold; font-size: 1.5em; border-radius: 8px 0 0 8px; display: flex; align-items: center; justify-content: center; min-width: 120px;">
+                  Hoje
+                </div>
+                <div style="padding: 15px 25px; text-align: left; flex-grow: 1;">
+                  <h4 style="color: #7c3aed; margin: 0 0 8px 0; font-size: 1.1em;">A Era dos Agentes (Claude Code / Gemini CLI)</h4>
+                  <p style="color: #1e2a3a; font-size: 0.85em; margin: 0; line-height: 1.4; font-weight: 500;">
+                    A IA opera no terminal. Ela não apenas sugere, mas <strong>executa</strong>. Lê a estrutura do projeto, roda comandos, executa testes, encontra erros e propõe soluções de forma autônoma (Agentes).
+                  </p>
+                </div>
+              </div>
+    
+            </div>
           </div>
         </section>
 
@@ -207,16 +258,91 @@
               </div>
             </div>
             <div>
-              <div class="card">
-                <h4>Casos de uso para analistas de energia</h4>
-                <ul style="margin:0; padding-left:18px;">
-                  <li>Gerar queries SQL para Snowflake a partir de descrições em português</li>
+              <div class="card" style="padding: 0; overflow: hidden; border: 1px solid #1e2a3a; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                <!-- Terminal Header -->
+                <div style="background: #1e2a3a; padding: 8px 12px; display: flex; gap: 6px; align-items: center;">
+                  <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
+                  <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
+                  <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
+                  <span style="color: #94a3b8; font-family: monospace; font-size: 0.6em; margin-left: 10px;">bash — claude code</span>
+                </div>
+                <!-- Terminal Body -->
+                <div style="background: #0f172a; padding: 20px; font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 0.65em; line-height: 1.5; text-align: left;">
+                  <div style="color: #94a3b8;">$ claude "refactor this data pipeline"</div>
+                  <div style="color: #38bdf8; margin-top: 10px;">[Claude Thinking...]</div>
+                  <div style="color: #f8fafc; margin-top: 5px;">I'll analyze the project structure...</div>
+                  <div style="color: #27c93f; margin-top: 5px;">✓ Found 3 related files in /src</div>
+                  <div style="color: #27c93f;">✓ Running tests... (12/12 passed)</div>
+                  <div style="color: #f8fafc; margin-top: 10px;">I've prepared a plan to optimize the Snowflake connection. Shall I proceed? (y/n)</div>
+                  <div style="color: #fbbf24; margin-top: 10px;">[PROPOSED CHANGES]</div>
+                  <div style="color: #94a3b8;">+ import snowflake.connector</div>
+                  <div style="color: #94a3b8;">- old_connection_method()</div>
+                  <div style="color: #27c93f;">+ new_optimized_pool()</div>
+                </div>
+              </div>
+              <div class="card" style="margin-top: 15px;">
+                <h4>Casos de uso para analistas</h4>
+                <ul style="margin:0; padding-left:18px; font-size: 0.75em;">
+                  <li>Gerar queries SQL para Snowflake</li>
                   <li>Criar funções de validação de dados de UC</li>
-                  <li>Documentar pipelines de qualidade automaticamente</li>
-                  <li>Explicar erros e sugerir correções</li>
+                  <li>Documentar pipelines automaticamente</li>
                   <li>Refatorar notebooks em scripts produtivos</li>
-                  <li>Gerar relatórios de qualidade em Excel/PDF</li>
                 </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+    <!-- ======================================================
+             SLIDE 4 — INSTALAÇÃO NODE.JS
+        ======================================================= -->
+        <section>
+          <h2><span class="tag-modulo">M4</span> Pré-requisito: Instalando o Node.js</h2>
+          <div class="grid-2" style="margin-top:18px;">
+            <div>
+              <div class="caixa-info">
+                Tanto o <strong>Claude Code</strong> quanto o <strong>Gemini CLI</strong> são ferramentas desenvolvidas em JavaScript/TypeScript e distribuídas como pacotes do Node.js (via <code>npm</code>).
+              </div>
+              <div style="margin-top:15px;">
+                <h3 style="font-size: 1.1em; color: #1e2a3a; margin-bottom: 8px;">Por que precisamos disso?</h3>
+                <ul style="font-size: 0.85em; color: #5a6a7a; padding-left: 18px; margin: 0; line-height: 1.5;">
+                  <li>O <strong>Node.js</strong> é o motor que executa o código dessas ferramentas no seu computador, fora do navegador.</li>
+                  <li>O <strong>NPM</strong> (Node Package Manager) é o instalador automático, que baixa a IA e todas as suas dependências.</li>
+                </ul>
+              </div>
+            </div>
+    
+            <div>
+              <div class="card" style="padding: 15px;">
+                <h4 style="margin: 0 0 10px 0; color: #1a6fa8; font-size: 1em; display: flex; align-items: center; gap: 6px;">
+                  Passo a Passo
+                </h4>
+                
+                <div style="margin-bottom: 12px;">
+                  <strong style="font-size: 0.8em; color: #1e2a3a;">1. Windows / macOS</strong>
+                  <div style="font-size: 0.75em; color: #5a6a7a; margin-top: 4px;">
+                    Acesse <a href="https://nodejs.org/" target="_blank" style="color: #7c3aed; text-decoration: none; font-weight: bold;">nodejs.org</a> e baixe a versão <strong>LTS (Long Term Support)</strong>. Siga o instalador padrão (Next, Next, Finish).
+                  </div>
+                </div>
+    
+                <div style="margin-bottom: 12px;">
+                  <strong style="font-size: 0.8em; color: #1e2a3a;">2. Linux (Debian/Ubuntu)</strong>
+                  <div class="caixa-codigo" style="font-size: 0.7em; margin-top: 6px; padding: 8px;">
+    <span style="color:#7c3aed;"># Instale o NVM (Node Version Manager)</span><br>
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash<br><br>
+    <span style="color:#7c3aed;"># Instale a versão mais recente LTS</span><br>
+    nvm install --lts
+                  </div>
+                </div>
+    
+                <div>
+                  <strong style="font-size: 0.8em; color: #1e2a3a;">3. Verificar Instalação</strong>
+                  <div class="caixa-codigo" style="font-size: 0.7em; margin-top: 6px; padding: 8px;">
+    node -v  <span style="color:#94a3b8;"># Exemplo: v20.11.0</span><br>
+    npm -v   <span style="color:#94a3b8;"># Exemplo: 10.2.4</span>
+                  </div>
+                </div>
+    
               </div>
             </div>
           </div>
@@ -553,13 +679,12 @@
           <h2>Boas Práticas — Desenvolvimento com IA</h2>
           <div class="grid-2" style="margin-top:18px;">
             <div>
-              <h3>Com Claude Code</h3>
-              <ul style="font-size:0.83em;">
-                <li>Mantenha o <code>CLAUDE.md</code> atualizado com o contexto do projeto</li>
-                <li>Revise <strong>todo</strong> código gerado antes de executar</li>
-                <li>Use o Claude para explicar, não apenas para gerar</li>
-                <li>Versione os prompts e skills junto com o código</li>
-                <li>Documente o que o Claude gerou nos commits</li>
+              <h3>Com IA / Agentes (Claude & Gemini)</h3>
+              <ul style="font-size:0.83em; line-height: 1.4; gap: 8px; display: flex; flex-direction: column;">
+                <li><strong>Evite o "Vibe Coding":</strong> Não peça para a IA codar logo de cara. Exija o fluxo: Explore (leia arquivos) → Planeje (proponha solução) → Implemente.</li>
+                <li><strong>O Padrão "Documentar e Limpar":</strong> Sessões longas fazem a IA alucinar. Peça para a IA resumir o progresso num arquivo <code>.md</code>, use <code>/clear</code> (zere a memória) e retome a partir do documento.</li>
+                <li><strong>Revisão Cruzada (Multi-Agente):</strong> A mesma sessão que escreveu o código é ruim para revisá-lo. Abra um terminal fresco para revisar o PR de forma crítica.</li>
+                <li><strong>CLAUDE.md:</strong> Mantenha-o enxuto (max 200 linhas). Documente nele os erros que a IA costuma repetir no seu projeto.</li>
               </ul>
             </div>
             <div>
@@ -616,6 +741,39 @@
             <p style="font-size:0.75em; color:#94a3b8; margin-top:20px;">
               Obrigado! Dúvidas? Use o Claude Code para perguntar. 😄
             </p>
+          </div>
+        </section>
+
+    <!-- ======================================================
+             SLIDE 14 — FINAL DA PARTE 2
+        ======================================================= -->
+        <section style="background: linear-gradient(135deg, #fafafa 0%, #f1f5f9 100%);">
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
+            
+            <div style="font-size: 3em; margin-bottom: 10px;">🏆</div>
+            <h2 style="font-size: 2.4em; color: #1e2a3a; margin: 0 0 10px 0; font-weight: 800;">Parte 2 Concluída!</h2>
+            <p style="color:#5a6a7a; font-size: 1.1em; max-width: 700px; line-height: 1.4; margin: 0 0 30px 0;">
+              Você completou com sucesso os módulos de desenvolvimento estratégico e a implementação de fluxos de trabalho avançados com Snowflake.
+            </p>
+    
+            <div class="grid-2" style="gap: 40px; align-items: center; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+              <div style="text-align: left;">
+                <h3 style="color: #1a6fa8; margin-top: 0;">Sua avaliação</h3>
+                <p style="font-size: 0.9em; color: #334155; line-height: 1.5;">
+                  Sua opinião é fundamental para continuarmos melhorando o curso. <br><br>
+                  Acesse o formulário e responda:<br>
+                  <strong>"Qual seu grau de satisfação com a Parte 2 do curso?"</strong>
+                </p>
+                <p style="font-size: 0.8em; color: #64748b; margin-top: 15px;">
+                  Escala de 1 (Muito Insatisfeito) a 5 (Muito Satisfeito).
+                </p>
+              </div>
+              <div style="text-align: center;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://forms.office.com/r/iPNssDMPR8" alt="QR Code Feedback" style="border: 4px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 180px; height: 180px;">
+                <p style="font-size: 0.5em; color: #94a3b8; margin-top: 10px; font-family: monospace; word-break: break-all; max-width: 200px;">forms.office.com/r/iPNssDMPR8</p>
+              </div>
+            </div>
+    
           </div>
         </section>
 
