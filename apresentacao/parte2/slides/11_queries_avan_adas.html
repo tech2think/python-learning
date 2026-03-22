@@ -1,0 +1,64 @@
+<!-- ======================================================
+         SLIDE 11 — AGENTE GEMINI + SNOWFLAKE
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-snow">M5</span> Agente Gemini com Ferramentas Snowflake</h2>
+      <div class="grid-2" style="margin-top:8px;">
+
+        <!-- Definição da ferramenta -->
+        <div>
+          <h3>1. Definir a ferramenta</h3>
+          <div class="caixa-codigo" style="font-size:0.63em; line-height:1.45;">
+<span style="color:#1a6fa8; font-weight:bold;">def</span> <span style="color:#0f766e;">analisar_qualidade_amostra</span>(limite: <span style="color:#0f766e;">int</span> = 100) -&gt; dict:<br>
+&nbsp;&nbsp;<span style="color:#92400e;">"""Analisa completude dos campos obrigatórios<br>
+&nbsp;&nbsp;em uma amostra de consumidores."""</span><br>
+&nbsp;&nbsp;query = <span style="color:#92400e;">f"""<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">SELECT</span> COUNT(*) AS TOTAL,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SUM(CASE WHEN MEDIDOR_ID IS NULL<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;THEN 1 ELSE 0 END) AS SEM_MEDIDOR<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">FROM</span> TAB_CADASTRO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">LIMIT</span> {limite}<br>
+&nbsp;&nbsp;"""</span><br>
+&nbsp;&nbsp;<span style="color:#0f766e;">df</span> = <span style="color:#0f766e;">read_sql_to_dataframe</span>(query)<br>
+&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#0f766e;">df</span>.iloc[0].to_dict()
+          </div>
+        </div>
+
+        <!-- Loop do agente -->
+        <div>
+          <h3>2. Loop do agente</h3>
+          <div class="caixa-codigo" style="font-size:0.63em; line-height:1.45;">
+response = client.models.generate_content(<br>
+&nbsp;&nbsp;model=<span style="color:#92400e;">"gemini-2.0-flash"</span>,<br>
+&nbsp;&nbsp;contents=messages,<br>
+&nbsp;&nbsp;config=types.GenerateContentConfig(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tools=TOOLS,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;temperature=0.1,<br>
+&nbsp;&nbsp;),<br>
+)<br><br>
+<span style="color:#64748b;"># Gemini decide chamar a ferramenta</span><br>
+fc = response.candidates[0].content.parts[0]<br>
+resultado = TOOL_MAP[fc.function_call.name](<br>
+&nbsp;&nbsp;**<span style="color:#0f766e;">dict</span>(fc.function_call.args)<br>
+)
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Fluxo -->
+      <div style="margin-top:8px; background:#f1f5f9; border-left:5px solid #0ea5e9; padding:8px 20px; border-radius:0 6px 6px 0;">
+        <h4 style="margin:0 0 5px 0; font-size:0.72em; color:#0ea5e9; text-transform:uppercase; letter-spacing:0.05em; font-weight:800;">Fluxo de execução</h4>
+        <div style="display:flex; align-items:center; gap:8px; font-size:0.68em; color:#334155; flex-wrap:wrap;">
+          <span style="background:white; border:1px solid #e2e8f0; border-radius:6px; padding:4px 10px;">Pergunta</span>
+          <span style="color:#0ea5e9;">→</span>
+          <span style="background:white; border:1px solid #e2e8f0; border-radius:6px; padding:4px 10px;">Gemini decide tool</span>
+          <span style="color:#0ea5e9;">→</span>
+          <span style="background:white; border:1px solid #29b5e8; border-radius:6px; padding:4px 10px; font-weight:bold;">Snowflake executa</span>
+          <span style="color:#0ea5e9;">→</span>
+          <span style="background:white; border:1px solid #e2e8f0; border-radius:6px; padding:4px 10px;">Resultado ao Gemini</span>
+          <span style="color:#0ea5e9;">→</span>
+          <span style="background:white; border:1px solid #e2e8f0; border-radius:6px; padding:4px 10px;">Resposta final</span>
+        </div>
+      </div>
+    </section>

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
   <style>
     :root {
-      --bg: #fafafa;
+      --bg: #e8f3fb;
       --bg-soft: #f1f5f9;
       --text-primary: #1e2a3a;
       --text-secondary: #5a6a7a;
@@ -23,7 +23,7 @@
       --r-heading-color: #1e2a3a;
       --r-main-color: #1e2a3a;
       --r-link-color: #1a6fa8;
-      --r-background-color: #fafafa;
+      --r-background-color: #e8f3fb;
     }
 
     .reveal .slides section { padding: 12px 30px; box-sizing: border-box; }
@@ -170,21 +170,21 @@
 
     
     <!-- ======================================================
-             SLIDE 1 — ABERTURA PARTE 2 (mesmo layout da Parte 1)
+             SLIDE 1 — ABERTURA PARTE 2
         ======================================================= -->
         <section>
           <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding: 30px 0; gap: 28px;">
-
-            <!-- Logo T2T -->
+    
+            <!-- Logo da empresa -->
             <img src="../../images/t2t_logo.webp" alt="Logo T2T" style="max-height: 450px; width: auto; object-fit: contain;">
-
+    
             <div style="text-align:center;">
               <h1 style="font-size:2.2em; margin: 0 0 0.2em 0; line-height:1.2; color: #1e2a3a;">IA Generativa no Desenvolvimento</h1>
               <a href="https://github.com/tech2think/python-learning" style="font-size: 0.55em; color: #94a3b8; text-decoration: none; font-family: 'JetBrains Mono', monospace; opacity: 0.8;">
                 github.com/tech2think/python-learning
               </a>
             </div>
-
+    
           </div>
         </section>
 
@@ -543,7 +543,6 @@
                   <tr><td style="padding:5px; color:#0ea5e9;">Warehouse</td><td style="padding:5px; color:#1e2a3a;">Cluster de computação (VXS a 6XL)</td></tr>
                   <tr><td style="padding:5px; color:#0ea5e9;">Database</td><td style="padding:5px; color:#1e2a3a;">Banco de dados lógico</td></tr>
                   <tr><td style="padding:5px; color:#0ea5e9;">Schema</td><td style="padding:5px; color:#1e2a3a;">Agrupamento de tabelas/views</td></tr>
-                  <tr><td style="padding:5px; color:#0ea5e9;">Stage</td><td style="padding:5px; color:#1e2a3a;">Área de carga de arquivos</td></tr>
                 </table>
               </div>
               <div class="caixa-aviso" style="margin-top:10px; font-size:0.8em;">
@@ -552,22 +551,22 @@
             </div>
             <div>
               <h3>Conexão Python</h3>
-              <div class="caixa-codigo" style="font-size:0.73em;">
-    import snowflake.connector<br>
-    from dotenv import load_dotenv<br>
-    import os<br><br>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#1a6fa8; font-weight:bold;">import</span> snowflake.connector<br>
+    <span style="color:#1a6fa8; font-weight:bold;">from</span> dotenv <span style="color:#1a6fa8; font-weight:bold;">import</span> load_dotenv<br>
+    <span style="color:#1a6fa8; font-weight:bold;">import</span> os<br><br>
     load_dotenv()<br><br>
     conn = snowflake.connector.connect(<br>
-    &nbsp;&nbsp;account=os.getenv("SF_ACCOUNT"),<br>
-    &nbsp;&nbsp;user=os.getenv("SF_USER"),<br>
-    &nbsp;&nbsp;password=os.getenv("SF_PASSWORD"),<br>
-    &nbsp;&nbsp;warehouse=os.getenv("SF_WAREHOUSE"),<br>
-    &nbsp;&nbsp;database=os.getenv("SF_DATABASE"),<br>
-    &nbsp;&nbsp;schema=os.getenv("SF_SCHEMA"),<br>
+    &nbsp;&nbsp;account=os.getenv(<span style="color:#92400e;">"SF_ACCOUNT"</span>),<br>
+    &nbsp;&nbsp;user=os.getenv(<span style="color:#92400e;">"SF_USER"</span>),<br>
+    &nbsp;&nbsp;password=os.getenv(<span style="color:#92400e;">"SF_PASSWORD"</span>),<br>
+    &nbsp;&nbsp;warehouse=os.getenv(<span style="color:#92400e;">"SF_WAREHOUSE"</span>),<br>
+    &nbsp;&nbsp;database=os.getenv(<span style="color:#92400e;">"SF_DATABASE"</span>),<br>
+    &nbsp;&nbsp;schema=os.getenv(<span style="color:#92400e;">"SF_SCHEMA"</span>),<br>
     )<br><br>
     cursor = conn.cursor()<br>
-    cursor.execute("SELECT CURRENT_VERSION()")<br>
-    print(cursor.fetchone()[0])
+    cursor.execute(<span style="color:#92400e;">"SELECT CURRENT_VERSION()"</span>)<br>
+    <span style="color:#0f766e;">print</span>(cursor.fetchone()[<span style="color:#92400e;">0</span>])
               </div>
             </div>
           </div>
@@ -614,60 +613,66 @@
         </section>
 
     <!-- ======================================================
-             SLIDE 9 — QUERIES AVANÇADAS
+             SLIDE 11 — AGENTE GEMINI + SNOWFLAKE
         ======================================================= -->
         <section>
-          <h2><span class="tag-snow">M5</span> Queries Avançadas no Snowflake</h2>
-          <div class="grid-2" style="margin-top:16px;">
+          <h2><span class="tag-snow">M5</span> Agente Gemini com Ferramentas Snowflake</h2>
+          <div class="grid-2" style="margin-top:8px;">
+    
+            <!-- Definição da ferramenta -->
             <div>
-              <h3>CTEs — organização de queries</h3>
-              <div class="caixa-codigo" style="font-size:0.73em;">
-    query = """<br>
-    WITH nulos_por_campo AS (<br>
-    &nbsp;&nbsp;SELECT<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;COUNT(*) AS total,<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;COUNT(cpf_cnpj) AS com_cpf,<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;COUNT(num_medidor) AS com_medidor,<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;COUNT(num_cep) AS com_cep<br>
-    &nbsp;&nbsp;FROM CONSUMIDORES_UC<br>
-    &nbsp;&nbsp;WHERE flg_ativo = TRUE<br>
-    ),<br>
-    pct_preenchimento AS (<br>
-    &nbsp;&nbsp;SELECT<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;ROUND(com_cpf / total * 100, 1)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AS pct_cpf,<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;ROUND(com_medidor / total * 100, 1)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AS pct_medidor<br>
-    &nbsp;&nbsp;FROM nulos_por_campo<br>
-    )<br>
-    SELECT * FROM pct_preenchimento;<br>
-    """<br>
-    df = pd.read_sql(query, conn)
+              <h3>1. Definir a ferramenta</h3>
+              <div class="caixa-codigo" style="font-size:0.63em; line-height:1.45;">
+    <span style="color:#1a6fa8; font-weight:bold;">def</span> <span style="color:#0f766e;">analisar_qualidade_amostra</span>(limite: <span style="color:#0f766e;">int</span> = 100) -&gt; dict:<br>
+    &nbsp;&nbsp;<span style="color:#92400e;">"""Analisa completude dos campos obrigatórios<br>
+    &nbsp;&nbsp;em uma amostra de consumidores."""</span><br>
+    &nbsp;&nbsp;query = <span style="color:#92400e;">f"""<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">SELECT</span> COUNT(*) AS TOTAL,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;SUM(CASE WHEN MEDIDOR_ID IS NULL<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;THEN 1 ELSE 0 END) AS SEM_MEDIDOR<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">FROM</span> TAB_CADASTRO<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">LIMIT</span> {limite}<br>
+    &nbsp;&nbsp;"""</span><br>
+    &nbsp;&nbsp;<span style="color:#0f766e;">df</span> = <span style="color:#0f766e;">read_sql_to_dataframe</span>(query)<br>
+    &nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#0f766e;">df</span>.iloc[0].to_dict()
               </div>
             </div>
+    
+            <!-- Loop do agente -->
             <div>
-              <h3>Window Functions — ranking de issues</h3>
-              <div class="caixa-codigo" style="font-size:0.73em;">
-    query_rank = """<br>
-    SELECT<br>
-    &nbsp;&nbsp;nom_municipio,<br>
-    &nbsp;&nbsp;COUNT(*) AS total_ucs,<br>
-    &nbsp;&nbsp;SUM(CASE WHEN cpf_cnpj IS NULL<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;THEN 1 ELSE 0 END) AS sem_cpf,<br>
-    &nbsp;&nbsp;ROUND(<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;SUM(CASE WHEN cpf_cnpj IS NULL<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;THEN 1 ELSE 0 END)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;/ COUNT(*) * 100, 1<br>
-    &nbsp;&nbsp;) AS pct_sem_cpf,<br>
-    &nbsp;&nbsp;RANK() OVER (<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;ORDER BY pct_sem_cpf DESC<br>
-    &nbsp;&nbsp;) AS ranking<br>
-    FROM CONSUMIDORES_UC<br>
-    GROUP BY nom_municipio<br>
-    ORDER BY ranking<br>
-    LIMIT 20;<br>
-    """
+              <h3>2. Loop do agente</h3>
+              <div class="caixa-codigo" style="font-size:0.63em; line-height:1.45;">
+    response = client.models.generate_content(<br>
+    &nbsp;&nbsp;model=<span style="color:#92400e;">"gemini-2.0-flash"</span>,<br>
+    &nbsp;&nbsp;contents=messages,<br>
+    &nbsp;&nbsp;config=types.GenerateContentConfig(<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;tools=TOOLS,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;temperature=0.1,<br>
+    &nbsp;&nbsp;),<br>
+    )<br><br>
+    <span style="color:#64748b;"># Gemini decide chamar a ferramenta</span><br>
+    fc = response.candidates[0].content.parts[0]<br>
+    resultado = TOOL_MAP[fc.function_call.name](<br>
+    &nbsp;&nbsp;**<span style="color:#0f766e;">dict</span>(fc.function_call.args)<br>
+    )
               </div>
+            </div>
+    
+          </div>
+    
+          <!-- Fluxo -->
+          <div style="margin-top:8px; background:#f1f5f9; border-left:5px solid #0ea5e9; padding:8px 20px; border-radius:0 6px 6px 0;">
+            <h4 style="margin:0 0 5px 0; font-size:0.72em; color:#0ea5e9; text-transform:uppercase; letter-spacing:0.05em; font-weight:800;">Fluxo de execução</h4>
+            <div style="display:flex; align-items:center; gap:8px; font-size:0.68em; color:#334155; flex-wrap:wrap;">
+              <span style="background:white; border:1px solid #e2e8f0; border-radius:6px; padding:4px 10px;">Pergunta</span>
+              <span style="color:#0ea5e9;">→</span>
+              <span style="background:white; border:1px solid #e2e8f0; border-radius:6px; padding:4px 10px;">Gemini decide tool</span>
+              <span style="color:#0ea5e9;">→</span>
+              <span style="background:white; border:1px solid #29b5e8; border-radius:6px; padding:4px 10px; font-weight:bold;">Snowflake executa</span>
+              <span style="color:#0ea5e9;">→</span>
+              <span style="background:white; border:1px solid #e2e8f0; border-radius:6px; padding:4px 10px;">Resultado ao Gemini</span>
+              <span style="color:#0ea5e9;">→</span>
+              <span style="background:white; border:1px solid #e2e8f0; border-radius:6px; padding:4px 10px;">Resposta final</span>
             </div>
           </div>
         </section>
@@ -705,72 +710,37 @@
         </section>
 
     <!-- ======================================================
-             SLIDE 11 — PRÓXIMOS PASSOS
+             SLIDE 14 — AGRADECIMENTO
         ======================================================= -->
-        <section style="background:#f5f7fa;">
-          <div style="text-align:center; padding:20px 0;">
-            <div style="font-size:2.5em; margin-bottom:16px;">🎯</div>
-            <h2 style="font-size:1.6em;">Próximos Passos</h2>
-            <div class="grid-2" style="margin-top:20px; text-align:left;">
-              <div>
-                <div class="card">
-                  <h4>Curto prazo</h4>
-                  <ul style="margin:0; padding-left:16px;">
-                    <li>Completar todos os notebooks do curso</li>
-                    <li>Configurar Claude Code no seu PC</li>
-                    <li>Criar um CLAUDE.md para o seu projeto atual</li>
-                    <li>Executar a análise de qualidade no seu ambiente Snowflake</li>
-                  </ul>
-                </div>
-              </div>
-              <div>
-                <div class="card">
-                  <h4>Médio prazo</h4>
-                  <ul style="margin:0; padding-left:16px;">
-                    <li>Automatizar o pipeline de qualidade (agendamento)</li>
-                    <li>Integrar com dashboards Power BI ou Streamlit</li>
-                    <li>Expandir para validações com great-expectations</li>
-                    <li>Criar alertas automáticos via e-mail/Teams</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="caixa-info" style="margin-top:18px; font-size:0.82em; text-align:left; max-width:700px; margin-left:auto; margin-right:auto;">
-              <strong>Recursos adicionais:</strong> docs.anthropic.com · snowflake.com/developers · pandas.pydata.org · plotly.com/python
-            </div>
-            <p style="font-size:0.75em; color:#94a3b8; margin-top:20px;">
-              Obrigado! Dúvidas? Use o Claude Code para perguntar. 😄
-            </p>
-          </div>
-        </section>
-
-    <!-- ======================================================
-             SLIDE 14 — FINAL DA PARTE 2
-        ======================================================= -->
-        <section style="background: linear-gradient(135deg, #fafafa 0%, #f1f5f9 100%);">
-          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
-            
-            <div style="font-size: 3em; margin-bottom: 10px;">🏆</div>
-            <h2 style="font-size: 2.4em; color: #1e2a3a; margin: 0 0 10px 0; font-weight: 800;">Parte 2 Concluída!</h2>
-            <p style="color:#5a6a7a; font-size: 1.1em; max-width: 700px; line-height: 1.4; margin: 0 0 30px 0;">
-              Você completou com sucesso os módulos de desenvolvimento estratégico e a implementação de fluxos de trabalho avançados com Snowflake.
-            </p>
+        <section>
+          <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding:30px 0; gap:32px;">
     
-            <div class="grid-2" style="gap: 40px; align-items: center; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-              <div style="text-align: left;">
-                <h3 style="color: #1a6fa8; margin-top: 0;">Sua avaliação</h3>
-                <p style="font-size: 0.9em; color: #334155; line-height: 1.5;">
-                  Sua opinião é fundamental para continuarmos melhorando o curso. <br><br>
-                  Acesse o formulário e responda:<br>
-                  <strong>"Qual seu grau de satisfação com a Parte 2 do curso?"</strong>
-                </p>
-                <p style="font-size: 0.8em; color: #64748b; margin-top: 15px;">
-                  Escala de 1 (Muito Insatisfeito) a 5 (Muito Satisfeito).
-                </p>
+            <!-- Logo -->
+            <img src="../../images/t2t_logo.webp" alt="Logo T2T" style="max-height:200px; width:auto; object-fit:contain;">
+    
+            <!-- Mensagem -->
+            <div style="text-align:center;">
+              <h1 style="font-size:2.4em; margin:0 0 0.15em 0; color:#1e2a3a; font-weight:800;">Obrigado!</h1>
+              <p style="font-size:0.95em; color:#5a6a7a; margin:0 0 0.4em 0; line-height:1.5;">
+                Foi um prazer construir isso com vocês.
+              </p>
+            </div>
+    
+            <!-- Contato -->
+            <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+              <div style="background:white; border:1px solid #e2e8f0; border-top:4px solid #1a6fa8; border-radius:10px; padding:14px 22px; text-align:center; min-width:180px;">
+                <span style="display:block; font-size:0.65em; color:#1a6fa8; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:5px;">Instrutor</span>
+                <span style="font-size:0.9em; font-weight:700; color:#1e2a3a;">Vinicius Tertulino Parede</span>
+                <span style="display:block; font-size:0.68em; color:#64748b; margin-top:3px;">Engenheiro Eletricista</span>
               </div>
-              <div style="text-align: center;">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://forms.office.com/r/iPNssDMPR8" alt="QR Code Feedback" style="border: 4px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 180px; height: 180px;">
-                <p style="font-size: 0.5em; color: #94a3b8; margin-top: 10px; font-family: monospace; word-break: break-all; max-width: 200px;">forms.office.com/r/iPNssDMPR8</p>
+              <div style="background:white; border:1px solid #e2e8f0; border-top:4px solid #7c3aed; border-radius:10px; padding:14px 22px; text-align:center; min-width:180px;">
+                <span style="display:block; font-size:0.65em; color:#7c3aed; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:5px;">Empresa</span>
+                <span style="font-size:0.9em; font-weight:700; color:#1e2a3a;">Tech2Think</span>
+                <span style="display:block; font-size:0.68em; color:#64748b; margin-top:3px;">tech2think.com.br</span>
+              </div>
+              <div style="background:white; border:1px solid #e2e8f0; border-top:4px solid #16a34a; border-radius:10px; padding:14px 22px; text-align:center; min-width:180px;">
+                <span style="display:block; font-size:0.65em; color:#16a34a; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:5px;">Código Fonte</span>
+                <span style="font-size:0.78em; font-weight:700; color:#1e2a3a; font-family:monospace;">github.com/tech2think<br>/python-learning</span>
               </div>
             </div>
     

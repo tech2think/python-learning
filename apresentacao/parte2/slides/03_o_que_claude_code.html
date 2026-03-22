@@ -1,0 +1,52 @@
+<!-- ======================================================
+         SLIDE 2 — O QUE É CLAUDE CODE?
+    ======================================================= -->
+    <section>
+      <h2>O que é Claude Code?</h2>
+      <div class="grid-2" style="margin-top:18px;">
+        <div>
+          <div class="caixa-info">
+            <strong>Claude Code</strong> é uma ferramenta de linha de comando da Anthropic que integra o modelo Claude diretamente ao terminal e ao seu editor de código.
+          </div>
+          <div class="caixa-info" style="margin-top:12px;">
+            Ele lê e escreve arquivos, executa comandos, entende o contexto do seu projeto e <span class="destaque-roxo">colabora como um desenvolvedor experiente</span> — mas você mantém o controle total.
+          </div>
+          <div class="caixa-aviso" style="margin-top:12px;">
+            Diferente de autocompletar de IDE: Claude Code <strong>entende o projeto inteiro</strong> e pode refatorar, documentar e gerar testes de forma contextual.
+          </div>
+        </div>
+        <div>
+          <div class="card" style="padding: 0; overflow: hidden; border: 1px solid #1e2a3a; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+            <!-- Terminal Header -->
+            <div style="background: #1e2a3a; padding: 8px 12px; display: flex; gap: 6px; align-items: center;">
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
+              <span style="color: #94a3b8; font-family: monospace; font-size: 0.6em; margin-left: 10px;">bash — claude code</span>
+            </div>
+            <!-- Terminal Body -->
+            <div style="background: #0f172a; padding: 20px; font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 0.65em; line-height: 1.5; text-align: left;">
+              <div style="color: #94a3b8;">$ claude "refactor this data pipeline"</div>
+              <div style="color: #38bdf8; margin-top: 10px;">[Claude Thinking...]</div>
+              <div style="color: #f8fafc; margin-top: 5px;">I'll analyze the project structure...</div>
+              <div style="color: #27c93f; margin-top: 5px;">✓ Found 3 related files in /src</div>
+              <div style="color: #27c93f;">✓ Running tests... (12/12 passed)</div>
+              <div style="color: #f8fafc; margin-top: 10px;">I've prepared a plan to optimize the Snowflake connection. Shall I proceed? (y/n)</div>
+              <div style="color: #fbbf24; margin-top: 10px;">[PROPOSED CHANGES]</div>
+              <div style="color: #94a3b8;">+ import snowflake.connector</div>
+              <div style="color: #94a3b8;">- old_connection_method()</div>
+              <div style="color: #27c93f;">+ new_optimized_pool()</div>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 15px;">
+            <h4>Casos de uso para analistas</h4>
+            <ul style="margin:0; padding-left:18px; font-size: 0.75em;">
+              <li>Gerar queries SQL para Snowflake</li>
+              <li>Criar funções de validação de dados de UC</li>
+              <li>Documentar pipelines automaticamente</li>
+              <li>Refatorar notebooks em scripts produtivos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>

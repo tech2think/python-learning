@@ -1,0 +1,54 @@
+<!-- ======================================================
+         SLIDE 4 — INSTALAÇÃO NODE.JS
+    ======================================================= -->
+    <section>
+      <h2><span class="tag-modulo">M4</span> Pré-requisito: Instalando o Node.js</h2>
+      <div class="grid-2" style="margin-top:18px;">
+        <div>
+          <div class="caixa-info">
+            Tanto o <strong>Claude Code</strong> quanto o <strong>Gemini CLI</strong> são ferramentas desenvolvidas em JavaScript/TypeScript e distribuídas como pacotes do Node.js (via <code>npm</code>).
+          </div>
+          <div style="margin-top:15px;">
+            <h3 style="font-size: 1.1em; color: #1e2a3a; margin-bottom: 8px;">Por que precisamos disso?</h3>
+            <ul style="font-size: 0.85em; color: #5a6a7a; padding-left: 18px; margin: 0; line-height: 1.5;">
+              <li>O <strong>Node.js</strong> é o motor que executa o código dessas ferramentas no seu computador, fora do navegador.</li>
+              <li>O <strong>NPM</strong> (Node Package Manager) é o instalador automático, que baixa a IA e todas as suas dependências.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="card" style="padding: 15px;">
+            <h4 style="margin: 0 0 10px 0; color: #1a6fa8; font-size: 1em; display: flex; align-items: center; gap: 6px;">
+              Passo a Passo
+            </h4>
+            
+            <div style="margin-bottom: 12px;">
+              <strong style="font-size: 0.8em; color: #1e2a3a;">1. Windows / macOS</strong>
+              <div style="font-size: 0.75em; color: #5a6a7a; margin-top: 4px;">
+                Acesse <a href="https://nodejs.org/" target="_blank" style="color: #7c3aed; text-decoration: none; font-weight: bold;">nodejs.org</a> e baixe a versão <strong>LTS (Long Term Support)</strong>. Siga o instalador padrão (Next, Next, Finish).
+              </div>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+              <strong style="font-size: 0.8em; color: #1e2a3a;">2. Linux (Debian/Ubuntu)</strong>
+              <div class="caixa-codigo" style="font-size: 0.7em; margin-top: 6px; padding: 8px;">
+<span style="color:#7c3aed;"># Instale o NVM (Node Version Manager)</span><br>
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash<br><br>
+<span style="color:#7c3aed;"># Instale a versão mais recente LTS</span><br>
+nvm install --lts
+              </div>
+            </div>
+
+            <div>
+              <strong style="font-size: 0.8em; color: #1e2a3a;">3. Verificar Instalação</strong>
+              <div class="caixa-codigo" style="font-size: 0.7em; margin-top: 6px; padding: 8px;">
+node -v  <span style="color:#94a3b8;"># Exemplo: v20.11.0</span><br>
+npm -v   <span style="color:#94a3b8;"># Exemplo: 10.2.4</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>

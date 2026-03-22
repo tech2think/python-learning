@@ -1,0 +1,85 @@
+-- SEMPRE QUE TEMOS MSLINK_INS NAO TEMOS MSLINK_TR E VICE VERSA
+-- EXEMPLO DE MSLINK_INS = 3166070
+-- EXEMPLO DE MSLINK_TR = 8563960
+-- EXEMPLO DE MSLINK_TR = 15146739
+SELECT 
+    NO_ID,
+    CR_NUMERO,
+    MSLINK_TR,
+    MSLINK_INS
+FROM EQTLINFO_RAW.MAPA_PA.CONSUMIDOR CONSUMIDOR 
+-- ORDER BY RANDOM()
+-- LIMIT 100;
+WHERE CR_NUMERO = 2004054;
+
+--- UM CONSUMIDOR EXEMPLO 2000735271
+-- SE CONECTA A SOMENTE UM NO NA REDE 
+-- NESSE CASO NO_ID = 12948812
+-- MAS UM NO PODE TER N OUTROS NOS (GRAFO)
+SELECT
+    TRC_DATA_INSTALACAO,
+    MSLINK,
+    NO_ID_DE,
+    NO_ID_PA,
+    OBJECTID,
+    TRC_COMPRIMENTO,  -- comprimento do segmento de NO_ID_DE até NO_ID_PA (metros)
+    TRC_NIVEL         -- nível do trecho: indica se a rede é ascendente ou não
+FROM
+    EQTLINFO_RAW.MAPA_PA.TRECHO_DE_REDE
+WHERE
+    NO_ID_DE = 12854320;
+
+
+-- NESSE CASO ELE TEM O MSLINK 15146739
+SELECT 
+    MSLINK,
+    MSLINK_CHAVE_PAI,
+    MSLINK_TR,
+    NO_ID,
+    AL_ID,
+    TB_IN_ID,
+    OBJECTID
+FROM
+    EQTLINFO_RAW.MAPA_PA.INSTALACAO
+
+WHERE
+    -- ESSE É O MSLINK DA TABELA DE NO
+    --MSLINK_TR = 15054484;
+    -- ESSE É O MESLINK_TR DO CONSUMIDOR
+    --MSLINK_TR = 15054468;
+    NO_ID = 12854320;
+
+
+SELECT
+    INSTALACAO_ID,
+    INSTALACAO_CHAVE_PAI_ID,
+    TRECHO_OPERACAO_ID,
+    IOP_NUM,
+    CONJUNTO_ID
+    PONTO_OPERACAO_ID_DE,
+    PONTO_OPERACAO_ID_PARA,
+    OBJECTID
+FROM
+    EQTLINFO_RAW.OPER_PA.INSTALACAO_OPERACAO 
+WHERE INSTALACAO_ID = '3174504.00';
+
+SELECT 
+    CR_NUMERO,
+    INSTALACAO_ID,
+    CON_MEDIDOR,
+    TRECHO_SECUNDARIA_ID,
+    CONTA_CONTRATO
+FROM
+    EQTLINFO_RAW.OPER_PA.CONSUMIDOR 
+WHERE
+    CR_NUMERO = '2004054.00';
+
+
+select * from eqtlinfo_raw.mapa_pa.instalacao;
+select distinct 
+    tb_in_id, 
+    tb_in_descricao 
+from eqtlinfo_raw.mapa_pa.tipo_de_instalacao limit 100;
+select * from eqtlinfo_raw.mapa_pa.no;
+select * from eqtlinfo_raw.mapa_pa.trecho_de_rede;
+select * from eqtlinfo_raw.mapa_pa.consumidor

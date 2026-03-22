@@ -6,38 +6,38 @@
       <div class="grid-2" style="margin-top:14px;">
         <div>
           <h3>Score de qualidade por registro</h3>
-          <div class="caixa-codigo">
-def score_qualidade(row) -&gt; float:<br>
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+<span style="color:#1a6fa8; font-weight:bold;">def</span> <span style="color:#0f766e;">score_qualidade</span>(row) -&gt; <span style="color:#0f766e;">float</span>:<br>
 &nbsp;&nbsp;campos = [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;'nom_consumidor', 'cpf_cnpj',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;'cod_modalidade_tarifaria',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;'nom_municipio', 'num_cep',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;'num_medidor', 'dat_ultima_leitura'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#92400e;">'nom_consumidor'</span>, <span style="color:#92400e;">'cpf_cnpj'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#92400e;">'cod_modalidade_tarifaria'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#92400e;">'nom_municipio'</span>, <span style="color:#92400e;">'num_cep'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#92400e;">'num_medidor'</span>, <span style="color:#92400e;">'dat_ultima_leitura'</span><br>
 &nbsp;&nbsp;]<br>
-&nbsp;&nbsp;preenchidos = sum(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;1 for c in campos<br>
-&nbsp;&nbsp;&nbsp;&nbsp;if pd.notna(row[c]) and row[c] != ''<br>
+&nbsp;&nbsp;preenchidos = <span style="color:#0f766e;">sum</span>(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#92400e;">1</span> <span style="color:#1a6fa8; font-weight:bold;">for</span> c <span style="color:#1a6fa8; font-weight:bold;">in</span> campos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">if</span> <span style="color:#0f766e;">pd</span>.notna(row[c]) <span style="color:#1a6fa8; font-weight:bold;">and</span> row[c] != <span style="color:#92400e;">''</span><br>
 &nbsp;&nbsp;)<br>
-&nbsp;&nbsp;return round(preenchidos / len(campos), 2)<br><br>
-df['score_qualidade'] = df.apply(<br>
-&nbsp;&nbsp;score_qualidade, axis=1<br>
+&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#0f766e;">round</span>(preenchidos / <span style="color:#0f766e;">len</span>(campos), <span style="color:#92400e;">2</span>)<br><br>
+<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'score_qualidade'</span>] = <span style="color:#0f766e;">df</span>.apply(<br>
+&nbsp;&nbsp;<span style="color:#0f766e;">score_qualidade</span>, axis=<span style="color:#92400e;">1</span><br>
 )
           </div>
         </div>
         <div>
           <h3>Dimensões de qualidade</h3>
-          <div class="caixa-codigo">
-<span style="color:#7c3aed;"># Completude (%)</span><br>
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+<span style="color:#64748b;"># Completude (%)</span><br>
 completude = (<br>
-&nbsp;&nbsp;df['nom_consumidor'].notna().mean() * 100<br>
+&nbsp;&nbsp;<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'nom_consumidor'</span>].notna().mean() * <span style="color:#92400e;">100</span><br>
 )<br><br>
-<span style="color:#7c3aed;"># Unicidade (Duplicatas)</span><br>
+<span style="color:#64748b;"># Unicidade (Duplicatas)</span><br>
 duplicados = (<br>
-&nbsp;&nbsp;df.duplicated(subset=['cod_consumidor']).sum()<br>
+&nbsp;&nbsp;<span style="color:#0f766e;">df</span>.duplicated(subset=[<span style="color:#92400e;">'cod_consumidor'</span>]).<span style="color:#0f766e;">sum</span>()<br>
 )<br><br>
-<span style="color:#7c3aed;"># Consistência</span><br>
+<span style="color:#64748b;"># Consistência</span><br>
 consistente = (<br>
-&nbsp;&nbsp;df['cod_classe_consumo'].isin(['RES', 'IND', 'COM'])<br>
+&nbsp;&nbsp;<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'cod_classe_consumo'</span>].isin([<span style="color:#92400e;">'RES'</span>, <span style="color:#92400e;">'IND'</span>, <span style="color:#92400e;">'COM'</span>])<br>
 )
           </div>
         </div>

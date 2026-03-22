@@ -5,13 +5,12 @@
       <h2>Boas Práticas — Desenvolvimento com IA</h2>
       <div class="grid-2" style="margin-top:18px;">
         <div>
-          <h3>Com Claude Code</h3>
-          <ul style="font-size:0.83em;">
-            <li>Mantenha o <code>CLAUDE.md</code> atualizado com o contexto do projeto</li>
-            <li>Revise <strong>todo</strong> código gerado antes de executar</li>
-            <li>Use o Claude para explicar, não apenas para gerar</li>
-            <li>Versione os prompts e skills junto com o código</li>
-            <li>Documente o que o Claude gerou nos commits</li>
+          <h3>Com IA / Agentes (Claude & Gemini)</h3>
+          <ul style="font-size:0.83em; line-height: 1.4; gap: 8px; display: flex; flex-direction: column;">
+            <li><strong>Evite o "Vibe Coding":</strong> Não peça para a IA codar logo de cara. Exija o fluxo: Explore (leia arquivos) → Planeje (proponha solução) → Implemente.</li>
+            <li><strong>O Padrão "Documentar e Limpar":</strong> Sessões longas fazem a IA alucinar. Peça para a IA resumir o progresso num arquivo <code>.md</code>, use <code>/clear</code> (zere a memória) e retome a partir do documento.</li>
+            <li><strong>Revisão Cruzada (Multi-Agente):</strong> A mesma sessão que escreveu o código é ruim para revisá-lo. Abra um terminal fresco para revisar o PR de forma crítica.</li>
+            <li><strong>CLAUDE.md:</strong> Mantenha-o enxuto (max 200 linhas). Documente nele os erros que a IA costuma repetir no seu projeto.</li>
           </ul>
         </div>
         <div>

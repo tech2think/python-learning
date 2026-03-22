@@ -6,33 +6,33 @@
       <div class="grid-2" style="margin-top:16px;">
         <div>
           <h3>Lendo o cadastro de consumidores</h3>
-          <div class="caixa-codigo">
-import pandas as pd<br><br>
-df = pd.read_csv("dados/consumidores_simulado.csv")<br><br>
-<span style="color:#7c3aed;"># Exploração básica</span><br>
-print(df.shape)        <span style="color:#94a3b8;"># (50, 12)</span><br>
-df.head()              <span style="color:#94a3b8;"># primeiras 5 linhas</span><br>
-df.info()              <span style="color:#94a3b8;"># tipos e nulos</span><br>
-df.describe()          <span style="color:#94a3b8;"># estatísticas</span><br><br>
-<span style="color:#7c3aed;"># Verificar nulos</span><br>
-df.isnull().sum()
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+<span style="color:#1a6fa8; font-weight:bold;">import</span> <span style="color:#0f766e;">pandas</span> <span style="color:#1a6fa8; font-weight:bold;">as</span> <span style="color:#0f766e;">pd</span><br><br>
+<span style="color:#0f766e;">df</span> = <span style="color:#0f766e;">pd</span>.read_csv(<span style="color:#92400e;">"dados/consumidores_simulado.csv"</span>)<br><br>
+<span style="color:#64748b;"># Exploração básica</span><br>
+<span style="color:#0f766e;">print</span>(<span style="color:#0f766e;">df</span>.shape)        <span style="color:#64748b;"># (50, 12)</span><br>
+<span style="color:#0f766e;">df</span>.head()              <span style="color:#64748b;"># primeiras 5 linhas</span><br>
+<span style="color:#0f766e;">df</span>.info()              <span style="color:#64748b;"># tipos e nulos</span><br>
+<span style="color:#0f766e;">df</span>.describe()          <span style="color:#64748b;"># estatísticas</span><br><br>
+<span style="color:#64748b;"># Verificar nulos</span><br>
+<span style="color:#0f766e;">df</span>.isnull().<span style="color:#0f766e;">sum</span>()
           </div>
         </div>
         <div>
           <h3>Filtros e agrupamentos</h3>
-          <div class="caixa-codigo">
-<span style="color:#7c3aed;"># Filtrar ativos</span><br>
-ativos = df[df['flg_ativo'] == True]<br><br>
-<span style="color:#7c3aed;"># Consumidores B1 com consumo &gt; 300</span><br>
-altos = df[<br>
-&nbsp;&nbsp;(df['cod_modalidade_tarifaria'] == 'B1')<br>
-&nbsp;&nbsp;&amp; (df['vlr_consumo_medio_kwh'] &gt; 300)<br>
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+<span style="color:#64748b;"># Filtrar ativos</span><br>
+ativos = <span style="color:#0f766e;">df</span>[<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'flg_ativo'</span>] == <span style="color:#1a6fa8; font-weight:bold;">True</span>]<br><br>
+<span style="color:#64748b;"># Consumidores B1 com consumo &gt; 300</span><br>
+altos = <span style="color:#0f766e;">df</span>[<br>
+&nbsp;&nbsp;(<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'cod_modalidade_tarifaria'</span>] == <span style="color:#92400e;">'B1'</span>)<br>
+&nbsp;&nbsp;&amp; (<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'vlr_consumo_medio_kwh'</span>] &gt; <span style="color:#92400e;">300</span>)<br>
 ]<br><br>
-<span style="color:#7c3aed;"># Agrupamento por classe</span><br>
-df.groupby('cod_classe_consumo')\<br>
-&nbsp;&nbsp;['vlr_consumo_medio_kwh']\<br>
-&nbsp;&nbsp;.agg(['mean', 'count', 'sum'])\<br>
-&nbsp;&nbsp;.round(2)
+<span style="color:#64748b;"># Agrupamento por classe</span><br>
+<span style="color:#0f766e;">df</span>.groupby(<span style="color:#92400e;">'cod_classe_consumo'</span>)\<br>
+&nbsp;&nbsp;[<span style="color:#92400e;">'vlr_consumo_medio_kwh'</span>]\<br>
+&nbsp;&nbsp;.agg([<span style="color:#92400e;">'mean'</span>, <span style="color:#92400e;">'count'</span>, <span style="color:#92400e;">'sum'</span>])\<br>
+&nbsp;&nbsp;.<span style="color:#0f766e;">round</span>(<span style="color:#92400e;">2</span>)
           </div>
         </div>
       </div>

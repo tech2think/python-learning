@@ -6,33 +6,33 @@
       <div class="grid-2" style="margin-top:16px;">
         <div>
           <h3>Classificação tarifária (if/elif)</h3>
-          <div class="caixa-codigo">
-def classificar_tarifa(consumo_kwh):<br>
-&nbsp;&nbsp;if consumo_kwh &lt;= 30:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return "Baixa Renda"<br>
-&nbsp;&nbsp;elif consumo_kwh &lt;= 100:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 1"<br>
-&nbsp;&nbsp;elif consumo_kwh &lt;= 220:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 2"<br>
-&nbsp;&nbsp;else:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 3"<br><br>
-print(classificar_tarifa(342))
-<span style="color:#16a34a;"># → "Faixa 3"</span>
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+<span style="color:#1a6fa8; font-weight:bold;">def</span> <span style="color:#0f766e;">classificar_tarifa</span>(consumo_kwh):<br>
+&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">if</span> consumo_kwh &lt;= <span style="color:#92400e;">30</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#92400e;">"Baixa Renda"</span><br>
+&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">elif</span> consumo_kwh &lt;= <span style="color:#92400e;">100</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#92400e;">"Faixa 1"</span><br>
+&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">elif</span> consumo_kwh &lt;= <span style="color:#92400e;">220</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#92400e;">"Faixa 2"</span><br>
+&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">else</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#92400e;">"Faixa 3"</span><br><br>
+<span style="color:#0f766e;">print</span>(<span style="color:#0f766e;">classificar_tarifa</span>(<span style="color:#92400e;">342</span>))<br>
+<span style="color:#64748b;"># → "Faixa 3"</span>
           </div>
         </div>
         <div>
           <h3>Iteração sobre leituras (for)</h3>
-          <div class="caixa-codigo">
-leituras = [310, 325, 342, None, 315]<br><br>
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+leituras = [<span style="color:#92400e;">310</span>, <span style="color:#92400e;">325</span>, <span style="color:#92400e;">342</span>, <span style="color:#1a6fa8; font-weight:bold;">None</span>, <span style="color:#92400e;">315</span>]<br><br>
 validas = []<br>
-for leitura in leituras:<br>
-&nbsp;&nbsp;if leitura is not None:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;validas.append(leitura)<br><br>
-<span style="color:#7c3aed;"># List comprehension — mais pythonico</span><br>
-validas = [x for x in leituras<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if x is not None]<br><br>
-media = sum(validas) / len(validas)<br>
-print(f"Média: {media:.1f} kWh")
+<span style="color:#1a6fa8; font-weight:bold;">for</span> leitura <span style="color:#1a6fa8; font-weight:bold;">in</span> leituras:<br>
+&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">if</span> leitura <span style="color:#1a6fa8; font-weight:bold;">is</span> <span style="color:#1a6fa8; font-weight:bold;">not</span> <span style="color:#1a6fa8; font-weight:bold;">None</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;validas.<span style="color:#0f766e;">append</span>(leitura)<br><br>
+<span style="color:#64748b;"># List comprehension — mais pythonico</span><br>
+validas = [x <span style="color:#1a6fa8; font-weight:bold;">for</span> x <span style="color:#1a6fa8; font-weight:bold;">in</span> leituras<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">if</span> x <span style="color:#1a6fa8; font-weight:bold;">is</span> <span style="color:#1a6fa8; font-weight:bold;">not</span> <span style="color:#1a6fa8; font-weight:bold;">None</span>]<br><br>
+media = <span style="color:#0f766e;">sum</span>(validas) / <span style="color:#0f766e;">len</span>(validas)<br>
+<span style="color:#0f766e;">print</span>(f<span style="color:#92400e;">"Média: {media:.1f} kWh"</span>)
           </div>
         </div>
       </div>

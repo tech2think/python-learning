@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
   <style>
     :root {
-      --bg: #fafafa;
+      --bg: #e8f3fb;
       --bg-soft: #f1f5f9;
       --text-primary: #1e2a3a;
       --text-secondary: #5a6a7a;
@@ -23,7 +23,7 @@
       --r-heading-color: #1e2a3a;
       --r-main-color: #1e2a3a;
       --r-link-color: #1a6fa8;
-      --r-background-color: #fafafa;
+      --r-background-color: #e8f3fb;
     }
 
     .reveal .slides section {
@@ -450,10 +450,10 @@
             <div style="display:flex; flex-direction:column; gap:20px;">
               <div style="background: white; padding: 22px; border-radius: 12px; border: 1px solid #e2e8f0; border-top: 5px solid #1a6fa8; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
                 <h4 style="color:#1a6fa8; margin: 0 0 12px 0; font-size: 1.1em; display:flex; align-items:center; gap:10px;">
-                  Objetivo Central
+                  Objetivo
                 </h4>
                 <p style="font-size:0.85em; margin:0; line-height:1.6; color: #334155;">
-                  Capacitar analistas e engenheiros do <span class="destaque">setor elétrico</span> a utilizar Python para automatizar processos, garantindo a <span class="destaque">qualidade de dados</span> e gerando insights estratégicos.
+                  Introduzir Python de forma prática para profissionais do <span class="destaque">setor elétrico</span> — do básico até automação de análises e <span class="destaque">qualidade de dados</span> integrada ao ambiente corporativo.
                 </p>
               </div>
     
@@ -543,7 +543,7 @@
           <div class="grid-2" style="margin-top:16px;">
             <div>
               <h3>Passo 1 — Instalar o uv</h3>
-              <div class="caixa-codigo">
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
     <span style="color:#0ea5e9;"># Linux / Mac</span><br>
     curl -LsSf https://astral.sh/uv/install.sh | sh<br><br>
     <span style="color:#0ea5e9;"># Windows (PowerShell)</span><br>
@@ -588,7 +588,7 @@
             <h2 style="font-size: 2.8em; color: #1e2a3a; margin: 0 0 20px 0; font-weight: 800;">Fundamentos Python</h2>
             <div style="width: 80px; height: 4px; background: #1a6fa8; border-radius: 2px; margin-bottom: 25px;"></div>
             <p style="color:#5a6a7a; font-size: 1.15em; max-width: 700px; line-height: 1.6; margin: 0;">
-              Construindo a base sólida necessária para automação e análise de dados no setor elétrico.
+              Construindo a base sólida necessária para automação e análise de dados.
             </p>
           </div>
         </section>
@@ -601,24 +601,24 @@
           <div class="grid-2" style="margin-top:16px;">
             <div>
               <h3>Tipos Numéricos</h3>
-              <div class="caixa-codigo">
-    <span style="color:#7c3aed;"># Inteiros (int) — contagens, códigos</span><br>
-    cod_consumidor = 100042<br>
-    tensao_nominal = 220  <span style="color:#94a3b8;"># Volts</span><br><br>
-    <span style="color:#7c3aed;"># Ponto Flutuante (float) — medições, valores</span><br>
-    consumo_kwh = 342.7<br>
-    fator_potencia = 0.92
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#64748b;"># Inteiros (int) — contagens, códigos</span><br>
+    cod_consumidor = <span style="color:#92400e;">100042</span><br>
+    tensao_nominal = <span style="color:#92400e;">220</span>  <span style="color:#64748b;"># Volts</span><br><br>
+    <span style="color:#64748b;"># Ponto Flutuante (float) — medições, valores</span><br>
+    consumo_kwh = <span style="color:#92400e;">342.7</span><br>
+    fator_potencia = <span style="color:#92400e;">0.92</span>
               </div>
             </div>
             <div>
               <h3>Textos e Lógicos</h3>
-              <div class="caixa-codigo">
-    <span style="color:#7c3aed;"># Textos (str) — nomes, categorias</span><br>
-    nome = "Maria Silva Santos"<br>
-    municipio = "São Paulo"<br><br>
-    <span style="color:#7c3aed;"># Booleanos (bool) — verdadeiro/falso</span><br>
-    ativo = True<br>
-    inadimplente = False
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#64748b;"># Textos (str) — nomes, categorias</span><br>
+    nome = <span style="color:#92400e;">"Maria Silva Santos"</span><br>
+    municipio = <span style="color:#92400e;">"São Paulo"</span><br><br>
+    <span style="color:#64748b;"># Booleanos (bool) — verdadeiro/falso</span><br>
+    ativo = <span style="color:#1a6fa8; font-weight:bold;">True</span><br>
+    inadimplente = <span style="color:#1a6fa8; font-weight:bold;">False</span>
               </div>
             </div>
           </div>
@@ -649,29 +649,29 @@
             <div>
               <h3>Listas (Sequências)</h3>
               <p style="font-size: 0.8em; color: #475569; margin-bottom: 10px;">Coleções ordenadas e mutáveis de itens.</p>
-              <div class="caixa-codigo">
-    <span style="color:#7c3aed;"># Criando uma lista de leituras</span><br>
-    leituras = [310, 325, 342, 298, 315]<br><br>
-    <span style="color:#7c3aed;"># Acessando o primeiro elemento (índice 0)</span><br>
-    primeira_leitura = leituras[0]<br><br>
-    <span style="color:#7c3aed;"># Adicionando um novo elemento</span><br>
-    leituras.append(330)
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#64748b;"># Criando uma lista de leituras</span><br>
+    leituras = [<span style="color:#92400e;">310</span>, <span style="color:#92400e;">325</span>, <span style="color:#92400e;">342</span>, <span style="color:#92400e;">298</span>, <span style="color:#92400e;">315</span>]<br><br>
+    <span style="color:#64748b;"># Acessando o primeiro elemento (índice 0)</span><br>
+    primeira_leitura = leituras[<span style="color:#92400e;">0</span>]<br><br>
+    <span style="color:#64748b;"># Adicionando um novo elemento</span><br>
+    leituras.<span style="color:#0f766e;">append</span>(<span style="color:#92400e;">330</span>)
               </div>
             </div>
             <div>
               <h3>Dicionários (Chave-Valor)</h3>
               <p style="font-size: 0.8em; color: #475569; margin-bottom: 10px;">Coleções de pares com chaves únicas.</p>
-              <div class="caixa-codigo">
-    <span style="color:#7c3aed;"># Criando um registro de UC</span><br>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#64748b;"># Criando um registro de UC</span><br>
     consumidor = {<br>
-    &nbsp;&nbsp;"cod": 100042,<br>
-    &nbsp;&nbsp;"nome": "Maria Silva",<br>
-    &nbsp;&nbsp;"classe": "B1",<br>
-    &nbsp;&nbsp;"consumo_kwh": 342.7,<br>
-    &nbsp;&nbsp;"ativo": True<br>
+    &nbsp;&nbsp;<span style="color:#92400e;">"cod"</span>: <span style="color:#92400e;">100042</span>,<br>
+    &nbsp;&nbsp;<span style="color:#92400e;">"nome"</span>: <span style="color:#92400e;">"Maria Silva"</span>,<br>
+    &nbsp;&nbsp;<span style="color:#92400e;">"classe"</span>: <span style="color:#92400e;">"B1"</span>,<br>
+    &nbsp;&nbsp;<span style="color:#92400e;">"consumo_kwh"</span>: <span style="color:#92400e;">342.7</span>,<br>
+    &nbsp;&nbsp;<span style="color:#92400e;">"ativo"</span>: <span style="color:#1a6fa8; font-weight:bold;">True</span><br>
     }<br><br>
-    <span style="color:#7c3aed;"># Acessando valores</span><br>
-    nome_cliente = consumidor["nome"]
+    <span style="color:#64748b;"># Acessando valores</span><br>
+    nome_cliente = consumidor[<span style="color:#92400e;">"nome"</span>]
               </div>
             </div>
           </div>
@@ -702,33 +702,33 @@
           <div class="grid-2" style="margin-top:16px;">
             <div>
               <h3>Classificação tarifária (if/elif)</h3>
-              <div class="caixa-codigo">
-    def classificar_tarifa(consumo_kwh):<br>
-    &nbsp;&nbsp;if consumo_kwh &lt;= 30:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return "Baixa Renda"<br>
-    &nbsp;&nbsp;elif consumo_kwh &lt;= 100:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 1"<br>
-    &nbsp;&nbsp;elif consumo_kwh &lt;= 220:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 2"<br>
-    &nbsp;&nbsp;else:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return "Faixa 3"<br><br>
-    print(classificar_tarifa(342))
-    <span style="color:#16a34a;"># → "Faixa 3"</span>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#1a6fa8; font-weight:bold;">def</span> <span style="color:#0f766e;">classificar_tarifa</span>(consumo_kwh):<br>
+    &nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">if</span> consumo_kwh &lt;= <span style="color:#92400e;">30</span>:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#92400e;">"Baixa Renda"</span><br>
+    &nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">elif</span> consumo_kwh &lt;= <span style="color:#92400e;">100</span>:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#92400e;">"Faixa 1"</span><br>
+    &nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">elif</span> consumo_kwh &lt;= <span style="color:#92400e;">220</span>:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#92400e;">"Faixa 2"</span><br>
+    &nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">else</span>:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#92400e;">"Faixa 3"</span><br><br>
+    <span style="color:#0f766e;">print</span>(<span style="color:#0f766e;">classificar_tarifa</span>(<span style="color:#92400e;">342</span>))<br>
+    <span style="color:#64748b;"># → "Faixa 3"</span>
               </div>
             </div>
             <div>
               <h3>Iteração sobre leituras (for)</h3>
-              <div class="caixa-codigo">
-    leituras = [310, 325, 342, None, 315]<br><br>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    leituras = [<span style="color:#92400e;">310</span>, <span style="color:#92400e;">325</span>, <span style="color:#92400e;">342</span>, <span style="color:#1a6fa8; font-weight:bold;">None</span>, <span style="color:#92400e;">315</span>]<br><br>
     validas = []<br>
-    for leitura in leituras:<br>
-    &nbsp;&nbsp;if leitura is not None:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;validas.append(leitura)<br><br>
-    <span style="color:#7c3aed;"># List comprehension — mais pythonico</span><br>
-    validas = [x for x in leituras<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if x is not None]<br><br>
-    media = sum(validas) / len(validas)<br>
-    print(f"Média: {media:.1f} kWh")
+    <span style="color:#1a6fa8; font-weight:bold;">for</span> leitura <span style="color:#1a6fa8; font-weight:bold;">in</span> leituras:<br>
+    &nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">if</span> leitura <span style="color:#1a6fa8; font-weight:bold;">is</span> <span style="color:#1a6fa8; font-weight:bold;">not</span> <span style="color:#1a6fa8; font-weight:bold;">None</span>:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;validas.<span style="color:#0f766e;">append</span>(leitura)<br><br>
+    <span style="color:#64748b;"># List comprehension — mais pythonico</span><br>
+    validas = [x <span style="color:#1a6fa8; font-weight:bold;">for</span> x <span style="color:#1a6fa8; font-weight:bold;">in</span> leituras<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">if</span> x <span style="color:#1a6fa8; font-weight:bold;">is</span> <span style="color:#1a6fa8; font-weight:bold;">not</span> <span style="color:#1a6fa8; font-weight:bold;">None</span>]<br><br>
+    media = <span style="color:#0f766e;">sum</span>(validas) / <span style="color:#0f766e;">len</span>(validas)<br>
+    <span style="color:#0f766e;">print</span>(f<span style="color:#92400e;">"Média: {media:.1f} kWh"</span>)
               </div>
             </div>
           </div>
@@ -754,49 +754,44 @@
         ======================================================= -->
         <section>
           <h2><span class="tag-modulo">M1</span> Funções</h2>
-          <div class="grid-2" style="margin-top:16px;">
+          <div class="grid-2" style="margin-top:8px;">
+    
+            <!-- Estrutura de uma função -->
             <div>
-              <h3>Cálculo do DEC</h3>
-              <div class="caixa-codigo">
-    def calcular_dec(interrupcoes: list) -&gt; float:<br>
-    &nbsp;&nbsp;"""<br>
-    &nbsp;&nbsp;Calcula o DEC (Duração Equivalente de<br>
-    &nbsp;&nbsp;Interrupção por Consumidor).<br><br>
-    &nbsp;&nbsp;Args:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;interrupcoes: lista de dicts com<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'duracao_h' e 'consumidores'<br>
-    &nbsp;&nbsp;Returns:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;DEC em horas<br>
-    &nbsp;&nbsp;"""<br>
-    &nbsp;&nbsp;total_ucs = interrupcoes[0]['total_ucs']<br>
-    &nbsp;&nbsp;soma = sum(<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;i['duracao_h'] * i['consumidores']<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;for i in interrupcoes<br>
-    &nbsp;&nbsp;)<br>
-    &nbsp;&nbsp;return round(soma / total_ucs, 4)
+              <h3>Estrutura</h3>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#1a6fa8; font-weight:bold;">def</span> <span style="color:#0f766e;">nome_da_funcao</span>(param1, param2):<br>
+    &nbsp;&nbsp;<span style="color:#92400e;">"""Descrição do que a função faz."""</span><br>
+    &nbsp;&nbsp;<span style="color:#64748b;"># lógica aqui</span><br>
+    &nbsp;&nbsp;resultado = param1 + param2<br>
+    &nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> resultado<br>
+    <br>
+    <span style="color:#64748b;"># chamando a função</span><br>
+    valor = nome_da_funcao(10, 20)<br>
+    <span style="color:#0f766e;">print</span>(valor)&nbsp;&nbsp;<span style="color:#64748b;"># 30</span>
               </div>
             </div>
+    
+            <!-- Exemplo real: DEC -->
             <div>
-              <h3>Validação de CPF</h3>
-              <div class="caixa-codigo">
-    import re<br><br>
-    def validar_cpf_formato(cpf: str) -&gt; bool:<br>
-    &nbsp;&nbsp;"""Valida formato do CPF."""<br>
-    &nbsp;&nbsp;cpf_limpo = re.sub(r'\D', '', cpf)<br>
-    &nbsp;&nbsp;return len(cpf_limpo) == 11<br><br>
-    def formatar_cpf(cpf: str) -&gt; str:<br>
-    &nbsp;&nbsp;"""Formata CPF: 12345678900 →<br>
-    &nbsp;&nbsp;123.456.789-00"""<br>
-    &nbsp;&nbsp;c = re.sub(r'\D', '', cpf)<br>
-    &nbsp;&nbsp;if len(c) != 11:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return cpf<br>
-    &nbsp;&nbsp;return f"{c[:3]}.{c[3:6]}.{c[6:9]}-{c[9:]}"
+              <h3>Exemplo — Cálculo do DEC</h3>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#1a6fa8; font-weight:bold;">def</span> <span style="color:#0f766e;">calcular_dec</span>(interrupcoes: list) -&gt; float:<br>
+    &nbsp;&nbsp;<span style="color:#92400e;">"""Calcula o DEC em horas.<br>
+    &nbsp;&nbsp;Args: lista de dicts com<br>
+    &nbsp;&nbsp;'duracao_h' e 'consumidores'."""</span><br>
+    &nbsp;&nbsp;total_ucs = interrupcoes[0][<span style="color:#92400e;">'total_ucs'</span>]<br>
+    &nbsp;&nbsp;soma = <span style="color:#0f766e;">sum</span>(<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;i[<span style="color:#92400e;">'duracao_h'</span>] * i[<span style="color:#92400e;">'consumidores'</span>]<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">for</span> i <span style="color:#1a6fa8; font-weight:bold;">in</span> interrupcoes<br>
+    &nbsp;&nbsp;)<br>
+    &nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#0f766e;">round</span>(soma / total_ucs, 4)
               </div>
             </div>
           </div>
     
           <!-- Notas sobre funções -->
-          <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+          <div style="margin-top: 8px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 8px 20px; border-radius: 0 6px 6px 0;">
             <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
               <ul style="margin: 0; padding-left: 18px;">
@@ -820,7 +815,7 @@
             <h2 style="font-size: 2.8em; color: #1e2a3a; margin: 0 0 20px 0; font-weight: 800;">Análise de Dados com Pandas</h2>
             <div style="width: 80px; height: 4px; background: #1a6fa8; border-radius: 2px; margin-bottom: 25px;"></div>
             <p style="color:#5a6a7a; font-size: 1.15em; max-width: 700px; line-height: 1.6; margin: 0;">
-              Leitura, limpeza e agregação de dados cadastrais de consumidores do setor elétrico.
+              Leitura, limpeza e agregação de dados.
             </p>
           </div>
         </section>
@@ -833,33 +828,33 @@
           <div class="grid-2" style="margin-top:16px;">
             <div>
               <h3>Lendo o cadastro de consumidores</h3>
-              <div class="caixa-codigo">
-    import pandas as pd<br><br>
-    df = pd.read_csv("dados/consumidores_simulado.csv")<br><br>
-    <span style="color:#7c3aed;"># Exploração básica</span><br>
-    print(df.shape)        <span style="color:#94a3b8;"># (50, 12)</span><br>
-    df.head()              <span style="color:#94a3b8;"># primeiras 5 linhas</span><br>
-    df.info()              <span style="color:#94a3b8;"># tipos e nulos</span><br>
-    df.describe()          <span style="color:#94a3b8;"># estatísticas</span><br><br>
-    <span style="color:#7c3aed;"># Verificar nulos</span><br>
-    df.isnull().sum()
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#1a6fa8; font-weight:bold;">import</span> <span style="color:#0f766e;">pandas</span> <span style="color:#1a6fa8; font-weight:bold;">as</span> <span style="color:#0f766e;">pd</span><br><br>
+    <span style="color:#0f766e;">df</span> = <span style="color:#0f766e;">pd</span>.read_csv(<span style="color:#92400e;">"dados/consumidores_simulado.csv"</span>)<br><br>
+    <span style="color:#64748b;"># Exploração básica</span><br>
+    <span style="color:#0f766e;">print</span>(<span style="color:#0f766e;">df</span>.shape)        <span style="color:#64748b;"># (50, 12)</span><br>
+    <span style="color:#0f766e;">df</span>.head()              <span style="color:#64748b;"># primeiras 5 linhas</span><br>
+    <span style="color:#0f766e;">df</span>.info()              <span style="color:#64748b;"># tipos e nulos</span><br>
+    <span style="color:#0f766e;">df</span>.describe()          <span style="color:#64748b;"># estatísticas</span><br><br>
+    <span style="color:#64748b;"># Verificar nulos</span><br>
+    <span style="color:#0f766e;">df</span>.isnull().<span style="color:#0f766e;">sum</span>()
               </div>
             </div>
             <div>
               <h3>Filtros e agrupamentos</h3>
-              <div class="caixa-codigo">
-    <span style="color:#7c3aed;"># Filtrar ativos</span><br>
-    ativos = df[df['flg_ativo'] == True]<br><br>
-    <span style="color:#7c3aed;"># Consumidores B1 com consumo &gt; 300</span><br>
-    altos = df[<br>
-    &nbsp;&nbsp;(df['cod_modalidade_tarifaria'] == 'B1')<br>
-    &nbsp;&nbsp;&amp; (df['vlr_consumo_medio_kwh'] &gt; 300)<br>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#64748b;"># Filtrar ativos</span><br>
+    ativos = <span style="color:#0f766e;">df</span>[<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'flg_ativo'</span>] == <span style="color:#1a6fa8; font-weight:bold;">True</span>]<br><br>
+    <span style="color:#64748b;"># Consumidores B1 com consumo &gt; 300</span><br>
+    altos = <span style="color:#0f766e;">df</span>[<br>
+    &nbsp;&nbsp;(<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'cod_modalidade_tarifaria'</span>] == <span style="color:#92400e;">'B1'</span>)<br>
+    &nbsp;&nbsp;&amp; (<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'vlr_consumo_medio_kwh'</span>] &gt; <span style="color:#92400e;">300</span>)<br>
     ]<br><br>
-    <span style="color:#7c3aed;"># Agrupamento por classe</span><br>
-    df.groupby('cod_classe_consumo')\<br>
-    &nbsp;&nbsp;['vlr_consumo_medio_kwh']\<br>
-    &nbsp;&nbsp;.agg(['mean', 'count', 'sum'])\<br>
-    &nbsp;&nbsp;.round(2)
+    <span style="color:#64748b;"># Agrupamento por classe</span><br>
+    <span style="color:#0f766e;">df</span>.groupby(<span style="color:#92400e;">'cod_classe_consumo'</span>)\<br>
+    &nbsp;&nbsp;[<span style="color:#92400e;">'vlr_consumo_medio_kwh'</span>]\<br>
+    &nbsp;&nbsp;.agg([<span style="color:#92400e;">'mean'</span>, <span style="color:#92400e;">'count'</span>, <span style="color:#92400e;">'sum'</span>])\<br>
+    &nbsp;&nbsp;.<span style="color:#0f766e;">round</span>(<span style="color:#92400e;">2</span>)
               </div>
             </div>
           </div>
@@ -885,10 +880,10 @@
         ======================================================= -->
         <section>
           <h2><span class="tag-modulo">M2</span> Limpeza de Dados de Consumidores</h2>
-          <div class="grid-2" style="margin-top:16px;">
+          <div class="grid-2" style="margin-top:8px;">
             <div>
               <h3>Problemas comuns no cadastro</h3>
-              <ul style="font-size:0.82em;">
+              <ul style="font-size:0.78em; line-height:1.4;">
                 <li>CPF/CNPJ com formatação inconsistente</li>
                 <li>Nomes em maiúsculas, minúsculas e misto</li>
                 <li>CEP sem zeros à esquerda</li>
@@ -897,34 +892,34 @@
                 <li>Campos obrigatórios vazios</li>
                 <li>Coordenadas geográficas ausentes</li>
               </ul>
-              <div class="caixa-info" style="margin-top:10px; font-size: 0.75em;">
-                <strong>Exemplos de Limpeza:</strong> Padronização de nomes de consumidores, saneamento de documentos (CPF/CNPJ) e remoção de registros duplicados em grandes bases cadastrais.
+              <div class="caixa-info" style="margin-top:8px; font-size: 0.72em;">
+                <strong>Exemplos de Limpeza:</strong> Padronização de nomes, saneamento de CPF/CNPJ e remoção de registros duplicados em grandes bases cadastrais.
               </div>
             </div>
             <div>
               <h3>Técnicas de limpeza</h3>
-              <div class="caixa-codigo">
-    <span style="color:#7c3aed;"># Normalizar nomes</span><br>
-    df['nom_consumidor'] = (<br>
-    &nbsp;&nbsp;df['nom_consumidor']<br>
-    &nbsp;&nbsp;.str.strip()<br>
-    &nbsp;&nbsp;.str.title()<br>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#64748b;"># Normalizar nomes</span><br>
+    <span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'nom_consumidor'</span>] = (<br>
+    &nbsp;&nbsp;<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'nom_consumidor'</span>]<br>
+    &nbsp;&nbsp;.<span style="color:#0f766e;">str</span>.strip()<br>
+    &nbsp;&nbsp;.<span style="color:#0f766e;">str</span>.title()<br>
     )<br><br>
-    <span style="color:#7c3aed;"># Limpar CPF/CNPJ</span><br>
-    df['cpf_cnpj'] = (<br>
-    &nbsp;&nbsp;df['cpf_cnpj']<br>
-    &nbsp;&nbsp;.str.replace(r'\D', '', regex=True)<br>
+    <span style="color:#64748b;"># Limpar CPF/CNPJ</span><br>
+    <span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'cpf_cnpj'</span>] = (<br>
+    &nbsp;&nbsp;<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'cpf_cnpj'</span>]<br>
+    &nbsp;&nbsp;.<span style="color:#0f766e;">str</span>.replace(r<span style="color:#92400e;">'\D'</span>, <span style="color:#92400e;">''</span>, regex=<span style="color:#1a6fa8; font-weight:bold;">True</span>)<br>
     )<br><br>
-    <span style="color:#7c3aed;"># Remover duplicatas</span><br>
-    df = df.drop_duplicates(<br>
-    &nbsp;&nbsp;subset=['cod_consumidor']<br>
+    <span style="color:#64748b;"># Remover duplicatas</span><br>
+    <span style="color:#0f766e;">df</span> = <span style="color:#0f766e;">df</span>.drop_duplicates(<br>
+    &nbsp;&nbsp;subset=[<span style="color:#92400e;">'cod_consumidor'</span>]<br>
     )
               </div>
             </div>
           </div>
     
           <!-- Notas sobre limpeza -->
-          <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+          <div style="margin-top: 6px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 7px 20px; border-radius: 0 6px 6px 0;">
             <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
               <ul style="margin: 0; padding-left: 18px;">
@@ -947,38 +942,38 @@
           <div class="grid-2" style="margin-top:14px;">
             <div>
               <h3>Score de qualidade por registro</h3>
-              <div class="caixa-codigo">
-    def score_qualidade(row) -&gt; float:<br>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#1a6fa8; font-weight:bold;">def</span> <span style="color:#0f766e;">score_qualidade</span>(row) -&gt; <span style="color:#0f766e;">float</span>:<br>
     &nbsp;&nbsp;campos = [<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;'nom_consumidor', 'cpf_cnpj',<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;'cod_modalidade_tarifaria',<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;'nom_municipio', 'num_cep',<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;'num_medidor', 'dat_ultima_leitura'<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#92400e;">'nom_consumidor'</span>, <span style="color:#92400e;">'cpf_cnpj'</span>,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#92400e;">'cod_modalidade_tarifaria'</span>,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#92400e;">'nom_municipio'</span>, <span style="color:#92400e;">'num_cep'</span>,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#92400e;">'num_medidor'</span>, <span style="color:#92400e;">'dat_ultima_leitura'</span><br>
     &nbsp;&nbsp;]<br>
-    &nbsp;&nbsp;preenchidos = sum(<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;1 for c in campos<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;if pd.notna(row[c]) and row[c] != ''<br>
+    &nbsp;&nbsp;preenchidos = <span style="color:#0f766e;">sum</span>(<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#92400e;">1</span> <span style="color:#1a6fa8; font-weight:bold;">for</span> c <span style="color:#1a6fa8; font-weight:bold;">in</span> campos<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">if</span> <span style="color:#0f766e;">pd</span>.notna(row[c]) <span style="color:#1a6fa8; font-weight:bold;">and</span> row[c] != <span style="color:#92400e;">''</span><br>
     &nbsp;&nbsp;)<br>
-    &nbsp;&nbsp;return round(preenchidos / len(campos), 2)<br><br>
-    df['score_qualidade'] = df.apply(<br>
-    &nbsp;&nbsp;score_qualidade, axis=1<br>
+    &nbsp;&nbsp;<span style="color:#1a6fa8; font-weight:bold;">return</span> <span style="color:#0f766e;">round</span>(preenchidos / <span style="color:#0f766e;">len</span>(campos), <span style="color:#92400e;">2</span>)<br><br>
+    <span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'score_qualidade'</span>] = <span style="color:#0f766e;">df</span>.apply(<br>
+    &nbsp;&nbsp;<span style="color:#0f766e;">score_qualidade</span>, axis=<span style="color:#92400e;">1</span><br>
     )
               </div>
             </div>
             <div>
               <h3>Dimensões de qualidade</h3>
-              <div class="caixa-codigo">
-    <span style="color:#7c3aed;"># Completude (%)</span><br>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#64748b;"># Completude (%)</span><br>
     completude = (<br>
-    &nbsp;&nbsp;df['nom_consumidor'].notna().mean() * 100<br>
+    &nbsp;&nbsp;<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'nom_consumidor'</span>].notna().mean() * <span style="color:#92400e;">100</span><br>
     )<br><br>
-    <span style="color:#7c3aed;"># Unicidade (Duplicatas)</span><br>
+    <span style="color:#64748b;"># Unicidade (Duplicatas)</span><br>
     duplicados = (<br>
-    &nbsp;&nbsp;df.duplicated(subset=['cod_consumidor']).sum()<br>
+    &nbsp;&nbsp;<span style="color:#0f766e;">df</span>.duplicated(subset=[<span style="color:#92400e;">'cod_consumidor'</span>]).<span style="color:#0f766e;">sum</span>()<br>
     )<br><br>
-    <span style="color:#7c3aed;"># Consistência</span><br>
+    <span style="color:#64748b;"># Consistência</span><br>
     consistente = (<br>
-    &nbsp;&nbsp;df['cod_classe_consumo'].isin(['RES', 'IND', 'COM'])<br>
+    &nbsp;&nbsp;<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'cod_classe_consumo'</span>].isin([<span style="color:#92400e;">'RES'</span>, <span style="color:#92400e;">'IND'</span>, <span style="color:#92400e;">'COM'</span>])<br>
     )
               </div>
             </div>
@@ -1022,47 +1017,47 @@
           <div class="grid-3" style="margin-top:18px;">
             <div class="card">
               <h4>matplotlib — Barras</h4>
-              <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
-    import matplotlib.pyplot as plt<br><br>
-    classes = df.groupby(<br>
-    &nbsp;&nbsp;'cod_classe_consumo'<br>
-    )['cod_consumidor'].count()<br><br>
-    classes.plot(kind='bar',<br>
-    &nbsp;&nbsp;color='steelblue',<br>
-    &nbsp;&nbsp;title='Consumidores<br>&nbsp;&nbsp;por Classe')<br>
-    plt.tight_layout()<br>
-    plt.show()
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5; padding:8px;">
+    <span style="color:#1a6fa8; font-weight:bold;">import</span> matplotlib.pyplot <span style="color:#1a6fa8; font-weight:bold;">as</span> <span style="color:#0f766e;">plt</span><br><br>
+    classes = <span style="color:#0f766e;">df</span>.groupby(<br>
+    &nbsp;&nbsp;<span style="color:#92400e;">'cod_classe_consumo'</span><br>
+    )[<span style="color:#92400e;">'cod_consumidor'</span>].count()<br><br>
+    classes.plot(kind=<span style="color:#92400e;">'bar'</span>,<br>
+    &nbsp;&nbsp;color=<span style="color:#92400e;">'steelblue'</span>,<br>
+    &nbsp;&nbsp;title=<span style="color:#92400e;">'Consumidores<br>&nbsp;&nbsp;por Classe'</span>)<br>
+    <span style="color:#0f766e;">plt</span>.tight_layout()<br>
+    <span style="color:#0f766e;">plt</span>.show()
               </div>
             </div>
             <div class="card">
               <h4>seaborn — Heatmap</h4>
-              <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
-    import seaborn as sns<br><br>
-    nulos = df.isnull().groupby(<br>
-    &nbsp;&nbsp;df['cod_uf']<br>
-    ).mean() * 100<br><br>
-    sns.heatmap(<br>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5; padding:8px;">
+    <span style="color:#1a6fa8; font-weight:bold;">import</span> seaborn <span style="color:#1a6fa8; font-weight:bold;">as</span> <span style="color:#0f766e;">sns</span><br><br>
+    nulos = <span style="color:#0f766e;">df</span>.isnull().groupby(<br>
+    &nbsp;&nbsp;<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'cod_uf'</span>]<br>
+    ).mean() * <span style="color:#92400e;">100</span><br><br>
+    <span style="color:#0f766e;">sns</span>.heatmap(<br>
     &nbsp;&nbsp;nulos,<br>
-    &nbsp;&nbsp;annot=True,<br>
-    &nbsp;&nbsp;fmt='.0f',<br>
-    &nbsp;&nbsp;cmap='RdYlGn_r'<br>
+    &nbsp;&nbsp;annot=<span style="color:#1a6fa8; font-weight:bold;">True</span>,<br>
+    &nbsp;&nbsp;fmt=<span style="color:#92400e;">'.0f'</span>,<br>
+    &nbsp;&nbsp;cmap=<span style="color:#92400e;">'RdYlGn_r'</span><br>
     )<br>
-    plt.title('% Nulos / UF')
+    <span style="color:#0f766e;">plt</span>.title(<span style="color:#92400e;">'% Nulos / UF'</span>)
               </div>
             </div>
             <div class="card">
               <h4>plotly — Interativo</h4>
-              <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
-    import plotly.express as px<br><br>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5; padding:8px;">
+    <span style="color:#1a6fa8; font-weight:bold;">import</span> plotly.express <span style="color:#1a6fa8; font-weight:bold;">as</span> px<br><br>
     fig = px.line(<br>
     &nbsp;&nbsp;df_mensal,<br>
-    &nbsp;&nbsp;x='mes',<br>
-    &nbsp;&nbsp;y='consumo_kwh',<br>
-    &nbsp;&nbsp;color='classe',<br>
-    &nbsp;&nbsp;title='Consumo Mensal'<br>
+    &nbsp;&nbsp;x=<span style="color:#92400e;">'mes'</span>,<br>
+    &nbsp;&nbsp;y=<span style="color:#92400e;">'consumo_kwh'</span>,<br>
+    &nbsp;&nbsp;color=<span style="color:#92400e;">'classe'</span>,<br>
+    &nbsp;&nbsp;title=<span style="color:#92400e;">'Consumo Mensal'</span><br>
     )<br>
     fig.update_layout(<br>
-    &nbsp;&nbsp;template='plotly_white'<br>
+    &nbsp;&nbsp;template=<span style="color:#92400e;">'plotly_white'</span><br>
     )<br>
     fig.show()
               </div>
@@ -1095,37 +1090,37 @@
               <div class="card">
                 <h4>DEC — Duração Equivalente de Interrupção</h4>
                 <p style="font-size:0.8em;">Soma das durações de interrupções ponderadas pelo número de UCs afetadas, dividida pelo total de UCs do conjunto.</p>
-                <div class="caixa-codigo" style="margin-top:8px;">
-    <span style="color:#7c3aed;"># Fórmula</span><br>
+                <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5; margin-top:8px;">
+    <span style="color:#64748b;"># Fórmula</span><br>
     DEC = Σ(Duração_i × UCs_i) / UCs_total
                 </div>
               </div>
               <div class="card" style="margin-top:12px;">
                 <h4>FEC — Frequência Equivalente de Interrupção</h4>
                 <p style="font-size:0.8em;">Número de interrupções ponderadas pelo número de UCs afetadas, dividido pelo total de UCs.</p>
-                <div class="caixa-codigo" style="margin-top:8px;">
+                <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5; margin-top:8px;">
     FEC = Σ(UCs_i) / UCs_total
                 </div>
               </div>
             </div>
             <div>
-              <div class="caixa-codigo">
-    import plotly.graph_objects as go<br><br>
+              <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+    <span style="color:#1a6fa8; font-weight:bold;">import</span> plotly.graph_objects <span style="color:#1a6fa8; font-weight:bold;">as</span> go<br><br>
     fig = go.Figure()<br><br>
     fig.add_trace(go.Bar(<br>
-    &nbsp;&nbsp;name='DEC Real',<br>
+    &nbsp;&nbsp;name=<span style="color:#92400e;">'DEC Real'</span>,<br>
     &nbsp;&nbsp;x=meses, y=dec_real,<br>
-    &nbsp;&nbsp;marker_color='#dc2626'<br>
+    &nbsp;&nbsp;marker_color=<span style="color:#92400e;">'#dc2626'</span><br>
     ))<br>
     fig.add_trace(go.Scatter(<br>
-    &nbsp;&nbsp;name='Limite ANEEL',<br>
+    &nbsp;&nbsp;name=<span style="color:#92400e;">'Limite ANEEL'</span>,<br>
     &nbsp;&nbsp;x=meses, y=dec_limite,<br>
-    &nbsp;&nbsp;line=dict(color='#d97706',<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;dash='dash')<br>
+    &nbsp;&nbsp;line=<span style="color:#0f766e;">dict</span>(color=<span style="color:#92400e;">'#d97706'</span>,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;dash=<span style="color:#92400e;">'dash'</span>)<br>
     ))<br>
     fig.update_layout(<br>
-    &nbsp;&nbsp;title='DEC Mensal vs. Limite',<br>
-    &nbsp;&nbsp;template='plotly_white'<br>
+    &nbsp;&nbsp;title=<span style="color:#92400e;">'DEC Mensal vs. Limite'</span>,<br>
+    &nbsp;&nbsp;template=<span style="color:#92400e;">'plotly_white'</span><br>
     )
               </div>
             </div>

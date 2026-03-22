@@ -3,10 +3,10 @@
     ======================================================= -->
     <section>
       <h2><span class="tag-modulo">M2</span> Limpeza de Dados de Consumidores</h2>
-      <div class="grid-2" style="margin-top:16px;">
+      <div class="grid-2" style="margin-top:8px;">
         <div>
           <h3>Problemas comuns no cadastro</h3>
-          <ul style="font-size:0.82em;">
+          <ul style="font-size:0.78em; line-height:1.4;">
             <li>CPF/CNPJ com formatação inconsistente</li>
             <li>Nomes em maiúsculas, minúsculas e misto</li>
             <li>CEP sem zeros à esquerda</li>
@@ -15,34 +15,34 @@
             <li>Campos obrigatórios vazios</li>
             <li>Coordenadas geográficas ausentes</li>
           </ul>
-          <div class="caixa-info" style="margin-top:10px; font-size: 0.75em;">
-            <strong>Exemplos de Limpeza:</strong> Padronização de nomes de consumidores, saneamento de documentos (CPF/CNPJ) e remoção de registros duplicados em grandes bases cadastrais.
+          <div class="caixa-info" style="margin-top:8px; font-size: 0.72em;">
+            <strong>Exemplos de Limpeza:</strong> Padronização de nomes, saneamento de CPF/CNPJ e remoção de registros duplicados em grandes bases cadastrais.
           </div>
         </div>
         <div>
           <h3>Técnicas de limpeza</h3>
-          <div class="caixa-codigo">
-<span style="color:#7c3aed;"># Normalizar nomes</span><br>
-df['nom_consumidor'] = (<br>
-&nbsp;&nbsp;df['nom_consumidor']<br>
-&nbsp;&nbsp;.str.strip()<br>
-&nbsp;&nbsp;.str.title()<br>
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+<span style="color:#64748b;"># Normalizar nomes</span><br>
+<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'nom_consumidor'</span>] = (<br>
+&nbsp;&nbsp;<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'nom_consumidor'</span>]<br>
+&nbsp;&nbsp;.<span style="color:#0f766e;">str</span>.strip()<br>
+&nbsp;&nbsp;.<span style="color:#0f766e;">str</span>.title()<br>
 )<br><br>
-<span style="color:#7c3aed;"># Limpar CPF/CNPJ</span><br>
-df['cpf_cnpj'] = (<br>
-&nbsp;&nbsp;df['cpf_cnpj']<br>
-&nbsp;&nbsp;.str.replace(r'\D', '', regex=True)<br>
+<span style="color:#64748b;"># Limpar CPF/CNPJ</span><br>
+<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'cpf_cnpj'</span>] = (<br>
+&nbsp;&nbsp;<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'cpf_cnpj'</span>]<br>
+&nbsp;&nbsp;.<span style="color:#0f766e;">str</span>.replace(r<span style="color:#92400e;">'\D'</span>, <span style="color:#92400e;">''</span>, regex=<span style="color:#1a6fa8; font-weight:bold;">True</span>)<br>
 )<br><br>
-<span style="color:#7c3aed;"># Remover duplicatas</span><br>
-df = df.drop_duplicates(<br>
-&nbsp;&nbsp;subset=['cod_consumidor']<br>
+<span style="color:#64748b;"># Remover duplicatas</span><br>
+<span style="color:#0f766e;">df</span> = <span style="color:#0f766e;">df</span>.drop_duplicates(<br>
+&nbsp;&nbsp;subset=[<span style="color:#92400e;">'cod_consumidor'</span>]<br>
 )
           </div>
         </div>
       </div>
 
       <!-- Notas sobre limpeza -->
-      <div style="margin-top: 15px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 12px 20px; border-radius: 0 6px 6px 0;">
+      <div style="margin-top: 6px; background: #f1f5f9; border-left: 5px solid #1a6fa8; padding: 7px 20px; border-radius: 0 6px 6px 0;">
         <h4 style="margin: 0 0 6px 0; font-size: 0.75em; color: #1a6fa8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Regras e Dicas</h4>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 25px; font-size: 0.65em; color: #334155; line-height: 1.35;">
           <ul style="margin: 0; padding-left: 18px;">

@@ -8,37 +8,37 @@
           <div class="card">
             <h4>DEC — Duração Equivalente de Interrupção</h4>
             <p style="font-size:0.8em;">Soma das durações de interrupções ponderadas pelo número de UCs afetadas, dividida pelo total de UCs do conjunto.</p>
-            <div class="caixa-codigo" style="margin-top:8px;">
-<span style="color:#7c3aed;"># Fórmula</span><br>
+            <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5; margin-top:8px;">
+<span style="color:#64748b;"># Fórmula</span><br>
 DEC = Σ(Duração_i × UCs_i) / UCs_total
             </div>
           </div>
           <div class="card" style="margin-top:12px;">
             <h4>FEC — Frequência Equivalente de Interrupção</h4>
             <p style="font-size:0.8em;">Número de interrupções ponderadas pelo número de UCs afetadas, dividido pelo total de UCs.</p>
-            <div class="caixa-codigo" style="margin-top:8px;">
+            <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5; margin-top:8px;">
 FEC = Σ(UCs_i) / UCs_total
             </div>
           </div>
         </div>
         <div>
-          <div class="caixa-codigo">
-import plotly.graph_objects as go<br><br>
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+<span style="color:#1a6fa8; font-weight:bold;">import</span> plotly.graph_objects <span style="color:#1a6fa8; font-weight:bold;">as</span> go<br><br>
 fig = go.Figure()<br><br>
 fig.add_trace(go.Bar(<br>
-&nbsp;&nbsp;name='DEC Real',<br>
+&nbsp;&nbsp;name=<span style="color:#92400e;">'DEC Real'</span>,<br>
 &nbsp;&nbsp;x=meses, y=dec_real,<br>
-&nbsp;&nbsp;marker_color='#dc2626'<br>
+&nbsp;&nbsp;marker_color=<span style="color:#92400e;">'#dc2626'</span><br>
 ))<br>
 fig.add_trace(go.Scatter(<br>
-&nbsp;&nbsp;name='Limite ANEEL',<br>
+&nbsp;&nbsp;name=<span style="color:#92400e;">'Limite ANEEL'</span>,<br>
 &nbsp;&nbsp;x=meses, y=dec_limite,<br>
-&nbsp;&nbsp;line=dict(color='#d97706',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;dash='dash')<br>
+&nbsp;&nbsp;line=<span style="color:#0f766e;">dict</span>(color=<span style="color:#92400e;">'#d97706'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dash=<span style="color:#92400e;">'dash'</span>)<br>
 ))<br>
 fig.update_layout(<br>
-&nbsp;&nbsp;title='DEC Mensal vs. Limite',<br>
-&nbsp;&nbsp;template='plotly_white'<br>
+&nbsp;&nbsp;title=<span style="color:#92400e;">'DEC Mensal vs. Limite'</span>,<br>
+&nbsp;&nbsp;template=<span style="color:#92400e;">'plotly_white'</span><br>
 )
           </div>
         </div>

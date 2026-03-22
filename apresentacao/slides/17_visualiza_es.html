@@ -6,47 +6,47 @@
       <div class="grid-3" style="margin-top:18px;">
         <div class="card">
           <h4>matplotlib — Barras</h4>
-          <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
-import matplotlib.pyplot as plt<br><br>
-classes = df.groupby(<br>
-&nbsp;&nbsp;'cod_classe_consumo'<br>
-)['cod_consumidor'].count()<br><br>
-classes.plot(kind='bar',<br>
-&nbsp;&nbsp;color='steelblue',<br>
-&nbsp;&nbsp;title='Consumidores<br>&nbsp;&nbsp;por Classe')<br>
-plt.tight_layout()<br>
-plt.show()
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5; padding:8px;">
+<span style="color:#1a6fa8; font-weight:bold;">import</span> matplotlib.pyplot <span style="color:#1a6fa8; font-weight:bold;">as</span> <span style="color:#0f766e;">plt</span><br><br>
+classes = <span style="color:#0f766e;">df</span>.groupby(<br>
+&nbsp;&nbsp;<span style="color:#92400e;">'cod_classe_consumo'</span><br>
+)[<span style="color:#92400e;">'cod_consumidor'</span>].count()<br><br>
+classes.plot(kind=<span style="color:#92400e;">'bar'</span>,<br>
+&nbsp;&nbsp;color=<span style="color:#92400e;">'steelblue'</span>,<br>
+&nbsp;&nbsp;title=<span style="color:#92400e;">'Consumidores<br>&nbsp;&nbsp;por Classe'</span>)<br>
+<span style="color:#0f766e;">plt</span>.tight_layout()<br>
+<span style="color:#0f766e;">plt</span>.show()
           </div>
         </div>
         <div class="card">
           <h4>seaborn — Heatmap</h4>
-          <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
-import seaborn as sns<br><br>
-nulos = df.isnull().groupby(<br>
-&nbsp;&nbsp;df['cod_uf']<br>
-).mean() * 100<br><br>
-sns.heatmap(<br>
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5; padding:8px;">
+<span style="color:#1a6fa8; font-weight:bold;">import</span> seaborn <span style="color:#1a6fa8; font-weight:bold;">as</span> <span style="color:#0f766e;">sns</span><br><br>
+nulos = <span style="color:#0f766e;">df</span>.isnull().groupby(<br>
+&nbsp;&nbsp;<span style="color:#0f766e;">df</span>[<span style="color:#92400e;">'cod_uf'</span>]<br>
+).mean() * <span style="color:#92400e;">100</span><br><br>
+<span style="color:#0f766e;">sns</span>.heatmap(<br>
 &nbsp;&nbsp;nulos,<br>
-&nbsp;&nbsp;annot=True,<br>
-&nbsp;&nbsp;fmt='.0f',<br>
-&nbsp;&nbsp;cmap='RdYlGn_r'<br>
+&nbsp;&nbsp;annot=<span style="color:#1a6fa8; font-weight:bold;">True</span>,<br>
+&nbsp;&nbsp;fmt=<span style="color:#92400e;">'.0f'</span>,<br>
+&nbsp;&nbsp;cmap=<span style="color:#92400e;">'RdYlGn_r'</span><br>
 )<br>
-plt.title('% Nulos / UF')
+<span style="color:#0f766e;">plt</span>.title(<span style="color:#92400e;">'% Nulos / UF'</span>)
           </div>
         </div>
         <div class="card">
           <h4>plotly — Interativo</h4>
-          <div class="caixa-codigo" style="font-size:0.72em; padding:8px;">
-import plotly.express as px<br><br>
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5; padding:8px;">
+<span style="color:#1a6fa8; font-weight:bold;">import</span> plotly.express <span style="color:#1a6fa8; font-weight:bold;">as</span> px<br><br>
 fig = px.line(<br>
 &nbsp;&nbsp;df_mensal,<br>
-&nbsp;&nbsp;x='mes',<br>
-&nbsp;&nbsp;y='consumo_kwh',<br>
-&nbsp;&nbsp;color='classe',<br>
-&nbsp;&nbsp;title='Consumo Mensal'<br>
+&nbsp;&nbsp;x=<span style="color:#92400e;">'mes'</span>,<br>
+&nbsp;&nbsp;y=<span style="color:#92400e;">'consumo_kwh'</span>,<br>
+&nbsp;&nbsp;color=<span style="color:#92400e;">'classe'</span>,<br>
+&nbsp;&nbsp;title=<span style="color:#92400e;">'Consumo Mensal'</span><br>
 )<br>
 fig.update_layout(<br>
-&nbsp;&nbsp;template='plotly_white'<br>
+&nbsp;&nbsp;template=<span style="color:#92400e;">'plotly_white'</span><br>
 )<br>
 fig.show()
           </div>

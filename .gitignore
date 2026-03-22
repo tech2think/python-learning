@@ -17,6 +17,7 @@ chaves/
 *.key
 *.env
 .env.*
+.secrets/
 
 # uv / pip
 uv.lock

@@ -13,17 +13,22 @@ Classes:
 """
 
 import logging
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import pandas as pd
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
+from dotenv import load_dotenv
 from jinja2 import Template
 from snowflake.connector import SnowflakeConnection
 from snowflake.connector import connect as snowflake_connect
 from snowflake.connector.errors import DatabaseError
 from snowflake.connector.pandas_tools import write_pandas
+
+# Carrega variáveis do .env (como a passphrase da chave) e sobrescreve variáveis de ambiente existentes
+load_dotenv(override=True)
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -34,14 +39,26 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 # ---------------------------------------------------------------------------
 
 SNOWFLAKE_CONFIG = {
-    "account": "khb56279.us-east-1",
-    "user": "SEU_EMAIL@EMPRESA.COM",
-    "private_key_path": "chaves/rsa_key.p8",   # caminho relativo à raiz do projeto
-    "private_key_passphrase": "SUA_PASSPHRASE",
-    "warehouse": "WH_EQTLINFO",
-    "database": "EQTLINFO_HML",
-    "schema": "EQTL_MA",
+    "account": os.getenv("SNOWFLAKE_ACCOUNT", "khb56279.us-east-1"),
+    "user": os.getenv("SNOWFLAKE_USER", "SEU_EMAIL@EMPRESA.COM"),
+    "private_key_path": os.getenv("SNOWFLAKE_KEY_PATH", ".secrets/snowflake.p8"),
+    "private_key_passphrase": os.getenv("SNOWFLAKE_PASSPHRASE"),
+    "warehouse": os.getenv("SNOWFLAKE_WAREHOUSE", "WH_EQTLINFO"),
+    "database": os.getenv("SNOWFLAKE_DATABASE", "EQTLINFO_HML"),
+    "schema": os.getenv("SNOWFLAKE_SCHEMA", "EQTL_MA"),
 }
+
+
+def _resolver_caminho_arquivo(caminho_base: Union[str, Path]) -> Path:
+    """Resolve caminhos testando localmente e na raiz do projeto."""
+    p = Path(caminho_base)
+    if p.exists():
+        return p
+    # Tenta subir um nível (caso esteja dentro de modulo5_...)
+    p_parent = Path("..") / caminho_base
+    if p_parent.exists():
+        return p_parent
+    return p
 
 
 # ---------------------------------------------------------------------------
@@ -217,7 +234,7 @@ class SnowflakeDB:
 
         self._private_key_bytes: Optional[bytes] = private_key
         self._private_key_path: Optional[Path] = (
-            Path(private_key_path) if private_key_path else None
+            _resolver_caminho_arquivo(private_key_path) if private_key_path else None
         )
         self._private_key_passphrase: Optional[bytes] = (
             private_key_passphrase.encode()

@@ -12,7 +12,6 @@
               <tr><td style="padding:5px; color:#0ea5e9;">Warehouse</td><td style="padding:5px; color:#1e2a3a;">Cluster de computação (VXS a 6XL)</td></tr>
               <tr><td style="padding:5px; color:#0ea5e9;">Database</td><td style="padding:5px; color:#1e2a3a;">Banco de dados lógico</td></tr>
               <tr><td style="padding:5px; color:#0ea5e9;">Schema</td><td style="padding:5px; color:#1e2a3a;">Agrupamento de tabelas/views</td></tr>
-              <tr><td style="padding:5px; color:#0ea5e9;">Stage</td><td style="padding:5px; color:#1e2a3a;">Área de carga de arquivos</td></tr>
             </table>
           </div>
           <div class="caixa-aviso" style="margin-top:10px; font-size:0.8em;">
@@ -21,22 +20,22 @@
         </div>
         <div>
           <h3>Conexão Python</h3>
-          <div class="caixa-codigo" style="font-size:0.73em;">
-import snowflake.connector<br>
-from dotenv import load_dotenv<br>
-import os<br><br>
+          <div class="caixa-codigo" style="font-size:0.65em; line-height:1.5;">
+<span style="color:#1a6fa8; font-weight:bold;">import</span> snowflake.connector<br>
+<span style="color:#1a6fa8; font-weight:bold;">from</span> dotenv <span style="color:#1a6fa8; font-weight:bold;">import</span> load_dotenv<br>
+<span style="color:#1a6fa8; font-weight:bold;">import</span> os<br><br>
 load_dotenv()<br><br>
 conn = snowflake.connector.connect(<br>
-&nbsp;&nbsp;account=os.getenv("SF_ACCOUNT"),<br>
-&nbsp;&nbsp;user=os.getenv("SF_USER"),<br>
-&nbsp;&nbsp;password=os.getenv("SF_PASSWORD"),<br>
-&nbsp;&nbsp;warehouse=os.getenv("SF_WAREHOUSE"),<br>
-&nbsp;&nbsp;database=os.getenv("SF_DATABASE"),<br>
-&nbsp;&nbsp;schema=os.getenv("SF_SCHEMA"),<br>
+&nbsp;&nbsp;account=os.getenv(<span style="color:#92400e;">"SF_ACCOUNT"</span>),<br>
+&nbsp;&nbsp;user=os.getenv(<span style="color:#92400e;">"SF_USER"</span>),<br>
+&nbsp;&nbsp;password=os.getenv(<span style="color:#92400e;">"SF_PASSWORD"</span>),<br>
+&nbsp;&nbsp;warehouse=os.getenv(<span style="color:#92400e;">"SF_WAREHOUSE"</span>),<br>
+&nbsp;&nbsp;database=os.getenv(<span style="color:#92400e;">"SF_DATABASE"</span>),<br>
+&nbsp;&nbsp;schema=os.getenv(<span style="color:#92400e;">"SF_SCHEMA"</span>),<br>
 )<br><br>
 cursor = conn.cursor()<br>
-cursor.execute("SELECT CURRENT_VERSION()")<br>
-print(cursor.fetchone()[0])
+cursor.execute(<span style="color:#92400e;">"SELECT CURRENT_VERSION()"</span>)<br>
+<span style="color:#0f766e;">print</span>(cursor.fetchone()[<span style="color:#92400e;">0</span>])
           </div>
         </div>
       </div>
